@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace task_2
     {
         static void Main(string[] args)
         {
+            const string programName = "Commercial";
+            Manager manger = new Manager(programName);
             const int EXIT = 8;
             int userSelection = 0;
 
@@ -32,7 +35,7 @@ namespace task_2
                 switch (userSelection)
                 {
                     case 1:
-                        //
+                        manger.addBuyer("dani","234543",);
                         break;
                     case 2:
                        //
@@ -62,5 +65,8 @@ namespace task_2
                 }
             }
         }  
+
+        //static UserBuyer createUser()
+       // {}
     }
 }

@@ -13,15 +13,6 @@ namespace task_2
         string city;
         string country;
 
-
-        public Address() { }
-
-        //public Address(string city, string country)
-        //{
-        //    this.city = city;
-        //    this.country = country;
-        //}
-
         public Address(string street, int numberOfStreet, string city, string country)
         {
             SetAdress(street, numberOfStreet, city, country);
@@ -36,10 +27,6 @@ namespace task_2
         {
             if (SetStreet(street) && SetNumberOfStreet(numberOfStreet) && SetCity(city) && SetCountry(country))
             {
-                //this.street = street;
-                //this.numberOfStreet = numberOfStreet;
-                //this.city = city;
-                //this.country = country;
                 return true;
             }
             return false;
@@ -104,8 +91,6 @@ namespace task_2
         public string ToString()
         {
             return "Country: " + country + ", city: " + city + ", street: " + street + ", number: " + numberOfStreet;
-            //Console.WriteLine($"Adress: Country: {this.country} City: {this.city} street: {this.street} number: {this.numberOfStreet}");
-
         }
     }
 }

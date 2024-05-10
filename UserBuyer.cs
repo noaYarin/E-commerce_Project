@@ -17,13 +17,9 @@ namespace task_2
         Product[] products;
 
         public UserBuyer() { }
-
         public UserBuyer(string name, string password, Address address)
         {
             SetBuyer(name, password, address);
-            //this.name = name;
-            //this.password = password;
-            //this.address = address;
         }
 
 
@@ -31,7 +27,7 @@ namespace task_2
         {
             if (SetName(name) && SetPassword(password))
             {
-                this.address = new Address(address);  //  this.address = address;
+                this.address = new Address(address); 
                 this.name = name;
                 return true;
             }

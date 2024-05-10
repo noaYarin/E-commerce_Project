@@ -15,6 +15,7 @@ namespace task_2
         {
             SetCode(_code);
             this.name = _name;
+            //setName
         }
 
         private bool SetCode(int code)
