@@ -48,13 +48,15 @@ namespace task_2
                         AddProductToCart(manger);
                         break;
                     case 5:
-                        //
+                        // Pay order
+                        PayOrder(manger);
                         break;
                     case 6:
                         //
                         break;
                     case 7:
-                        //
+                        // for only tests
+                        manger.ShowAllProducts();
                         break;
                     case 8:
                         Console.WriteLine("Goodbye :) ");
@@ -66,6 +68,14 @@ namespace task_2
                 }
             }
         }  
+
+
+        static void PayOrder(Manager manager)
+        {
+            Console.WriteLine("What name of the buyer: ");
+            string name = Console.ReadLine();
+            manager.payOrderAllCart("chen");
+        }
 
         static void AddProductToCart(Manager manger)
         {
@@ -91,7 +101,6 @@ namespace task_2
                 isSpecialBox= false;
 
             manger.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
-
         }
 
         //static UserBuyer createUser()

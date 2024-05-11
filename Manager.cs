@@ -40,6 +40,22 @@ namespace task_2
             return true; 
         }
 
+        public bool payOrderAllCart(string name)
+        {
+            int totlePrice;
+            foreach(UserBuyer buyer in usersArr)
+            {
+                if (name == buyer.GetName())
+                {
+                    Console.WriteLine(buyer);
+                }
+
+                else
+                    return false;
+            }
+            return true;
+        }
+
 
         public bool addBuyer(string name, string password, Address address)
         {
@@ -70,6 +86,16 @@ namespace task_2
                
                // usersArr *= size;
             }
+        }
+
+        public void ShowAllProducts()
+        {
+            Console.WriteLine("\n***list all products***\n");
+            if(productsArr != null) 
+                foreach (Product productDetail in productsArr) 
+                {
+                    Console.WriteLine($"name: {productDetail.GetProductName()} price: {productDetail.GetPrice()}");
+                }
         }
 
     }
