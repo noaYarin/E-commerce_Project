@@ -16,6 +16,11 @@ namespace task_2
             const int EXIT = 8;
             int userSelection = 0;
 
+            initiateData(manager); // Template Data
+
+           
+            
+
             while (userSelection != EXIT)
             {
                 Console.WriteLine();
@@ -37,7 +42,7 @@ namespace task_2
                     case 1:
                         Console.WriteLine("Add name,password and address");
                         Address userAddr = new Address(Console.ReadLine(), int.Parse(Console.ReadLine()), 
-                            Console.ReadLine(), Console.ReadLine());
+                           Console.ReadLine(), Console.ReadLine());
                         manager.addBuyer(Console.ReadLine(), Console.ReadLine(), userAddr);
                         break;
                     case 2:
@@ -70,12 +75,13 @@ namespace task_2
             }
         }
 
-        //static void PayOrder(Manager manager)
-        //{
-        //    Console.WriteLine("What name of the buyer: ");
-        //    string name = Console.ReadLine();
-        //    manager.payOrderAllCart("chen");
-        //}
+        static void PayOrder(Manager manager)
+        {
+            Console.WriteLine("What name of the buyer: ");
+            string name = Console.ReadLine();
+            manager.payOrderAllCart("chen");
+        }
+
 
         static void AddProductToCart(Manager manger)
         {
@@ -102,5 +108,26 @@ namespace task_2
 
             manger.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
         }
+
+
+        static void initiateData(Manager manager)
+        {
+            //Template Data
+            Address addr1 = new Address("Zamenhof", 3, "Netanya", "ISR");
+            manager.addBuyer("Chen", "12345", addr1);
+            Address addr2 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
+            manager.addBuyer("Ben", "12345", addr2);
+            Address addr3 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
+            manager.addBuyer("Aviv", "12345", addr3);
+
+            manager.addMyProduct(new Product("Chen", 45));
+            manager.addMyProduct(new Product("Chen", 35));
+            manager.addMyProduct(new Product("Chen", 444));
+            manager.addMyProduct(new Product("Ben", 444));
+        }
+
+
+
+
     }
 }
