@@ -16,12 +16,16 @@ namespace task_2
         Order[] orders;
         Product[] products;
 
-        public UserBuyer() { }
+        public UserBuyer(){}
         public UserBuyer(string name, string password, Address address)
         {
             SetBuyer(name, password, address);
         }
 
+        public UserBuyer(UserBuyer other)
+        {
+            SetBuyer(other.name, other.password, other.address);
+        }
 
         public bool SetBuyer(string name, string password, Address address)
         {

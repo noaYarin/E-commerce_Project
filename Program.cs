@@ -12,7 +12,7 @@ namespace task_2
         static void Main(string[] args)
         {
             const string programName = "Commercial";
-            Manager manger = new Manager(programName);
+            Manager manager = new Manager(programName);
             const int EXIT = 8;
             int userSelection = 0;
 
@@ -35,7 +35,10 @@ namespace task_2
                 switch (userSelection)
                 {
                     case 1:
-                        manger.addBuyer("dani","234543",);
+                        Console.WriteLine("Add name,password and address");
+                        Address userAddr = new Address(Console.ReadLine(), int.Parse(Console.ReadLine()), 
+                            Console.ReadLine(), Console.ReadLine());
+                        manager.addBuyer(Console.ReadLine(), Console.ReadLine(), userAddr);
                         break;
                     case 2:
                        //
@@ -65,8 +68,5 @@ namespace task_2
                 }
             }
         }  
-
-        //static UserBuyer createUser()
-       // {}
     }
 }

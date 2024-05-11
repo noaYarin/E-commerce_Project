@@ -11,8 +11,12 @@ namespace task_2
         string name;
         string password;
         Address address;
-        Product[] products; 
+        Product[] products;
 
+        public void AddProduct(Product product)
+        {
+
+        }
         public UserSeller(string name, string password, Address address)
         {
             SetSeller(name, password, address);

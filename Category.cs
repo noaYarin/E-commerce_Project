@@ -14,8 +14,7 @@ namespace task_2
         public Category(int _code, string _name)
         {
             SetCode(_code);
-            this.name = _name;
-            //setName
+            SetName(_name);
         }
 
         private bool SetCode(int code)
@@ -26,6 +25,20 @@ namespace task_2
                 return false;
             }
             this.code = code;
+            return true;
+        }
+
+        private bool SetName(string name)
+        {
+            foreach (char letter in name)
+            {
+                if (!(letter >= 'a' && letter <= 'z') && !(letter >= 'A' && letter <= 'Z'))
+                {
+                    Console.WriteLine("Name field needs to conatine only letters");
+                    return false;
+                }
+            }
+            this.name = name;
             return true;
         }
 
