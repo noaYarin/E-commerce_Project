@@ -22,6 +22,9 @@ namespace task_2
             SetBuyer(name, password, address);
         }
 
+        public string GetName() { return name; }
+     
+
 
         public bool SetBuyer(string name, string password, Address address)
         {
