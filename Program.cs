@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,7 +12,7 @@ namespace task_2
         static void Main(string[] args)
         {
             const string programName = "Commercial";
-            Manager manger = new Manager(programName);
+            Manager manager = new Manager(programName);
             const int EXIT = 8;
             int userSelection = 0;
 
@@ -35,7 +35,10 @@ namespace task_2
                 switch (userSelection)
                 {
                     case 1:
-                        //manger.addBuyer("dani","234543",);
+                        Console.WriteLine("Add name,password and address");
+                        Address userAddr = new Address(Console.ReadLine(), int.Parse(Console.ReadLine()), 
+                            Console.ReadLine(), Console.ReadLine());
+                        manager.addBuyer(Console.ReadLine(), Console.ReadLine(), userAddr);
                         break;
                     case 2:
                        //
@@ -44,18 +47,15 @@ namespace task_2
                       //
                         break;
                     case 4:
-                        // Add product to shopping cart
                         AddProductToCart(manger);
                         break;
                     case 5:
-                        // Pay order
                         PayOrder(manger);
                         break;
                     case 6:
                         //
                         break;
                     case 7:
-                        // for only tests
                         manger.ShowAllProducts();
                         break;
                     case 8:
@@ -68,8 +68,7 @@ namespace task_2
                 }
             }
         }  
-
-
+      
         static void PayOrder(Manager manager)
         {
             Console.WriteLine("What name of the buyer: ");
@@ -101,9 +100,6 @@ namespace task_2
                 isSpecialBox= false;
 
             manger.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
-        }
 
-        //static UserBuyer createUser()
-        // {}
     }
 }

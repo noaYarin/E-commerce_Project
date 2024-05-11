@@ -10,28 +10,18 @@ namespace task_2
     {
         private string name;
         private int price;
-        private Category[] categoriesList;
+        private Category category;
         private bool hasSpecialBox;
         private int extraPrice;
 
         public Product(string _name,int _price) {  //,Category _category
             this.name = _name;
             setPrice(_price);
-            //addCategory(_category);
         }
-
-        /*public bool addCategory(Category _category)
-        {
-            categoriesList = new Category(_category);
-            return true;
-        }*/
-
+      
         public string GetProductName() { return  name; }
         public int GetPrice() { return price; }
-        public Category[] GetCategoriesList() {  return categoriesList; }
         public bool GetHasSpecialBox() { return hasSpecialBox; }
-
-
 
         public bool addProduct(Product product)
         {
