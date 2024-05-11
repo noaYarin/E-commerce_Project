@@ -11,6 +11,7 @@ namespace task_2
         private UserSeller[] sellers;
         private int sellersLogSize;
         private UserBuyer[] buyers;
+        private Product[] productsArr;
         private int buyersLogSize;
         private string name;
         private int size = 2;
@@ -25,41 +26,41 @@ namespace task_2
         }
 
  
-        public bool addMyProduct(Product p)
+        public bool addMyProduct(Product product)
         {
             Product[] newProduct;
             if(productsArr == null)
             {
                 newProduct = new Product[1];
-                newProduct[0] = new Product(p.GetProductName(), p.GetPrice()); 
+                newProduct[0] = new Product(product.GetProductName(), product.GetPrice()); 
             }
 
             else
             {
                 newProduct = new Product[productsArr.Length+1];
                 productsArr.CopyTo(newProduct, 0);
-                newProduct[productsArr.Length] = new Product(p.GetProductName(), p.GetPrice());
+                newProduct[productsArr.Length] = new Product(product.GetProductName(), product.GetPrice());
             }
             productsArr = newProduct;
 
             return true; 
         }
 
-        public bool payOrderAllCart(string name)
-        {
-            int totlePrice;
-            foreach(UserBuyer buyer in usersArr)
-            {
-                if (name == buyer.GetName())
-                {
-                    Console.WriteLine(buyer);
-                }
+        //public bool payOrderAllCart(string name)
+        //{
+        //    int totlePrice;
+        //    foreach(UserBuyer buyer in usersArr)
+        //    {
+        //        if (name == buyer.GetName())
+        //        {
+        //            Console.WriteLine(buyer);
+        //        }
 
-                else
-                    return false;
-            }
-            return true;
-        }
+        //        else
+        //            return false;
+        //    }
+        //    return true;
+        //}
 
 
         public bool addBuyer(string name, string password, Address address)
@@ -80,14 +81,14 @@ namespace task_2
                     buyers2[i] = new UserBuyer(buyers[i]);
                 }
                 buyers = buyers2;
-             buyers[buyersLogSize] = newBuyer;
-            buyersLogSize++;
-            return true;
-        }
+                buyers[buyersLogSize] = newBuyer;
+                buyersLogSize++;
             }
+            return false;
+        }
           
           
-              public void ShowAllProducts()
+        public void ShowAllProducts()
         {
             Console.WriteLine("\n***list all products***\n");
             if(productsArr != null) 

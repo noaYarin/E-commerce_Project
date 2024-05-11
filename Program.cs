@@ -47,16 +47,17 @@ namespace task_2
                       //
                         break;
                     case 4:
-                        AddProductToCart(manger);
+                        AddProductToCart(manager);
                         break;
                     case 5:
-                        PayOrder(manger);
+                        //PayOrder(manger);
                         break;
                     case 6:
                         //
                         break;
                     case 7:
-                        manger.ShowAllProducts();
+                        // for only tests
+                        manager.ShowAllProducts();
                         break;
                     case 8:
                         Console.WriteLine("Goodbye :) ");
@@ -67,14 +68,14 @@ namespace task_2
 
                 }
             }
-        }  
-      
-        static void PayOrder(Manager manager)
-        {
-            Console.WriteLine("What name of the buyer: ");
-            string name = Console.ReadLine();
-            manager.payOrderAllCart("chen");
         }
+
+        //static void PayOrder(Manager manager)
+        //{
+        //    Console.WriteLine("What name of the buyer: ");
+        //    string name = Console.ReadLine();
+        //    manager.payOrderAllCart("chen");
+        //}
 
         static void AddProductToCart(Manager manger)
         {
@@ -87,19 +88,19 @@ namespace task_2
             string category = Console.ReadLine();
             Console.Write("Do you want add a special package? [Yes / No]: ");
             string specialBoxStr = Console.ReadLine();
-            bool isSpecialBox=false;
-            int extraPrice=0;
+            bool isSpecialBox = false;
+            int extraPrice = 0;
             if (specialBoxStr == "yes")
             {
                 isSpecialBox = true;
                 Console.Write("how much is it to add a package box? ");
                 extraPrice = int.Parse(Console.ReadLine());
             }
-               
-            else if(specialBoxStr == "no")
-                isSpecialBox= false;
+
+            else if (specialBoxStr == "no")
+                isSpecialBox = false;
 
             manger.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
-
+        }
     }
 }
