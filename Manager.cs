@@ -15,6 +15,7 @@ namespace task_2
         private int buyersLogSize;
         private string name;
         private int size = 2;
+        private int sizeLogic = 0;
       
         public Manager(string _name)
         {
@@ -29,6 +30,12 @@ namespace task_2
         public bool addMyProduct(Product product)
         {
             Product[] newProduct;
+            foreach (UserBuyer buyer in buyers)
+            {
+                //if (buyer.GetName() == "Chen")
+                //    Console.WriteLine("exsit");
+                Console.WriteLine("fff");
+            }
             if(productsArr == null)
             {
                 newProduct = new Product[1];
@@ -46,48 +53,45 @@ namespace task_2
             return true; 
         }
 
-        //public bool payOrderAllCart(string name)
-        //{
-        //    int totlePrice;
-        //    foreach(UserBuyer buyer in usersArr)
-        //    {
-        //        if (name == buyer.GetName())
-        //        {
-        //            Console.WriteLine(buyer);
-        //        }
 
-        //        else
-        //            return false;
-        //    }
-        //    return true;
-        //}
+        public bool payOrderAllCart(string name)
+        {
+            int totlePrice;
+            foreach (UserBuyer buyer in buyers)
+            {
+                if (name == buyer.GetName())
+                {
+                    Console.WriteLine(buyer);
+                }
+
+                else
+                    return false;
+            }
+            return true;
+        }
 
 
         public bool addBuyer(string name, string password, Address address)
         {
-            UserBuyer newBuyer = new UserBuyer();
-            bool isValid = newBuyer.SetBuyer(name, password, address);
-            if (!isValid)
-            {
-                Console.WriteLine("Invalid value");
-                return false;
-            }
+            UserBuyer[] newBuyer;
 
-            if (buyersLogSize == buyers.Length)
+            if (buyers == null) 
             {
-                UserBuyer[] buyers2 = new UserBuyer[buyers.Length * 2];
-                for (int i = 0; i < buyers.Length; i++)
-                {
-                    buyers2[i] = new UserBuyer(buyers[i]);
-                }
-                buyers = buyers2;
-                buyers[buyersLogSize] = newBuyer;
-                buyersLogSize++;
+                newBuyer = new UserBuyer[1];
+                newBuyer[0] = new UserBuyer(name, password, address);
             }
+            else
+            {
+                newBuyer = new UserBuyer[buyers.Length + size]; 
+                buyers.CopyTo(newBuyer, 0);
+                newBuyer[sizeLogic] = new UserBuyer(name, password, address); 
+                sizeLogic++;
+            }
+            buyers = newBuyer;
             return false;
         }
-          
-          
+
+
         public void ShowAllProducts()
         {
             Console.WriteLine("\n***list all products***\n");
