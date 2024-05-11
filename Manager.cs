@@ -10,12 +10,36 @@ namespace task_2
     {
         private UserSeller[] sellersArr;
         private UserBuyer[] usersArr;
+        private Product[] productsArr;
         private string name;
         private int index = 0;
+
         public Manager(string _name)
         {
             this.name = _name;
         }
+
+ 
+        public bool addMyProduct(Product p)
+        {
+            Product[] newProduct;
+            if(productsArr == null)
+            {
+                newProduct = new Product[1];
+                newProduct[0] = new Product(p.GetProductName(), p.GetPrice()); 
+            }
+
+            else
+            {
+                newProduct = new Product[productsArr.Length+1];
+                productsArr.CopyTo(newProduct, 0);
+                newProduct[productsArr.Length] = new Product(p.GetProductName(), p.GetPrice());
+            }
+            productsArr = newProduct;
+
+            return true; 
+        }
+
 
         public bool addBuyer(string name, string password, Address address)
         {
