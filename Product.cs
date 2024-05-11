@@ -14,10 +14,14 @@ namespace task_2
         private bool hasSpecialBox;
         private int extraPrice;
 
-        public Product(string _name,int _price,Category _category) {
+        public Product(string _name,int _price) {  //,Category _category
             this.name = _name;
             setPrice(_price);
         }
+      
+        public string GetProductName() { return  name; }
+        public int GetPrice() { return price; }
+        public bool GetHasSpecialBox() { return hasSpecialBox; }
 
         public bool addProduct(Product product)
         {

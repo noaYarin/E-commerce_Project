@@ -21,12 +21,13 @@ namespace task_2
         {
             SetBuyer(name, password, address);
         }
-
         public UserBuyer(UserBuyer other)
         {
             SetBuyer(other.name, other.password, other.address);
-        }
+         }
 
+     public string GetName() { return name; }
+      
         public bool SetBuyer(string name, string password, Address address)
         {
             if (SetName(name) && SetPassword(password))
