@@ -8,22 +8,43 @@ namespace task_2
 {
     internal class UserSeller
     {
-        string name;
-        string password;
-        Address address;
-        Product[] products;
+        private string name;
+        private string password;
+        private Address address;
+        private Product[] products;
+        private int productsSellerLogSize = 0;
+        private int size = 2;
 
         public UserSeller() { }
 
         public UserSeller(string name, string password, Address address)
         {
             SetSeller(name, password, address);
+            products = new Product[size];
         }
 
         public UserSeller(UserSeller other)
         {
             SetSeller(other.name, other.password, other.address);
         }
+
+         public bool addProduct(string name, int price)
+           {
+               Product[] tempNewProducts;
+
+               if (products == null)
+               {
+                   tempNewProducts = new Product[1];
+                   tempNewProducts[0] = new Product(name, price);
+               }else {
+                  tempNewProducts = new Product[products.Length + size];
+                    products.CopyTo(tempNewProducts, 0);
+                   tempNewProducts[productsSellerLogSize] = new Product(name, price);
+                   productsSellerLogSize++;
+               }
+                products = tempNewProducts;
+               return true;
+           }
 
         public bool SetSeller(string name, string password, Address address)
         {
@@ -66,7 +87,10 @@ namespace task_2
             return false;
         }
 
-        public void AddProduct(Product product){}
+        public string getSellerName()
+        {
+            return this.name;
+        }
 
         public string ToString()
         {
