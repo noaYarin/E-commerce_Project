@@ -37,13 +37,10 @@ namespace task_2
                 switch (userSelection)
                 {
                     case 1:
-                        Console.WriteLine("Add name,\npassword\nand address that include - street , street number, city, country");
-                        Address userAddr = new Address(Console.ReadLine(), int.Parse(Console.ReadLine()), 
-                           Console.ReadLine(), Console.ReadLine());
-                        manager.addBuyer(Console.ReadLine(), Console.ReadLine(), userAddr);
+                        AddBuyer(manager);
                         break;
                     case 2:
-                       //
+                       AddSeller(manager);
                         break;
                     case 3:
                       //
@@ -70,6 +67,40 @@ namespace task_2
 
                 }
             }
+        }
+
+        private static void AddBuyer(Manager manager)
+        {
+            Console.WriteLine("Enter name:");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter password:");
+            string password = Console.ReadLine();
+            Address buyerAddr = GetAddress();
+            manager.addBuyer(name, password, buyerAddr);
+        }
+
+        private static void AddSeller(Manager manager)
+        {
+            Console.WriteLine("Enter name:");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter password:");
+            string password = Console.ReadLine();
+            Address sellerAddr = GetAddress();
+            manager.addSeller(name, password, sellerAddr);
+        }
+
+        private static Address GetAddress()
+        {
+            Console.WriteLine("Enter street:");
+            string street = Console.ReadLine();
+            Console.WriteLine("Enter street number:");
+            int streetNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter city:");
+            string city = Console.ReadLine();
+            Console.WriteLine("Enter country:");
+            string country = Console.ReadLine();
+
+            return new Address(street, streetNumber, city, country);
         }
 
         static void PayOrder(Manager manager)

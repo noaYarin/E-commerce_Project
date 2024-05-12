@@ -13,14 +13,16 @@ namespace task_2
         Address address;
         Product[] products;
 
-        public void AddProduct(Product product)
-        {
+        public UserSeller() { }
 
-        }
         public UserSeller(string name, string password, Address address)
         {
             SetSeller(name, password, address);
+        }
 
+        public UserSeller(UserSeller other)
+        {
+            SetSeller(other.name, other.password, other.address);
         }
 
         public bool SetSeller(string name, string password, Address address)
@@ -56,19 +58,19 @@ namespace task_2
             return false;
         }
 
-
-        public string ToString()
-        {
-            return "Status: Seller, name: " + name + ", password: " + password + ", Address: " + address.ToString();
-        }
-
-
         public bool IsContainDigit(string str)
         {
             foreach (char ch in str)
                 if (ch >= '0' && ch <= '9')
                     return true;
             return false;
+        }
+
+        public void AddProduct(Product product){}
+
+        public string ToString()
+        {
+            return "Status: Seller, name: " + name + ", password: " + password + ", Address: " + address.ToString();
         }
 
     }

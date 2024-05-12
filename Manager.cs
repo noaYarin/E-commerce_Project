@@ -40,7 +40,27 @@ namespace task_2
                 buyersLogSize++;
             }
             buyers = tempNewBuyers;
-            return false;
+            return true;
+        }
+
+        public bool addSeller(string name, string password, Address address)
+        {
+            UserSeller[] tempNewSellers;
+
+            if (sellers == null)
+            {
+                tempNewSellers = new UserSeller[1];
+                tempNewSellers[0] = new UserSeller(name, password, address);
+            }
+            else
+            {
+                tempNewSellers = new UserSeller[sellers.Length + size];
+                sellers.CopyTo(tempNewSellers, 0);
+                tempNewSellers[sellersLogSize] = new UserSeller(name, password, address);
+                sellersLogSize++;
+            }
+            sellers = tempNewSellers;
+            return true;
         }
 
 
@@ -73,7 +93,7 @@ namespace task_2
 
         public bool payOrderAllCart(string name)
         {
-            int totlePrice;
+            int totalPrice=0;
             foreach (UserBuyer buyer in buyers)
             {
                 if (name == buyer.GetName())
