@@ -18,9 +18,6 @@ namespace task_2
 
             initiateData(manager); // Template Data
 
-           
-            
-
             while (userSelection != EXIT)
             {
                 Console.WriteLine();
@@ -40,7 +37,7 @@ namespace task_2
                 switch (userSelection)
                 {
                     case 1:
-                        Console.WriteLine("Add name,password and address");
+                        Console.WriteLine("Add name,\npassword\nand address that include - street , street number, city, country");
                         Address userAddr = new Address(Console.ReadLine(), int.Parse(Console.ReadLine()), 
                            Console.ReadLine(), Console.ReadLine());
                         manager.addBuyer(Console.ReadLine(), Console.ReadLine(), userAddr);

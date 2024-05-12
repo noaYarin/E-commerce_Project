@@ -9,24 +9,41 @@ namespace task_2
     internal class Manager
     {
         private UserSeller[] sellers;
-        private int sellersLogSize;
+        private int sellersLogSize=0;
         private UserBuyer[] buyers;
-        private Product[] productsArr;
-        private int buyersLogSize;
+        private int buyersLogSize=0;
         private string name;
         private int size = 2;
-        private int sizeLogic = 0;
-      
+        private Product[] productsArr;
+
         public Manager(string _name)
         {
             this.name = _name;
-            buyersLogSize = 0;
             buyers = new UserBuyer[size];
-            sellersLogSize = 0;
             sellers = new UserSeller[size];
         }
 
- 
+        public bool addBuyer(string name, string password, Address address)
+        {
+            UserBuyer[] tempNewBuyers;
+
+            if (buyers == null)
+            {
+                tempNewBuyers = new UserBuyer[1];
+                tempNewBuyers[0] = new UserBuyer(name, password, address);
+            }
+            else
+            {
+                tempNewBuyers = new UserBuyer[buyers.Length + size];
+                buyers.CopyTo(tempNewBuyers, 0);
+                tempNewBuyers[buyersLogSize] = new UserBuyer(name, password, address);
+                buyersLogSize++;
+            }
+            buyers = tempNewBuyers;
+            return false;
+        }
+
+
         public bool addMyProduct(Product product)
         {
             Product[] newProduct;
@@ -69,28 +86,6 @@ namespace task_2
             }
             return true;
         }
-
-
-        public bool addBuyer(string name, string password, Address address)
-        {
-            UserBuyer[] newBuyer;
-
-            if (buyers == null) 
-            {
-                newBuyer = new UserBuyer[1];
-                newBuyer[0] = new UserBuyer(name, password, address);
-            }
-            else
-            {
-                newBuyer = new UserBuyer[buyers.Length + size]; 
-                buyers.CopyTo(newBuyer, 0);
-                newBuyer[sizeLogic] = new UserBuyer(name, password, address); 
-                sizeLogic++;
-            }
-            buyers = newBuyer;
-            return false;
-        }
-
 
         public void ShowAllProducts()
         {
