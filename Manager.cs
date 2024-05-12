@@ -20,29 +20,42 @@ namespace task_2
         public Manager(string _name)
         {
             this.name = _name;
-            buyers = new UserBuyer[size];
+            //buyers = new UserBuyer[size];
             sellers = new UserSeller[size];
         }
 
+
+       
         public bool addBuyer(string name, string password, Address address)
         {
             UserBuyer[] tempNewBuyers;
+            UserBuyer temp = new UserBuyer();
 
             if (buyers == null)
             {
-                tempNewBuyers = new UserBuyer[1];
+                tempNewBuyers = new UserBuyer[size];
                 tempNewBuyers[0] = new UserBuyer(name, password, address);
+                buyers = tempNewBuyers;
             }
             else
             {
-                tempNewBuyers = new UserBuyer[buyers.Length + size];
-                buyers.CopyTo(tempNewBuyers, 0);
-                tempNewBuyers[buyersLogSize] = new UserBuyer(name, password, address);
-                buyersLogSize++;
+                if (temp.SetBuyer(name, password, address))
+                {
+                    tempNewBuyers = new UserBuyer[buyers.Length + size];
+                    buyers.CopyTo(tempNewBuyers, 0);
+                    tempNewBuyers[buyersLogSize] = temp;
+                    buyers = tempNewBuyers;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid parameter!!");
+                    return false;
+                }
             }
-            buyers = tempNewBuyers;
+            buyersLogSize++;
             return true;
         }
+
 
         public bool addSeller(string name, string password, Address address)
         {
@@ -78,11 +91,11 @@ namespace task_2
         public bool addMyProduct(Product product)
         {
             Product[] newProduct;
-            foreach (UserBuyer buyer in buyers)
-            {
-                //if (buyer.GetName() == "Chen")
-                //    Console.WriteLine("exsit");
-            }
+            //foreach (UserBuyer buyer in buyers)
+            //{
+              
+            //}
+
             if(productsArr == null)
             {
                 newProduct = new Product[1];
@@ -119,11 +132,24 @@ namespace task_2
 
         public void ShowAllProducts()
         {
-            Console.WriteLine("\n***list all products***\n");
+            Console.WriteLine("\n***The list all products***");
             if(productsArr != null) 
                 foreach (Product productDetail in productsArr) 
                 {
                     Console.WriteLine($"name: {productDetail.GetProductName()} price: {productDetail.GetPrice()}");
+                }
+        }
+
+        public void ShowAllBuyers()
+        {
+            Console.WriteLine("\n***The list all buyers***");
+            if (buyers != null)
+                foreach (UserBuyer buyer in buyers)
+                {
+                    if (buyer != null)
+                        Console.WriteLine($"{buyer.ToString()} ");
+                    else
+                        break;
                 }
         }
     }

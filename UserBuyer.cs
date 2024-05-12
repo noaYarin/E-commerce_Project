@@ -26,7 +26,8 @@ namespace task_2
             SetBuyer(other.name, other.password, other.address);
          }
 
-     public string GetName() { return name; }
+        public string GetName() { return name; }
+        public string GetBuyerCity() { return address.GetCity(); }
       
         public bool SetBuyer(string name, string password, Address address)
         {
@@ -52,7 +53,7 @@ namespace task_2
 
         public bool SetPassword(string password)
         {
-            if (password != null && (password.Length >= 4 && password.Length <= 10))
+            if (password != null && (password.Length >= 0 && password.Length <= 15))
             {
                 this.password = password;
                 return true;
