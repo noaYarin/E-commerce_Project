@@ -43,7 +43,7 @@ namespace task_2
                        AddSeller(manager);
                         break;
                     case 3:
-                      //
+                        AddProductToSeller(manager);
                         break;
                     case 4:
                         AddProductToCart(manager);
@@ -52,7 +52,7 @@ namespace task_2
                         //PayOrder(manger);
                         break;
                     case 6:
-                        //
+                        //ShowAllBuyersDetails()
                         break;
                     case 7:
                         // for only tests
@@ -103,15 +103,15 @@ namespace task_2
             return new Address(street, streetNumber, city, country);
         }
 
-        static void PayOrder(Manager manager)
-        {
-            Console.WriteLine("What name of the buyer: ");
+        static void AddProductToSeller(Manager manager) {
+            Console.WriteLine("Enter product name:");
             string name = Console.ReadLine();
-            manager.payOrderAllCart("chen");
+            Console.WriteLine("Enter product price:");
+            int price = int.Parse(Console.ReadLine());
+            manager.addProductToSeller(name, price);
         }
 
-
-        static void AddProductToCart(Manager manger)
+        static void AddProductToCart(Manager manager)
         {
             Console.WriteLine("\nYou choose add prodct to shopping cart");
             Console.Write("Enter a product name: ");
@@ -134,9 +134,15 @@ namespace task_2
             else if (specialBoxStr == "no")
                 isSpecialBox = false;
 
-            manger.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
+            manager.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
         }
 
+        static void PayOrder(Manager manager)
+        {
+            Console.WriteLine("What name of the buyer: ");
+            string name = Console.ReadLine();
+            manager.payOrderAllCart("chen");
+        }
 
         static void initiateData(Manager manager)
         {

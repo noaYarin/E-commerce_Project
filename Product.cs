@@ -13,8 +13,7 @@ namespace task_2
         private Category category;
         private bool hasSpecialBox;
         private int extraPrice;
-
-        public Product(string _name,int _price) {  //,Category _category
+        public Product(string _name,int _price) { 
             this.name = _name;
             setPrice(_price);
         }

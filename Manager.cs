@@ -63,6 +63,10 @@ namespace task_2
             return true;
         }
 
+        public bool addProductToSeller(string name,int price)
+        {
+            return true;
+        }
 
         public bool addMyProduct(Product product)
         {
@@ -71,7 +75,6 @@ namespace task_2
             {
                 //if (buyer.GetName() == "Chen")
                 //    Console.WriteLine("exsit");
-                Console.WriteLine("fff");
             }
             if(productsArr == null)
             {
