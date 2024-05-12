@@ -22,16 +22,6 @@ namespace task_2
         public int GetPrice() { return price; }
         public bool GetHasSpecialBox() { return hasSpecialBox; }
 
-        public bool addProduct(Product product)
-        {
-            if(product != null)
-            {
-                
-                return true;
-            }
-            return false;
-        }
-
         public bool setPrice(int price)
         {
             if(price <= 0)

@@ -108,7 +108,9 @@ namespace task_2
             string name = Console.ReadLine();
             Console.WriteLine("Enter product price:");
             int price = int.Parse(Console.ReadLine());
-            manager.addProductToSeller(name, price);
+            Console.WriteLine("Enter seller name:");
+            string sellerName= Console.ReadLine();
+            manager.addProductToSeller(name, price,sellerName);
         }
 
         static void AddProductToCart(Manager manager)

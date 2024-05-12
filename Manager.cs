@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,9 +64,15 @@ namespace task_2
             return true;
         }
 
-        public bool addProductToSeller(string name,int price)
+        public void addProductToSeller(string name,int price,string sellerName)
         {
-            return true;
+            foreach (var seller in sellers)
+            {
+                if(seller.getSellerName()!= null && seller.getSellerName() == sellerName) {
+                    seller.addProduct(name, price);
+                }
+            }
+
         }
 
         public bool addMyProduct(Product product)
