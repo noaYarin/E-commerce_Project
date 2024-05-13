@@ -57,6 +57,7 @@ namespace task_2
                     case 7:
                         // for only tests
                         manager.ShowAllProducts();
+                        manager.ShowAllBuyers();
                         break;
                     case 8:
                         Console.WriteLine("Goodbye :) ");
@@ -154,7 +155,7 @@ namespace task_2
             Address addr2 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
             manager.addBuyer("Ben", "12345", addr2);
             Address addr3 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.addBuyer("Aviv", "12345", addr3);
+            manager.addBuyer("A1viv", "12345", addr3);
 
             manager.addMyProduct(new Product("Chen", 45));
             manager.addMyProduct(new Product("Chen", 35));
