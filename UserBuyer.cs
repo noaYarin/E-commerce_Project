@@ -26,7 +26,7 @@ namespace task_2
             SetBuyer(other.name, other.password, other.address);
          }
 
-        public string GetName() { return name; }
+        public string GetBuyerName() { return name; }
         public string GetBuyerCity() { return address.GetCity(); }
       
         public bool SetBuyer(string name, string password, Address address)
@@ -71,10 +71,12 @@ namespace task_2
         public void ToStringAllProducts()
         {
             if(products != null)
-                foreach (Product productDetail in products)
+            {
+                foreach (var productDetail in products)
                 {
                     Console.WriteLine(productDetail.ToString());
                 }
+            }
         }
 
 

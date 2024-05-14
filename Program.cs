@@ -11,13 +11,17 @@ namespace task_2
     {
         static void Main(string[] args)
         {
-            const string programName = "Commercial";
+            const string programName = "E-commerce Project\nSubmitted by Noa-Yarin Levi and Chen Brown";
             Manager manager = new Manager(programName);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(programName + "\n");
+            Console.ResetColor();
+
             const int EXIT = 8;
             int userSelection = 0;
 
-            //initiateData(manager);
-
+            InitiateData(manager);
+  
             while (userSelection != EXIT)
             {
                 Console.WriteLine();
@@ -55,7 +59,7 @@ namespace task_2
                         manager.ShowAllBuyers();
                         break;
                     case 7:
-                        // Show all sellers
+                        manager.ShowAllSellers();
                         break;
                     case 8:
                         Console.WriteLine("Goodbye :) ");
@@ -150,7 +154,7 @@ namespace task_2
                
         }
 
-        static void initiateData(Manager manager)
+        static void InitiateData(Manager manager)
         {
             //Template Data
             Address addr1 = new Address("Zamenhof", 3, "Netanya", "ISR");
@@ -159,6 +163,11 @@ namespace task_2
             manager.AddBuyer("ben", "12345", addr2);
             Address addr3 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
             manager.AddBuyer("aviv", "12345", addr3);
+
+            Address addr4 = new Address("Zamenhof", 3, "Netanya", "ISR");
+            manager.AddBuyer("eli", "12345", addr4);
+            Address addr5 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
+            manager.AddBuyer("chenj", "12345", addr5);
 
             manager.AddProductToCart(new Product("table", 12, false, 0), "chen"); 
             manager.AddProductToCart(new Product("milk", 76, true, 45), "chen");
