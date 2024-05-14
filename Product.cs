@@ -16,7 +16,7 @@ namespace task_2
         public Product(string _name,int _price) { 
             this.name = _name;
             this.price = _price;
-            setPrice(_price);
+            SetPrice(_price);
         }
 
         public Product(string _name, int _price, bool _hasSpecialBox, int _extraPrice)
@@ -25,7 +25,7 @@ namespace task_2
             this.price = _price;
             this.hasSpecialBox = _hasSpecialBox;
             this.extraPrice = _extraPrice;
-            setPrice(_price);
+            SetPrice(_price);
         }
 
         public string GetProductName() { return  name; }
@@ -33,7 +33,7 @@ namespace task_2
         public bool GetHasSpecialBox() { return hasSpecialBox; }
         public int GetExtraPrice() {  return extraPrice; }
 
-        public bool setPrice(int price)
+        public bool SetPrice(int price)
         {
             if(price <= 0)
             {

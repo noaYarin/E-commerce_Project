@@ -9,11 +9,11 @@ namespace task_2
 {
     internal class Manager
     {
+        private string name;
         private UserSeller[] sellers;
         private int sellersLogSize=0;
         private UserBuyer[] buyers;
         private int buyersLogSize=0;
-        private string name;
         private const int size = 2;
         private Product[] productsArr;
 
@@ -31,14 +31,8 @@ namespace task_2
             UserBuyer[] tempNewBuyers;
             UserBuyer newBuyer = new UserBuyer();
 
-            foreach (var buyer in buyers)
-            {
-                if (buyer != null && buyer.GetName() == name)
-                {
-                    Console.WriteLine("Buyer name already taken, try another name");
-                    return false;
-                }
-            }
+             checkUserName(name);
+
             bool isValid = newBuyer.SetBuyer(name, password, address);
             if (!isValid)
             {
@@ -62,16 +56,9 @@ namespace task_2
         {
             UserSeller[] tempNewSellers;
             UserSeller newSeller = new UserSeller();
-            foreach (var seller in sellers)
-            {
-                if (seller != null && seller.GetSellerName() == name)
-                {
-                    Console.WriteLine("Seller name already taken, try another name");
-                    return false;
-                }
-            }
+            bool isNameNotExist = checkUserName(name);
             bool isValid = newSeller.SetSeller(name, password, address);
-            if (!isValid)
+            if (!isValid || !isNameNotExist)
             {
                 Console.WriteLine("Invalid values");
                 return false;
@@ -104,7 +91,7 @@ namespace task_2
             foreach (var buyer in buyers)
             {
                
-                if(buyer!=null && buyer.GetName() == name)
+                if(buyer!=null && buyer.GetBuyerName() == name)
                 {
                     buyer.SetProduct(product);
                     return true;
@@ -120,7 +107,7 @@ namespace task_2
             foreach (UserBuyer buyer in buyers)
             {
                 if (buyer != null) 
-                    if (name == buyer.GetName())
+                    if (name == buyer.GetBuyerName())
                     {
                         Console.WriteLine("price: " + buyer.GetPriceCart());
                         return true;
@@ -142,23 +129,73 @@ namespace task_2
 
         public void ShowAllBuyers()
         {
-            Console.WriteLine("\n***Show all buyers detail***");
-            int index = 1;
-            if (buyers != null)
+            Console.WriteLine("\n***Show all buyers details***");
+            if (buyers[0] != null) 
             {
-                foreach (UserBuyer buyer in buyers)
+                int index = 1;
+                foreach (var buyer in buyers)
                 {
-                    if (buyer != null)
-                    {
-                        Console.WriteLine($"{index} {buyer.ToString()} ");
-                        buyer.ToStringAllProducts();
-                        Console.WriteLine();
-                        index++;
-                    }
-                    else
+                    if (buyer == null) { 
                         break;
+                    }
+                    Console.WriteLine($"{index} {buyer.ToString()} ");
+                    buyer.ToStringAllProducts(); 
+                    Console.WriteLine();
+                    index++;
                 }
             }
+            else
+            {
+                Console.WriteLine("No buyers to display."); 
+            }
+
+        }
+
+        public void ShowAllSellers()
+        {
+            Console.WriteLine("\n***Show all buyers details***");
+            if (sellers[0] != null)
+            {
+                int index = 1;
+                foreach (var seller in sellers)
+                {
+                    if (seller == null)
+                    {
+                        break;
+                    }
+                    Console.WriteLine($"{index} {seller.ToString()} ");
+                    seller.ToStringAllProducts();
+                    Console.WriteLine();
+                    index++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("No sellers to display.");
+            }
+        }
+
+        private bool checkUserName(string name)
+        {
+            foreach (var seller in sellers)
+            {
+                if (seller != null && seller.GetSellerName() == name)
+                {
+                    Console.WriteLine("Name already taken, try another name");
+                    return false;
+                }
+            }
+
+            foreach (var buyer in buyers)
+            {
+                if (buyer != null && buyer.GetBuyerName() == name)
+                {
+                    Console.WriteLine("Name already taken, try another name");
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

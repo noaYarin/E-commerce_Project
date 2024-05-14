@@ -92,6 +92,16 @@ namespace task_2
             return name;
         }
 
+        public void ToStringAllProducts()
+        {
+            if (products != null)
+            {
+                foreach (var productDetail in products)
+                {
+                    Console.WriteLine(productDetail.ToString());
+                }
+            }
+        }
         public string ToString()
         {
             return "Status: Seller, name: " + name + ", password: " + password + ", Address: " + address.ToString();
