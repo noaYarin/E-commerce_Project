@@ -16,7 +16,7 @@ namespace task_2
             const int EXIT = 8;
             int userSelection = 0;
 
-            initiateData(manager); // Template Data
+            //initiateData(manager);
 
             while (userSelection != EXIT)
             {
@@ -70,22 +70,25 @@ namespace task_2
 
         private static void AddBuyer(Manager manager)
         {
-            string name = nameOfUser();
+            string name =NameOfUser();
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address buyerAddr = GetAddress();
-            if (manager.addBuyer(name, password, buyerAddr))
+            if (manager.AddBuyer(name, password, buyerAddr))
+            {
                 Console.WriteLine("Buyer successfully added!");
+            }
         }
 
         private static void AddSeller(Manager manager)
         {
-            Console.WriteLine("Enter name:");
-            string name = Console.ReadLine();
+            string name = NameOfUser();
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address sellerAddr = GetAddress();
-            manager.addSeller(name, password, sellerAddr);
+            if(manager.AddSeller(name, password, sellerAddr)){
+                    Console.WriteLine("Seller successfully added!");
+            }
         }
 
         private static Address GetAddress()
@@ -109,18 +112,16 @@ namespace task_2
             int price = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter seller name:");
             string sellerName= Console.ReadLine();
-            manager.addProductToSeller(name, price,sellerName);
+            manager.AddProductToSeller(name, price,sellerName);
         }
 
         static void AddProductToCart(Manager manager)
         {
-            string name = nameOfUser();
+            string name = NameOfUser();
             Console.Write("Enter a product name: ");
             string productName = Console.ReadLine();
             Console.Write("Enter the product price: ");
             int productPrice = int.Parse(Console.ReadLine());
-            Console.Write("Enter which type of category from this list: [Kids, Electronics, Offices, Cloths]: ");
-            string category = Console.ReadLine();
             Console.Write("Do you want add a special package? [Yes / No]: ");
             string specialBoxStr = Console.ReadLine();
             bool isSpecialBox = false;
@@ -128,48 +129,48 @@ namespace task_2
             if (specialBoxStr == "yes")
             {
                 isSpecialBox = true;
-                Console.Write("how much is it to add a package box? ");
+                Console.Write("How much is it to add a package box? ");
                 extraPrice = int.Parse(Console.ReadLine());
             }
 
             else if (specialBoxStr == "no")
+            {
                 isSpecialBox = false;
-
-            manager.addMyProduct(new Product(productName, productPrice, isSpecialBox, extraPrice), name); 
+            }
+            manager.AddProductToCart(new Product(productName, productPrice, isSpecialBox, extraPrice), name); 
         }
 
         static void PayOrder(Manager manager)
         {
-            
-            string name = nameOfUser();
+            string name = NameOfUser();
             if (!manager.payOrderAllCart(name))
+            {
                 Console.WriteLine("Invalid name");
+            }
+               
         }
 
         static void initiateData(Manager manager)
         {
             //Template Data
             Address addr1 = new Address("Zamenhof", 3, "Netanya", "ISR");
-            manager.addBuyer("chen", "12345", addr1);
+            manager.AddBuyer("chen", "12345", addr1);
             Address addr2 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.addBuyer("ben", "12345", addr2);
+            manager.AddBuyer("ben", "12345", addr2);
             Address addr3 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.addBuyer("aviv", "12345", addr3);
+            manager.AddBuyer("aviv", "12345", addr3);
 
-            manager.addMyProduct(new Product("table", 12, false, 0), "chen"); 
-            manager.addMyProduct(new Product("milk", 76, true, 45), "chen");
-            manager.addMyProduct(new Product("keyboard", 76, true, 65), "ben");
+            manager.AddProductToCart(new Product("table", 12, false, 0), "chen"); 
+            manager.AddProductToCart(new Product("milk", 76, true, 45), "chen");
+            manager.AddProductToCart(new Product("keyboard", 76, true, 65), "ben");
         }
 
 
-        static string nameOfUser()
+        static string NameOfUser()
         {
-            Console.Write("enter name of the user: ");
+            Console.Write("Enter name :");
             string name = Console.ReadLine();
             return name.ToLower();
         }
-
-
-
     }
 }

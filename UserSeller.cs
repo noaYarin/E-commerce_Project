@@ -13,7 +13,7 @@ namespace task_2
         private Address address;
         private Product[] products;
         private int productsSellerLogSize = 0;
-        private int size = 2;
+        private const int size = 2;
 
         public UserSeller() { }
 
@@ -28,7 +28,7 @@ namespace task_2
             SetSeller(other.name, other.password, other.address);
         }
 
-         public bool addProduct(string name, int price)
+         public bool AddProduct(string name, int price)
            {
                Product[] tempNewProducts;
 
@@ -87,9 +87,9 @@ namespace task_2
             return false;
         }
 
-        public string getSellerName()
+        public string GetSellerName()
         {
-            return this.name;
+            return name;
         }
 
         public string ToString()
