@@ -77,13 +77,14 @@ namespace task_2
 
         public void AddProductToSeller(string name,int price,string sellerName)
         {
+            bool isAdded = false;
             foreach (var seller in sellers)
             {
-                if(seller.GetSellerName()!= null && seller.GetSellerName() == sellerName) {
-                    seller.AddProduct(name, price);
+                if(seller!= null && seller.GetSellerName() == sellerName) {
+                  isAdded =seller.AddProduct(name, price);
                 }
             }
-
+            Console.WriteLine(isAdded ? "\nProduct successfully added!" : "\nProduct not added");
         }
 
         public bool AddProductToCart(Product product, string name)
@@ -146,7 +147,7 @@ namespace task_2
             }
             else
             {
-                Console.WriteLine("No buyers to display."); 
+                Console.WriteLine("\nNo buyers to display."); 
             }
 
         }
@@ -171,7 +172,7 @@ namespace task_2
             }
             else
             {
-                Console.WriteLine("No sellers to display.");
+                Console.WriteLine("\nNo sellers to display.");
             }
         }
 
