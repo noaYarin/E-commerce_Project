@@ -48,16 +48,14 @@ namespace task_2
                     case 4:
                         AddProductToCart(manager);
                         break;
-                    case 5:
-                        //PayOrder(manger);
+                    case 5: 
+                        PayOrder(manager);
                         break;
                     case 6:
-                        //ShowAllBuyersDetails()
+                        manager.ShowAllBuyers();
                         break;
                     case 7:
-                        // for only tests
-                        manager.ShowAllProducts();
-                        manager.ShowAllBuyers();
+                        // Show all sellers
                         break;
                     case 8:
                         Console.WriteLine("Goodbye :) ");
@@ -72,12 +70,12 @@ namespace task_2
 
         private static void AddBuyer(Manager manager)
         {
-            Console.WriteLine("Enter name:");
-            string name = Console.ReadLine();
+            string name = nameOfUser();
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address buyerAddr = GetAddress();
-            manager.addBuyer(name, password, buyerAddr);
+            if (manager.addBuyer(name, password, buyerAddr))
+                Console.WriteLine("Buyer successfully added!");
         }
 
         private static void AddSeller(Manager manager)
@@ -116,7 +114,7 @@ namespace task_2
 
         static void AddProductToCart(Manager manager)
         {
-            Console.WriteLine("\nYou choose add prodct to shopping cart");
+            string name = nameOfUser();
             Console.Write("Enter a product name: ");
             string productName = Console.ReadLine();
             Console.Write("Enter the product price: ");
@@ -137,32 +135,39 @@ namespace task_2
             else if (specialBoxStr == "no")
                 isSpecialBox = false;
 
-            manager.addMyProduct(new Product(productName, productPrice)); // To Do fix constructor
+            manager.addMyProduct(new Product(productName, productPrice, isSpecialBox, extraPrice), name); 
         }
 
         static void PayOrder(Manager manager)
         {
-            Console.WriteLine("What name of the buyer: ");
-            string name = Console.ReadLine();
-            manager.payOrderAllCart("chen");
+            
+            string name = nameOfUser();
+            if (!manager.payOrderAllCart(name))
+                Console.WriteLine("Invalid name");
         }
 
         static void initiateData(Manager manager)
         {
             //Template Data
             Address addr1 = new Address("Zamenhof", 3, "Netanya", "ISR");
-            manager.addBuyer("Chen", "12345", addr1);
+            manager.addBuyer("chen", "12345", addr1);
             Address addr2 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.addBuyer("Ben", "12345", addr2);
+            manager.addBuyer("ben", "12345", addr2);
             Address addr3 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.addBuyer("A1viv", "12345", addr3);
+            manager.addBuyer("aviv", "12345", addr3);
 
-            manager.addMyProduct(new Product("Chen", 45));
-            manager.addMyProduct(new Product("Chen", 35));
-            manager.addMyProduct(new Product("Chen", 444));
-            manager.addMyProduct(new Product("Ben", 444));
+            manager.addMyProduct(new Product("table", 12, false, 0), "chen"); 
+            manager.addMyProduct(new Product("milk", 76, true, 45), "chen");
+            manager.addMyProduct(new Product("keyboard", 76, true, 65), "ben");
         }
 
+
+        static string nameOfUser()
+        {
+            Console.Write("enter name of the user: ");
+            string name = Console.ReadLine();
+            return name.ToLower();
+        }
 
 
 

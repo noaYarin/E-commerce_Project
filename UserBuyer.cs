@@ -65,7 +65,28 @@ namespace task_2
 
         public string ToString()
         {
-            return "Status: Buyer, name: " + name + ", password: " + password + ", Address: " + address.ToString();
+            return "Customer name: " + name + ", password: " + password + ", Address: " + address.ToString(); 
+        }
+
+        public void ToStringAllProducts()
+        {
+            if(products != null)
+                foreach (Product productDetail in products)
+                {
+                    Console.WriteLine(productDetail.ToString());
+                }
+        }
+
+
+        public int GetPriceCart()
+        {
+            int priceCart = 0;
+            if (products != null)
+                foreach (Product productDetail in products)
+                {
+                    priceCart += productDetail.GetPrice();
+                }
+            return priceCart;
         }
 
 
@@ -75,6 +96,25 @@ namespace task_2
                 if (ch >= '0' && ch <= '9')
                     return true;
             return false;
+        }
+
+
+        public bool SetProduct(Product productDetail)
+        {
+            Product[] newProduct;
+            if(products == null)
+            {
+                newProduct = new Product[1];
+                newProduct[0] = productDetail;
+            }
+            else
+            {
+                newProduct = new Product[products.Length + 1];
+                products.CopyTo(newProduct, 0);
+                newProduct[products.Length] = productDetail; 
+            }
+            products = newProduct;
+            return true;
         }
 
     }
