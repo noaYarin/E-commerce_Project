@@ -11,6 +11,7 @@ namespace task_2
     {
         static void Main(string[] args)
         {
+            //https://github.com/noaYarin/E-commerce_task_2
             const string programName = "E-commerce Project\nSubmitted by Noa-Yarin Levi and Chen Brown";
             Manager manager = new Manager(programName);
             Console.ForegroundColor = ConsoleColor.Red;
@@ -25,7 +26,7 @@ namespace task_2
             while (userSelection != EXIT)
             {
                 Console.WriteLine();
-                Console.WriteLine("---------Menu---------");
+                Console.WriteLine("---------------Menu----------------\n");
                 Console.WriteLine("Choose one of the following options:");
                 Console.WriteLine("(1) Add new buyer");
                 Console.WriteLine("(2) Add new seller");
@@ -35,7 +36,7 @@ namespace task_2
                 Console.WriteLine("(6) Show buyers details");
                 Console.WriteLine("(7) Show sellers details");
                 Console.WriteLine("(8) EXIT");
-                Console.Write("Enter your choice: ");
+                Console.Write("\nEnter your choice: ");
                 userSelection = int.Parse(Console.ReadLine());
 
                 switch (userSelection)
@@ -80,7 +81,11 @@ namespace task_2
             Address buyerAddr = GetAddress();
             if (manager.AddBuyer(name, password, buyerAddr))
             {
-                Console.WriteLine("Buyer successfully added!");
+                Console.WriteLine("\nBuyer successfully added!");
+            }
+            else
+            {
+                Console.WriteLine("\nBuyer not added, try again");
             }
         }
 
@@ -91,7 +96,11 @@ namespace task_2
             string password = Console.ReadLine();
             Address sellerAddr = GetAddress();
             if(manager.AddSeller(name, password, sellerAddr)){
-                    Console.WriteLine("Seller successfully added!");
+              Console.WriteLine("Seller successfully added!");
+            }
+            else
+            {
+                Console.WriteLine("\nSeller not added, try again");
             }
         }
 
