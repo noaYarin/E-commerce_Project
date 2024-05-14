@@ -88,46 +88,38 @@ namespace task_2
 
         }
 
-        public bool addMyProduct(Product product)
+        public bool addMyProduct(Product product, string name)
         {
             Product[] newProduct;
-            //foreach (UserBuyer buyer in buyers)
-            //{
-              
-            //}
-
-            if(productsArr == null)
+            foreach (UserBuyer buyer in buyers)
             {
-                newProduct = new Product[1];
-                newProduct[0] = new Product(product.GetProductName(), product.GetPrice()); 
+               
+                if(buyer.GetName() == name)
+                {
+                    buyer.SetProduct(product);
+                    return true;
+                }
             }
 
-            else
-            {
-                newProduct = new Product[productsArr.Length+1];
-                productsArr.CopyTo(newProduct, 0);
-                newProduct[productsArr.Length] = new Product(product.GetProductName(), product.GetPrice());
-            }
-            productsArr = newProduct;
-
-            return true; 
+            return false; 
         }
 
 
         public bool payOrderAllCart(string name)
         {
-            int totalPrice=0;
+            int price=0;
             foreach (UserBuyer buyer in buyers)
             {
-                if (name == buyer.GetName())
-                {
-                    Console.WriteLine(buyer);
-                }
+                if (buyer != null) 
+                    if (name == buyer.GetName())
+                    {
+                        price = buyer.GetPriceCart();
+                        Console.WriteLine("price: " + price);
+                        return true;
+                    }
 
-                else
-                    return false;
             }
-            return true;
+            return false;
         }
 
         public void ShowAllProducts()
@@ -140,14 +132,21 @@ namespace task_2
                 }
         }
 
+
         public void ShowAllBuyers()
         {
-            Console.WriteLine("\n***The list all buyers***");
+            Console.WriteLine("\n***Show all buyers detail***");
+            int index = 1;
             if (buyers != null)
                 foreach (UserBuyer buyer in buyers)
                 {
                     if (buyer != null)
-                        Console.WriteLine($"{buyer.ToString()} ");
+                    {
+                        Console.WriteLine($"{index} {buyer.ToString()} ");
+                        buyer.ToStringAllProducts();
+                        Console.WriteLine();
+                        index++;
+                    }
                     else
                         break;
                 }

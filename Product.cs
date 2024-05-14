@@ -15,12 +15,23 @@ namespace task_2
         private int extraPrice;
         public Product(string _name,int _price) { 
             this.name = _name;
+            this.price = _price;
             setPrice(_price);
         }
-      
+
+        public Product(string _name, int _price, bool _hasSpecialBox, int _extraPrice)
+        {
+            this.name = _name;
+            this.price = _price;
+            this.hasSpecialBox = _hasSpecialBox;
+            this.extraPrice = _extraPrice;
+            setPrice(_price);
+        }
+
         public string GetProductName() { return  name; }
         public int GetPrice() { return price; }
         public bool GetHasSpecialBox() { return hasSpecialBox; }
+        public int GetExtraPrice() {  return extraPrice; }
 
         public bool setPrice(int price)
         {
@@ -28,9 +39,14 @@ namespace task_2
             {
                 Console.WriteLine("Invalid price");
                 return false;
-        }
+            }
             this.price = price;
             return true;
+        }
+
+        public string ToString()
+        {
+            return $"\t- product name: {name} price: {price} category: {category} special box: {hasSpecialBox} extra price: {extraPrice}";
         }
     }
 }
