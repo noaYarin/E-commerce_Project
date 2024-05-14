@@ -46,7 +46,7 @@ namespace task_2
 
         public string ToString()
         {
-            return $"\t- product name: {name} price: {price} category: {category} special box: {hasSpecialBox} extra price: {extraPrice}";
+            return $"\t- product name: {name}, price: {price}, category: {category}, special box: {hasSpecialBox}, extra price: {extraPrice}";
         }
     }
 }
