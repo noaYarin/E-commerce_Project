@@ -54,7 +54,7 @@ namespace task_2
                         AddProductToCart(manager);
                         break;
                     case 5: 
-                        PayOrder(manager);
+                        Payment(manager);
                         break;
                     case 6:
                         manager.ShowAllBuyers();
@@ -153,10 +153,10 @@ namespace task_2
             manager.AddProductToCart(new Product(productName, productPrice, isSpecialBox, extraPrice), name); 
         }
 
-        static void PayOrder(Manager manager)
+        static void Payment(Manager manager)
         {
             string name = NameOfUser();
-            if (!manager.payOrderAllCart(name))
+            if (!manager.PaymentCart(name))
             {
                 Console.WriteLine("Invalid name");
             }
