@@ -15,7 +15,7 @@ namespace task_2
         private UserBuyer[] buyers;
         private int buyersLogSize=0;
         private const int size = 2;
-        private Product[] productsArr;
+
 
         public Manager(string _name)
         {
@@ -103,30 +103,19 @@ namespace task_2
         }
 
 
-        public bool payOrderAllCart(string name)
+        public bool PaymentCart(string name)
         {
-            foreach (UserBuyer buyer in buyers)
+            foreach(var buyer in buyers)
             {
-                if (buyer != null) 
-                    if (name == buyer.GetBuyerName())
-                    {
-                        Console.WriteLine("price: " + buyer.GetPriceCart());
-                        return true;
-                    }
+                if (buyer!=null && name == buyer.GetBuyerName())
+                {
+                    buyer.SetOrderArr(buyer);
+                    buyer.RemoveAllCartProducts();
+                    return true;
+                }
             }
             return false;
         }
-
-        public void ShowAllProducts()
-        {
-            Console.WriteLine("\n***The list all products***");
-            if(productsArr != null) 
-                foreach (Product productDetail in productsArr) 
-                {
-                    Console.WriteLine($"name: {productDetail.GetProductName()} price: {productDetail.GetPrice()}");
-                }
-        }
-
 
         public void ShowAllBuyers()
         {
@@ -141,6 +130,8 @@ namespace task_2
                     }
                     Console.WriteLine($"{index} {buyer.ToString()} ");
                     buyer.ToStringAllProducts(); 
+                    Console.WriteLine();
+                    buyer.ToStringHistoryProducts(); 
                     Console.WriteLine();
                     index++;
                 }

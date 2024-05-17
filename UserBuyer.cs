@@ -15,6 +15,8 @@ namespace task_2
         Address address;
         Order[] orders;
         Product[] products;
+        int size = 2;
+        int productSizeLogic = 0;
 
         public UserBuyer(){}
         public UserBuyer(string name, string password, Address address)
@@ -28,7 +30,10 @@ namespace task_2
 
         public string GetBuyerName() { return name; }
         public string GetBuyerCity() { return address.GetCity(); }
+
+        public Product[] GetProductsArr() { return products; }
       
+
         public bool SetBuyer(string name, string password, Address address)
         {
             if (SetName(name) && SetPassword(password))
@@ -38,6 +43,25 @@ namespace task_2
                 return true;
             }
             return false;
+        }
+
+        public bool SetOrderArr(UserBuyer _UserBuyer)
+        {
+            Order[] newOrder;
+            
+            if (orders == null)
+            {
+                orders = new Order[1];
+            }
+            else
+            {
+                newOrder = new Order[orders.Length + 1];
+                orders.CopyTo(newOrder, 0);
+                orders = newOrder;
+            }
+
+            this.orders[orders.Length - 1] = new Order(_UserBuyer, products, productSizeLogic);
+            return true;
         }
 
 
@@ -74,9 +98,33 @@ namespace task_2
             {
                 foreach (var productDetail in products)
                 {
-                    Console.WriteLine(productDetail.ToString());
+                    if(productDetail != null)
+                        Console.WriteLine(productDetail.ToString());
                 }
             }
+        }
+
+        public void ToStringHistoryProducts()
+        {
+            if(orders!= null)
+            {
+                Console.WriteLine("\tHistrory shopping:");
+                foreach (var order in orders)
+                {
+                    Console.WriteLine(order.ToString());
+                    order.HistroyCart();
+                }
+            }
+        }
+
+        public bool RemoveAllCartProducts()
+        {
+            for(int i = 0; i< products.Length; i++)
+            {
+                products[i] = null;
+            }
+            productSizeLogic = 0;
+            return true;
         }
 
 
@@ -106,15 +154,17 @@ namespace task_2
             Product[] newProduct;
             if(products == null)
             {
-                newProduct = new Product[1];
+                newProduct = new Product[size]; 
                 newProduct[0] = productDetail;
             }
             else
             {
-                newProduct = new Product[products.Length + 1];
+                newProduct = new Product[products.Length * size];
+              
                 products.CopyTo(newProduct, 0);
-                newProduct[products.Length] = productDetail; 
+                newProduct[productSizeLogic] = productDetail;
             }
+            productSizeLogic++;
             products = newProduct;
             return true;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace task_2
 {
@@ -26,6 +27,15 @@ namespace task_2
             this.hasSpecialBox = _hasSpecialBox;
             this.extraPrice = _extraPrice;
             SetPrice(_price);
+        }
+
+        public Product(Product _product) 
+        {
+            this.name = _product.name;
+            this.price = _product.price;
+            this.hasSpecialBox = _product.hasSpecialBox;
+            this.extraPrice = _product.extraPrice;
+            SetPrice(_product.price);
         }
 
         public string GetProductName() { return  name; }
