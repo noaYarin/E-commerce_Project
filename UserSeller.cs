@@ -14,13 +14,15 @@ namespace task_2
         private Product[] products;
         private int productsSellerLogSize = 0;
         private const int size = 2;
+        private Product[] productsList;
 
-        public UserSeller() { }
+        public UserSeller() {
+            products = new Product[size];
+        }
 
         public UserSeller(string name, string password, Address address)
         {
             SetSeller(name, password, address);
-            products = new Product[size];
         }
 
         public UserSeller(UserSeller other)
@@ -30,22 +32,19 @@ namespace task_2
 
          public bool AddProduct(string name, int price)
            {
-               Product[] tempNewProducts;
+            Product[] tempNewProducts;
+            Product newProduct = new Product(name,price);
 
-               if (products == null)
-               {
-                   tempNewProducts = new Product[1];
-                   tempNewProducts[0] = new Product(name, price);
-               }else {
-                  tempNewProducts = new Product[products.Length + size];
-                    products.CopyTo(tempNewProducts, 0);
-                   tempNewProducts[productsSellerLogSize] = new Product(name, price);
-                   productsSellerLogSize++;
-               }
+            if (productsSellerLogSize == products.Length)
+            {
+                tempNewProducts = new Product[products.Length * 2];
+                products.CopyTo(tempNewProducts, 0);
                 products = tempNewProducts;
-               return true;
+            }
+            products[productsSellerLogSize] = newProduct;
+            productsSellerLogSize++;
+            return true;
            }
-
         public bool SetSeller(string name, string password, Address address)
         {
             if (SetName(name) && SetPassword(password))
@@ -86,10 +85,15 @@ namespace task_2
                     return true;
             return false;
         }
-
+        
         public string GetSellerName()
         {
             return name;
+        }
+
+        public Product[] GetProductsList()
+        {
+            return productsList;
         }
 
         public void ToStringAllProducts()
@@ -98,13 +102,14 @@ namespace task_2
             {
                 foreach (var productDetail in products)
                 {
-                    Console.WriteLine(productDetail.ToString());
+                    if (productDetail != null)
+                        Console.WriteLine(productDetail.ToString());
                 }
             }
         }
         public string ToString()
         {
-            return "Status: Seller, name: " + name + ", password: " + password + ", Address: " + address.ToString();
+            return "Status: Seller, name: " + name + ", Address: " + address.ToString();
         }
 
     }

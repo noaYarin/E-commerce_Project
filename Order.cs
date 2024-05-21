@@ -41,13 +41,6 @@ namespace task_2
             this.totalPrice = price;
         }
 
-       
-
-        public string ToString() 
-        {
-            return $"\t# {buyerDetails.GetBuyerName()}: total price: {totalPrice} ";
-        }
-
         public void HistroyCart()
         {
             foreach (var item in this.allProducts)
@@ -58,6 +51,11 @@ namespace task_2
                 }
             }
         }
-      
+
+        public string ToString()
+        {
+            return $"\t# {buyerDetails.GetBuyerName()}: total price: {totalPrice} ";
+        }
+
     }
 }
