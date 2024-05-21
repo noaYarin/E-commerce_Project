@@ -29,7 +29,7 @@ namespace task_2
             UserBuyer[] tempNewBuyers;
             UserBuyer newBuyer = new UserBuyer();
 
-             checkUserName(name);
+            checkUserName(name);
 
             bool isValid = newBuyer.SetBuyer(name, password, address);
             if (!isValid)
