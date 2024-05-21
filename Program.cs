@@ -20,8 +20,6 @@ namespace task_2
 
             const int EXIT = 8;
             int userSelection = 0;
-
-            //InitiateData(manager);
   
             while (userSelection != EXIT)
             {
@@ -95,7 +93,7 @@ namespace task_2
             string password = Console.ReadLine();
             Address sellerAddr = GetAddress();
             if(manager.AddSeller(name, password, sellerAddr)){
-              Console.WriteLine("Seller successfully added!");
+              Console.WriteLine("\nSeller successfully added!");
             }
             else
             {
@@ -161,32 +159,14 @@ namespace task_2
             string name = NameOfUser();
             if (!manager.PaymentCart(name))
             {
-                Console.WriteLine("Invalid name");
+                Console.WriteLine("\nInvalid name");
             }
             else
             {
-                Console.WriteLine("Order completed");
+                Console.WriteLine("\nOrder completed");
             }
                
         }
-
-        static void InitiateData(Manager manager)
-        {
-            //Template Data
-            Address addr1 = new Address("Zamenhof", 3, "Netanya", "ISR");
-            manager.AddBuyer("chen", "12345!", addr1);
-
-            Address addr4 = new Address("Zamenhof", 3, "Netanya", "ISR");
-            manager.AddBuyer("eli", "12341!", addr4);
-            Address addr5 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.AddSeller("noa", "12345!", addr5);
-
-            Console.WriteLine("3 Buyers successfully added!");
-            manager.AddProductToCart(new Product("table", 12, false, 0), "chen"); 
-            manager.AddProductToCart(new Product("milk", 76, true, 45), "chen");
-            manager.AddProductToCart(new Product("keyboard", 76, true, 65), "ben");
-        }
-
 
         static string NameOfUser()
         {
