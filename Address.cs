@@ -12,6 +12,7 @@ namespace task_2
         private int numberOfStreet;
         private string city;
         private string country;
+        private Validation checkValidation = new Validation();
 
         public Address(string street, int numberOfStreet, string city, string country)
         {
@@ -34,7 +35,7 @@ namespace task_2
 
         bool SetStreet(string street)
         {
-            if (street != null && !IsContainDigit(street))
+            if (street != null && !checkValidation.IsContainDigit(street))
             {
                 this.street = street;
                 return true;
@@ -54,7 +55,7 @@ namespace task_2
 
         bool SetCity(string city)
         {
-            if (city != null && !IsContainDigit(city))
+            if (city != null && !checkValidation.IsContainDigit(city))
             {
                 this.city = city;
                 return true;
@@ -64,7 +65,7 @@ namespace task_2
 
         bool SetCountry(string country)
         {
-            if (country != null && !IsContainDigit(country))
+            if (country != null && !checkValidation.IsContainDigit(country))
             {
                 this.country = country;
                 return true;
@@ -78,15 +79,6 @@ namespace task_2
         public string GetCountry() { return country; }
         public int GetNumberOfStreet() { return numberOfStreet; }
 
-
-
-        bool IsContainDigit(string street)
-        {
-            foreach (char ch in street)
-                if (ch >= '0' && ch <= '9')
-                    return true;
-            return false;
-        }
 
         public string ToString()
         {
