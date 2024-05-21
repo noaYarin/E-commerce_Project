@@ -166,17 +166,14 @@ namespace task_2
         {
             //Template Data
             Address addr1 = new Address("Zamenhof", 3, "Netanya", "ISR");
-            manager.AddBuyer("chen", "12345", addr1);
-            Address addr2 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.AddBuyer("ben", "12345", addr2);
-            Address addr3 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.AddBuyer("aviv", "12345", addr3);
+            manager.AddBuyer("chen", "12345!", addr1);
 
             Address addr4 = new Address("Zamenhof", 3, "Netanya", "ISR");
-            manager.AddBuyer("eli", "12345", addr4);
+            manager.AddBuyer("eli", "12341!", addr4);
             Address addr5 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.AddSeller("noa", "12345", addr5);
+            manager.AddSeller("noa", "12345!", addr5);
 
+            Console.WriteLine("3 Buyers successfully added!");
             manager.AddProductToCart(new Product("table", 12, false, 0), "chen"); 
             manager.AddProductToCart(new Product("milk", 76, true, 45), "chen");
             manager.AddProductToCart(new Product("keyboard", 76, true, 65), "ben");

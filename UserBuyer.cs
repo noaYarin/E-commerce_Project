@@ -11,13 +11,14 @@ namespace task_2
     internal class UserBuyer
     {
 
-        string name;
-        string password;
-        Address address;
-        Order[] orders;
-        Product[] products;
-        int size = 2;
-        int productSizeLogic = 0;
+        private string name;
+        private string password;
+        private Address address;
+        private Order[] orders;
+        private Product[] products;
+        private int size = 2;
+        private int productSizeLogic = 0;
+        private Validation checkValidation = new Validation();
 
         public UserBuyer(){
             products = new Product[size];
@@ -70,7 +71,7 @@ namespace task_2
 
         public bool SetName(string name)
         {
-            if (name != null && !IsContainDigit(name) && name.Length < 10)
+            if (name != null && !checkValidation.IsContainDigit(name) && name.Length < 10)
             {
                 return true;
             }
@@ -80,14 +81,7 @@ namespace task_2
 
         public bool SetPassword(string password)
         {
-            if (password != null && (password.Length >= 0 && password.Length <= 15))
-            {
-                this.password = password;
-                return true;
-
-            }
-
-            return false;
+           return checkValidation.IsValidPassword(password);
         }
 
         public void ToStringAllProducts()
@@ -135,14 +129,6 @@ namespace task_2
                     priceCart += productDetail.GetPrice();
                 }
             return priceCart;
-        }
-
-        public bool IsContainDigit(string str)
-        {
-            foreach (char ch in str)
-                if (ch >= '0' && ch <= '9')
-                    return true;
-            return false;
         }
 
 
