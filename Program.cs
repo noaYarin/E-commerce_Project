@@ -21,7 +21,7 @@ namespace task_2
             const int EXIT = 8;
             int userSelection = 0;
 
-            InitiateData(manager);
+            //InitiateData(manager);
   
             while (userSelection != EXIT)
             {
@@ -124,7 +124,7 @@ namespace task_2
             int price = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter seller name:");
             string sellerName= Console.ReadLine();
-            manager.AddProductToSeller(name, price,sellerName);
+            manager.AddProductToSeller(name, price, sellerName);
         }
 
         static void AddProductToCart(Manager manager)
@@ -149,7 +149,11 @@ namespace task_2
             {
                 isSpecialBox = false;
             }
-            manager.AddProductToCart(new Product(productName, productPrice, isSpecialBox, extraPrice), name); 
+            if (manager.AddProductToCart(new Product(productName, productPrice, isSpecialBox, extraPrice), name))
+                Console.WriteLine("\nProduct successfully added!");
+            else
+                Console.WriteLine("\nProduct not added");
+             
         }
 
         static void Payment(Manager manager)
@@ -158,6 +162,10 @@ namespace task_2
             if (!manager.PaymentCart(name))
             {
                 Console.WriteLine("Invalid name");
+            }
+            else
+            {
+                Console.WriteLine("Order completed");
             }
                
         }
