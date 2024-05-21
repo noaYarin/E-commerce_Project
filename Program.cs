@@ -79,14 +79,13 @@ namespace task_2
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address buyerAddr = GetAddress();
-            if (manager.AddBuyer(name, password, buyerAddr))
+            if (!(manager.AddBuyer(name, password, buyerAddr)))
             {
-                Console.WriteLine("\nBuyer successfully added!");
+               Console.WriteLine("\nBuyer not added, try again");
+               return;
             }
-            else
-            {
-                Console.WriteLine("\nBuyer not added, try again");
-            }
+            Console.WriteLine("\nBuyer successfully added!");
+            
         }
 
         private static void AddSeller(Manager manager)
@@ -139,14 +138,14 @@ namespace task_2
             string specialBoxStr = Console.ReadLine();
             bool isSpecialBox = false;
             int extraPrice = 0;
-            if (specialBoxStr == "yes")
+            if (specialBoxStr.ToLower() == "yes")
             {
                 isSpecialBox = true;
                 Console.Write("How much is it to add a package box? ");
                 extraPrice = int.Parse(Console.ReadLine());
             }
 
-            else if (specialBoxStr == "no")
+            else if (specialBoxStr.ToLower() == "no")
             {
                 isSpecialBox = false;
             }
@@ -187,8 +186,7 @@ namespace task_2
         static string NameOfUser()
         {
             Console.Write("Enter name of user:");
-            string name = Console.ReadLine();
-            return name.ToLower();
+            return (Console.ReadLine()).ToLower();
         }
     }
 }

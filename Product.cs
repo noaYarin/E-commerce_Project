@@ -38,14 +38,9 @@ namespace task_2
             SetPrice(_product.price);
         }
 
-        public string GetProductName() { return  name; }
-        public int GetPrice() { return price; }
-        public bool GetHasSpecialBox() { return hasSpecialBox; }
-        public int GetExtraPrice() {  return extraPrice; }
-
         public bool SetPrice(int price)
         {
-            if(price <= 0)
+            if (price <= 0)
             {
                 Console.WriteLine("Invalid price");
                 return false;
@@ -53,6 +48,11 @@ namespace task_2
             this.price = price;
             return true;
         }
+
+        public string GetProductName() { return  name; }
+        public int GetPrice() { return price; }
+        public bool GetHasSpecialBox() { return hasSpecialBox; }
+        public int GetExtraPrice() {  return extraPrice; }
 
         public string ToString()
         {

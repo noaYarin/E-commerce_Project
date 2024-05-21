@@ -78,7 +78,7 @@ namespace task_2
             bool isAdded = false;
             foreach (var seller in sellers)
             {
-                if(seller!= null && seller.GetSellerName() == sellerName) {
+                if(checkSellerName(seller, sellerName)) {
                   isAdded =seller.AddProduct(name, price);
                 }
             }
@@ -90,7 +90,7 @@ namespace task_2
             foreach (var buyer in buyers)
             {
                
-                if(buyer!=null && buyer.GetBuyerName() == name)
+                if(checkBuyerName(buyer, name))
                 {
                     buyer.SetProduct(product);
                     return true;
@@ -105,7 +105,7 @@ namespace task_2
         {
             foreach(var buyer in buyers)
             {
-                if (buyer!=null && name == buyer.GetBuyerName())
+                if (checkBuyerName(buyer, name))
                 {
                     buyer.SetOrderArr(buyer);
                     buyer.RemoveAllCartProducts();
@@ -126,7 +126,7 @@ namespace task_2
                     if (buyer == null) { 
                         break;
                     }
-                    Console.WriteLine($"{index} {buyer.ToString()} ");
+                    Console.WriteLine($"{index}) {buyer.ToString()} ");
                     buyer.ToStringAllProducts(); 
                     Console.WriteLine();
                     buyer.ToStringHistoryProducts(); 
@@ -153,7 +153,7 @@ namespace task_2
                     {
                         break;
                     }
-                    Console.WriteLine($"{index} {seller.ToString()} ");
+                    Console.WriteLine($"{index}) {seller.ToString()} ");
                     seller.ToStringAllProducts();
                     Console.WriteLine();
                     index++;
@@ -169,7 +169,7 @@ namespace task_2
         {
             foreach (var seller in sellers)
             {
-                if (seller != null && seller.GetSellerName() == name)
+                if (checkSellerName(seller,name))
                 {
                     Console.WriteLine("Name already taken, try another name");
                     return false;
@@ -178,7 +178,7 @@ namespace task_2
 
             foreach (var buyer in buyers)
             {
-                if (buyer != null && buyer.GetBuyerName() == name)
+                if (checkBuyerName(buyer,name))
                 {
                     Console.WriteLine("Name already taken, try another name");
                     return false;
@@ -186,6 +186,16 @@ namespace task_2
             }
 
             return true;
+        }
+
+        public bool checkBuyerName(UserBuyer buyer, string name)
+        {
+            return buyer != null && buyer.GetBuyerName() == name ?true:false;
+        }
+
+        public bool checkSellerName(UserSeller buyer, string name)
+        {
+            return buyer != null && buyer.GetSellerName() == name ? true : false;
         }
     }
 }
