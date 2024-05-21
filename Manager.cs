@@ -24,8 +24,6 @@ namespace task_2
             sellers = new UserSeller[size];
         }
 
-
-       
         public bool AddBuyer(string name, string password, Address address)
         {
             UserBuyer[] tempNewBuyers;

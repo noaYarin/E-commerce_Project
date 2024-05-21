@@ -87,11 +87,6 @@ namespace task_2
             return false;
         }
 
-        public string ToString()
-        {
-            return "Customer name: " + name + ", password: " + password + ", Address: " + address.ToString(); 
-        }
-
         public void ToStringAllProducts()
         {
             if(products != null)
@@ -140,6 +135,7 @@ namespace task_2
         }
 
 
+        //Add new Class valid
         public bool IsContainDigit(string str)
         {
             foreach (char ch in str)
@@ -169,5 +165,10 @@ namespace task_2
             return true;
         }
 
+
+        public string ToString()
+        {
+            return "Customer name: " + name +", Address: " + address.ToString();
+        }
     }
 }

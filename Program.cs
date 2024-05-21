@@ -176,7 +176,7 @@ namespace task_2
             Address addr4 = new Address("Zamenhof", 3, "Netanya", "ISR");
             manager.AddBuyer("eli", "12345", addr4);
             Address addr5 = new Address("Kikar HaAtsmaut", 34, "Netanya", "ISR");
-            manager.AddBuyer("chenj", "12345", addr5);
+            manager.AddSeller("noa", "12345", addr5);
 
             manager.AddProductToCart(new Product("table", 12, false, 0), "chen"); 
             manager.AddProductToCart(new Product("milk", 76, true, 45), "chen");
@@ -186,7 +186,7 @@ namespace task_2
 
         static string NameOfUser()
         {
-            Console.Write("Enter name :");
+            Console.Write("Enter name of user:");
             string name = Console.ReadLine();
             return name.ToLower();
         }
