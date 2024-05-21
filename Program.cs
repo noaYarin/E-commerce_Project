@@ -21,7 +21,7 @@ namespace task_2
             const int EXIT = 8;
             int userSelection = 0;
 
-            InitiateData(manager);
+            //InitiateData(manager);
   
             while (userSelection != EXIT)
             {
