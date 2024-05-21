@@ -8,10 +8,10 @@ namespace task_2
 {
     internal class Address
     {
-        string street;
-        int numberOfStreet;
-        string city;
-        string country;
+        private string street;
+        private int numberOfStreet;
+        private string city;
+        private string country;
 
         public Address(string street, int numberOfStreet, string city, string country)
         {
@@ -73,10 +73,10 @@ namespace task_2
         }
 
 
-        public string GetStreet() { return this.street; }
-        public string GetCity() { return this.city; }
-        public string GetCountry() { return this.country; }
-        public int GetNumberOfStreet() { return this.numberOfStreet; }
+        public string GetStreet() { return street; }
+        public string GetCity() { return city; }
+        public string GetCountry() { return country; }
+        public int GetNumberOfStreet() { return numberOfStreet; }
 
 
 

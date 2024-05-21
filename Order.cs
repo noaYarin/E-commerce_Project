@@ -15,7 +15,7 @@ namespace task_2
 
         public Order(UserBuyer buyer, Product[] products, int cart_size)
         {
-            this.buyerDetails = buyer;
+            buyerDetails = buyer;
             SetCheckOut(cart_size, products);
             SetOrderPrice();
         }
@@ -30,20 +30,19 @@ namespace task_2
             }
         }
 
-
         private void SetOrderPrice()
         {
             float price = 0;
-            foreach (var product in this.allProducts)
+            foreach (var product in allProducts)
             {
                 price += product.GetPrice();
             }
-            this.totalPrice = price;
+            totalPrice = price;
         }
 
         public void HistroyCart()
         {
-            foreach (var item in this.allProducts)
+            foreach (var item in allProducts)
             {
                 if(item != null)
                 {

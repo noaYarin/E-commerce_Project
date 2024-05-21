@@ -14,7 +14,6 @@ namespace task_2
         private Product[] products;
         private int productsSellerLogSize = 0;
         private const int size = 2;
-        private Product[] productsList;
 
         public UserSeller() {
             products = new Product[size];
@@ -90,12 +89,6 @@ namespace task_2
         {
             return name;
         }
-
-        public Product[] GetProductsList()
-        {
-            return productsList;
-        }
-
         public void ToStringAllProducts()
         {
             if (products != null)

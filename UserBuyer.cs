@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -18,7 +19,9 @@ namespace task_2
         int size = 2;
         int productSizeLogic = 0;
 
-        public UserBuyer(){}
+        public UserBuyer(){
+            products = new Product[size];
+        }
         public UserBuyer(string name, string password, Address address)
         {
             SetBuyer(name, password, address);
@@ -65,7 +68,7 @@ namespace task_2
         }
 
 
-        bool SetName(string name)
+        public bool SetName(string name)
         {
             if (name != null && !IsContainDigit(name) && name.Length < 10)
             {
@@ -134,8 +137,6 @@ namespace task_2
             return priceCart;
         }
 
-
-        //Add new Class valid
         public bool IsContainDigit(string str)
         {
             foreach (char ch in str)
@@ -145,26 +146,20 @@ namespace task_2
         }
 
 
-        public bool SetProduct(Product productDetail)
+        public bool SetProduct(Product productDetails)
         {
-            Product[] newProduct;
-            if(products == null)
+            Product[] tempNewProducts;
+           if(productSizeLogic==products.Length)
             {
-                newProduct = new Product[size]; 
-                newProduct[0] = productDetail;
+                tempNewProducts = new Product[products.Length * size];
+                products.CopyTo(tempNewProducts, 0);
+                products = tempNewProducts;
+
             }
-            else
-            {
-                newProduct = new Product[products.Length * size];
-              
-                products.CopyTo(newProduct, 0);
-                newProduct[productSizeLogic] = productDetail;
-            }
+            products[productSizeLogic] = productDetails;
             productSizeLogic++;
-            products = newProduct;
             return true;
         }
-
 
         public string ToString()
         {
