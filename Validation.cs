@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace task_2
 {
-    internal class Validation
+    static class Validation
     {
-        public bool IsContainDigit(string str)
+        public static bool IsContainDigit(string str)
         {
             foreach (char ch in str)
                 if (ch >= '0' && ch <= '9')
@@ -16,8 +16,8 @@ namespace task_2
             return false;
         }
 
-
-        public bool IsValidPassword(string password)
+        
+        public static bool IsValidPassword(string password)
         {
             bool hasSpecialChar = false;
             string specialSigns = "!@#&$?";
