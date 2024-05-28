@@ -18,7 +18,6 @@ namespace task_2
         private Product[] products;
         private int size = 2;
         private int productSizeLogic = 0;
-        private Validation checkValidation = new Validation();
 
         public UserBuyer(){
             products = new Product[size];
@@ -71,7 +70,7 @@ namespace task_2
 
         public bool SetName(string name)
         {
-            if (name != null && !checkValidation.IsContainDigit(name) && name.Length < 10)
+            if (name != null && !Validation.IsContainDigit(name) && name.Length < 10)
             {
                 return true;
             }
@@ -81,7 +80,7 @@ namespace task_2
 
         public bool SetPassword(string password)
         {
-           return checkValidation.IsValidPassword(password);
+           return Validation.IsValidPassword(password);
         }
 
         public void ToStringAllProducts()

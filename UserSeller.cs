@@ -14,7 +14,6 @@ namespace task_2
         private Product[] products;
         private int productsSellerLogSize = 0;
         private const int size = 2;
-        Validation checkValidation = new Validation();
 
         public UserSeller() {
             products = new Product[size];
@@ -58,7 +57,7 @@ namespace task_2
 
         bool SetName(string name)
         {
-            if (name != null && !checkValidation.IsContainDigit(name) && name.Length < 10)
+            if (name != null && !Validation.IsContainDigit(name) && name.Length < 10)
             {
                 return true;
             }
@@ -68,7 +67,7 @@ namespace task_2
 
         public bool SetPassword(string password)
         {
-           return checkValidation.IsValidPassword(password);
+           return Validation.IsValidPassword(password);
         }
         
         public string GetSellerName()
