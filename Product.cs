@@ -14,9 +14,11 @@ namespace task_2
         private Category category;
         private bool hasSpecialBox;
         private int extraPrice;
-        public Product(string _name,int _price) { 
+
+        public Product(string _name,int _price, Category _category) { 
             this.name = _name;
             this.price = _price;
+            this.category = _category;
             SetPrice(_price);
         }
 
@@ -56,7 +58,7 @@ namespace task_2
 
         public string ToString()
         {
-            return $"\t- product name: {name}, price: {price}, special box: {hasSpecialBox}, extra price: {extraPrice}";
+            return $"\t- product name: {name}, price: {price} ,category: {category.GetCategoryName()}, special box: {hasSpecialBox}, extra price: {extraPrice}";
         }
     }
 }
