@@ -30,10 +30,10 @@ namespace task_2
             SetSeller(other.name, other.password, other.address);
         }
 
-         public bool AddProduct(string name, int price)
+         public bool AddProduct(string name, int price, Category category)
            {
             Product[] tempNewProducts;
-            Product newProduct = new Product(name,price);
+            Product newProduct = new Product(name,price, category);
 
             if (productsSellerLogSize == products.Length)
             {
@@ -45,6 +45,7 @@ namespace task_2
             productsSellerLogSize++;
             return true;
            }
+
         public bool SetSeller(string name, string password, Address address)
         {
             if (SetName(name) && SetPassword(password))

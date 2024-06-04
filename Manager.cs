@@ -73,13 +73,13 @@ namespace task_2
             return true;
         }
 
-        public void AddProductToSeller(string name,int price,string sellerName)
+        public void AddProductToSeller(string name,int price,Category category, string sellerName)
         {
             bool isAdded = false;
             foreach (var seller in sellers)
             {
                 if(checkSellerName(seller, sellerName)) {
-                  isAdded =seller.AddProduct(name, price);
+                  isAdded =seller.AddProduct(name, price,category);
                 }
             }
             Console.WriteLine(isAdded ? "\nProduct successfully added!" : "\nProduct not added");
