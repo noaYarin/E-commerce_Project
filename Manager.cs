@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -196,6 +197,25 @@ namespace task_2
         public bool checkSellerName(UserSeller buyer, string name)
         {
             return buyer != null && buyer.GetSellerName() == name ? true : false;
+        }
+
+        public Category AddCategory()
+        {
+            Category category = new Category();
+            DisplayCategories(category);
+            int index = int.Parse(Console.ReadLine());
+           bool isValidChoice= category.SetCategoryNameByIndex(index);
+            return !isValidChoice ? null : category;
+        }
+        public void DisplayCategories(Category category)
+        {
+            string[] categories = category.GetCategoryNames();
+
+            Console.WriteLine("Please choose a category by number:");
+            for (int i = 0; i < categories.Length; i++)
+            {
+                Console.WriteLine($"{i + 1} - {categories[i]}");
+            }
         }
     }
 }

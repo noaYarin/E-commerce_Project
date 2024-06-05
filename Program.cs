@@ -122,13 +122,16 @@ namespace task_2
             string name = Console.ReadLine();
             Console.WriteLine("Enter product price:");
             int price = int.Parse(Console.ReadLine());
-            Category category = new Category();
-            DisplayCategories(category);
-            int index = int.Parse(Console.ReadLine());
-            category.SetCategoryNameByIndex(index);
+            Category category = manager.AddCategory();
             Console.WriteLine("Enter seller name:");
             string sellerName = Console.ReadLine();
-            manager.AddProductToSeller(name, price, category, sellerName);
+            if (category!=null) {
+                manager.AddProductToSeller(name, price, category, sellerName);
+            }
+            else
+            {
+                Console.WriteLine("\nProduct not added");
+            }
         }
 
         static void AddProductToCart(Manager manager)
@@ -180,15 +183,5 @@ namespace task_2
             return (Console.ReadLine()).ToLower();
         }
 
-        static void DisplayCategories(Category category)
-        {
-            string[] categories = category.GetCategoryNames();
-
-            Console.WriteLine("Please choose a category by number:");
-            for (int i = 0; i < categories.Length; i++)
-            {
-                Console.WriteLine($"{i + 1} - {categories[i]}");
-            }
-        }
     }
 }

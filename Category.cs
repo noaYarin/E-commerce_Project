@@ -39,13 +39,16 @@ namespace task_2
             return Enum.GetNames(typeof(CategoriesList));
         }
 
-        public void SetCategoryNameByIndex(int index)
+        public bool SetCategoryNameByIndex(int index)
         {
             string[] categoryNames = GetCategoryNames();
             if (index >= 0 && index <= categoryNames.Length)
             {
                 name = (CategoriesList)index;
+                return true;
             }
+            Console.WriteLine("Invalid number");
+            return false;
         }
 
         public CategoriesList GetCategoryName()
