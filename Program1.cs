@@ -82,10 +82,10 @@ namespace task_2
 
             manager.AddUserSeller("chen", "15@4885!", addr1);
             manager.AddUserSeller("alex", "54885!@", addr1);
-
-            //manager.AddNewProduct(new Product("Table", 54,"Office"), "chen");
-            //manager.AddNewProduct(new Product("picture", 154), "chen");
-            //manager.AddNewProduct(new Product("monitor", 254), "alex");
+            Category category =new Category();
+            manager.AddNewProduct(new Product("Table", 54,category), "chen");
+            manager.AddNewProduct(new Product("picture", 154, category), "chen");
+            manager.AddNewProduct(new Product("monitor", 254, category), "alex");
 
             manager.AddProductToCart("tom", "chen", "Table");
             manager.AddProductToCart("tom", "alex", "monitor");
@@ -143,7 +143,7 @@ namespace task_2
             Console.Write("Enter seller name: ");
             string sellerName = Console.ReadLine();
             Console.Write("Enter product name: ");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine().ToLower();
             Console.Write("Enter product price: ");
             int price = int.Parse(Console.ReadLine());
             Category category = manager.AddCategory();
@@ -166,7 +166,7 @@ namespace task_2
             Console.Write("Enter a seller name: ");
             string sellerName = Console.ReadLine();
             Console.Write("Enter a product name: ");
-            string productName = Console.ReadLine();
+            string productName = Console.ReadLine().ToLower();
             Console.Write("Do you want add a special package? [Yes / No]: ");
             string specialBoxStr = Console.ReadLine();
             bool isSpecialBox = false;
