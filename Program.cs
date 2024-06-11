@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace task_2
 {
@@ -20,6 +22,8 @@ namespace task_2
 
             const int EXIT = 8;
             int userSelection = 0;
+
+            InitialData(manager);
   
             while (userSelection != EXIT)
             {
@@ -71,13 +75,32 @@ namespace task_2
             }
         }
 
+        private static void InitialData(Manager manager)
+        {
+            Address addr1 = new Address("abc", 124, "Netanya", "ISR");
+            //User user1 = new User("Chen", "4679!!", addr1);
+
+            manager.AddUserBuyer("tom", "54885!@", addr1);
+            manager.AddUserBuyer("tomy", "5@4885!", addr1);
+
+            manager.AddUserSeller("chen", "15@4885!", addr1);
+            manager.AddUserSeller("alex", "54885!@", addr1);
+
+            manager.AddNewProduct(new Product("Table", 54), "chen");
+            manager.AddNewProduct(new Product("picture", 154), "chen");
+            manager.AddNewProduct(new Product("monitor", 254), "alex");
+
+            manager.PrintAllProductSeller();
+            manager.AddProductToCart("tom", "chen", "Table");
+        }
+
         private static void AddBuyer(Manager manager)
         {
-            string name =NameOfUser();
+            string name = NameOfUser();
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address buyerAddr = GetAddress();
-            if (!(manager.AddBuyer(name, password, buyerAddr)))
+            if (!(manager.AddUserBuyer(name, password, buyerAddr)))
             {
                Console.WriteLine("\nBuyer not added, try again");
                return;
@@ -92,7 +115,7 @@ namespace task_2
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address sellerAddr = GetAddress();
-            if(manager.AddSeller(name, password, sellerAddr)){
+            if(manager.AddUserSeller(name, password, sellerAddr)){
               Console.WriteLine("\nSeller successfully added!");
             }
             else
@@ -122,35 +145,38 @@ namespace task_2
             int price = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter seller name:");
             string sellerName= Console.ReadLine();
-            manager.AddProductToSeller(name, price, sellerName);
+            //manager.AddProductToSeller(name, price, sellerName);
+            manager.AddNewProduct(new Product(name, price, false, 0), name);
         }
 
         static void AddProductToCart(Manager manager)
         {
-            string name = NameOfUser();
-            Console.Write("Enter a product name: ");
-            string productName = Console.ReadLine();
-            Console.Write("Enter the product price: ");
-            int productPrice = int.Parse(Console.ReadLine());
-            Console.Write("Do you want add a special package? [Yes / No]: ");
-            string specialBoxStr = Console.ReadLine();
-            bool isSpecialBox = false;
-            int extraPrice = 0;
-            if (specialBoxStr.ToLower() == "yes")
-            {
-                isSpecialBox = true;
-                Console.Write("How much is it to add a package box? ");
-                extraPrice = int.Parse(Console.ReadLine());
-            }
 
-            else if (specialBoxStr.ToLower() == "no")
-            {
-                isSpecialBox = false;
-            }
-            if (manager.AddProductToCart(new Product(productName, productPrice, isSpecialBox, extraPrice), name))
-                Console.WriteLine("\nProduct successfully added!");
-            else
-                Console.WriteLine("\nProduct not added");
+
+            //string name = NameOfUser();
+            //Console.Write("Enter a product name: ");
+            //string productName = Console.ReadLine();
+            //Console.Write("Enter the product price: ");
+            //int productPrice = int.Parse(Console.ReadLine());
+            //Console.Write("Do you want add a special package? [Yes / No]: ");
+            //string specialBoxStr = Console.ReadLine();
+            //bool isSpecialBox = false;
+            //int extraPrice = 0;
+            //if (specialBoxStr.ToLower() == "yes")
+            //{
+            //    isSpecialBox = true;
+            //    Console.Write("How much is it to add a package box? ");
+            //    extraPrice = int.Parse(Console.ReadLine());
+            //}
+
+            //else if (specialBoxStr.ToLower() == "no")
+            //{
+            //    isSpecialBox = false;
+            //}
+            //if (manager.AddNewProduct(new Product(productName, productPrice, isSpecialBox, extraPrice), name))
+            //    Console.WriteLine("\nProduct successfully added!");
+            //else
+            //    Console.WriteLine("\nProduct not added");
              
         }
 
@@ -165,7 +191,6 @@ namespace task_2
             {
                 Console.WriteLine("\nOrder completed");
             }
-               
         }
 
         static string NameOfUser()

@@ -11,13 +11,12 @@ namespace task_2
     {
         private Product[] allProducts;
         private float totalPrice = 0;
-        private UserBuyer buyerDetails;
-
-        public Order(UserBuyer buyer, Product[] products, int cart_size)
+        private User buyerDetails;
+        public Order(Product[] products, int cart_size, User b)
         {
-            buyerDetails = buyer;
             SetCheckOut(cart_size, products);
             SetOrderPrice();
+            buyerDetails = b;
         }
 
        
@@ -26,16 +25,22 @@ namespace task_2
             this.allProducts = new Product[cart_size];
             for(int i = 0; i < cart_size; i++)
             {
-                this.allProducts[i] = new Product(cartProducts[i]);
+                if (cartProducts[i] != null)
+                    this.allProducts[i] = new Product(cartProducts[i]);
             }
         }
 
         private void SetOrderPrice()
         {
             float price = 0;
-            foreach (var product in allProducts)
+            foreach (Product product in allProducts)
             {
-                price += product.GetPrice();
+                if (product != null)
+                {
+                    price += product.GetPrice();
+                }
+                else 
+                    break;
             }
             totalPrice = price;
         }
@@ -53,8 +58,12 @@ namespace task_2
 
         public string ToString()
         {
-            return $"\t# {buyerDetails.GetBuyerName()}: total price: {totalPrice} ";
+            string resProducts = "";
+            foreach (Product product in allProducts)
+            {
+                resProducts += product.ToString();
+            }
+            return $"\t# total price: {totalPrice}\n {resProducts} ";
         }
-
     }
 }
