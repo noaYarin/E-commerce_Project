@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,13 +10,18 @@ namespace task_2
     internal class Category
     {
         private int code;
-        private string name;
-
-        public Category(int _code, string _name)
-        {
-            SetCode(_code);
-            SetName(_name);
+        private CategoriesList name;
+        public enum CategoriesList{
+            Children=1,
+            Electricity,
+            Office,
+            Clothes
         }
+
+        public Category(){ }
+        public Category(int _code){
+             SetCode(_code);
+          }
 
         private bool SetCode(int code)
         {
@@ -28,18 +34,26 @@ namespace task_2
             return true;
         }
 
-        private bool SetName(string name)
+        public string[] GetCategoryNames()
         {
-            foreach (char letter in name)
+            return Enum.GetNames(typeof(CategoriesList));
+        }
+
+        public bool SetCategoryNameByIndex(int index)
+        {
+            string[] categoryNames = GetCategoryNames();
+            if (index >= 0 && index <= categoryNames.Length)
             {
-                if (!(letter >= 'a' && letter <= 'z') && !(letter >= 'A' && letter <= 'Z'))
-                {
-                    Console.WriteLine("Name field needs to conatine only letters");
-                    return false;
-                }
+                name = (CategoriesList)index;
+                return true;
             }
-            this.name = name;
-            return true;
+            Console.WriteLine("Invalid number");
+            return false;
+        }
+
+        public CategoriesList GetCategoryName()
+        {
+            return name;
         }
 
     }

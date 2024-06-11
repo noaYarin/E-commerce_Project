@@ -78,22 +78,17 @@ namespace task_2
             }
        }
 
-
-        public bool AddProductToCart(string buyerName, string sellerName, string productName) 
+        public void AddProductToSeller(string name,int price,string sellerName)
         {
             
             foreach (var buyer in buyers) 
             {
-                if(buyer.GetBuyerName() == buyerName)
-                {
-                    foreach(var seller in sellers)
-                    {
-                        if(seller.GetBuyerName() == sellerName)
-                        {
-                            buyer.SetProduct(seller.GetProduct(productName));
-                        }
-                    }
+                if(checkSellerName(seller, sellerName)) {
+                  isAdded =seller.AddProduct(name, price);
                 }
+            }
+            Console.WriteLine(isAdded ? "\nProduct successfully added!" : "\nProduct not added");
+        }
 
             }
             
@@ -143,7 +138,6 @@ namespace task_2
                         break;
                     }
                     Console.WriteLine($"{index}) {buyer.ToString()} ");
-                    //buyer.ToStringAllProducts();
                     Console.WriteLine();
                     buyer.ToStringHistoryProducts();
                     Console.WriteLine();
@@ -169,9 +163,7 @@ namespace task_2
                     {
                         break;
                     }
-                    Console.WriteLine($"{index}) {seller.ToString()} ");
-                    //seller.ToStringAllProducts();
-                    Console.WriteLine();
+                    Console.WriteLine($"{index}) {seller.ToString()} ");           Console.WriteLine();
                     index++;
                 }
             }
@@ -215,7 +207,5 @@ namespace task_2
         {
             return buyer != null && buyer.GetBuyerName() == name ? true : false;
         }
-
-
     }
 }

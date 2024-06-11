@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -22,9 +23,12 @@ namespace task_2
 
             const int EXIT = 8;
             int userSelection = 0;
+<<<<<<< HEAD
 
             InitialData(manager);
   
+=======
+>>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
             while (userSelection != EXIT)
             {
                 Console.WriteLine();
@@ -47,7 +51,7 @@ namespace task_2
                         AddBuyer(manager);
                         break;
                     case 2:
-                       AddSeller(manager);
+                        AddSeller(manager);
                         break;
                     case 3:
                         AddProductToSeller(manager);
@@ -55,7 +59,7 @@ namespace task_2
                     case 4:
                         AddProductToCart(manager);
                         break;
-                    case 5: 
+                    case 5:
                         Payment(manager);
                         break;
                     case 6:
@@ -102,11 +106,11 @@ namespace task_2
             Address buyerAddr = GetAddress();
             if (!(manager.AddUserBuyer(name, password, buyerAddr)))
             {
-               Console.WriteLine("\nBuyer not added, try again");
-               return;
+                Console.WriteLine("\nBuyer not added, try again");
+                return;
             }
             Console.WriteLine("\nBuyer successfully added!");
-            
+
         }
 
         private static void AddSeller(Manager manager)
@@ -115,8 +119,14 @@ namespace task_2
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
             Address sellerAddr = GetAddress();
+<<<<<<< HEAD
             if(manager.AddUserSeller(name, password, sellerAddr)){
               Console.WriteLine("\nSeller successfully added!");
+=======
+            if (manager.AddSeller(name, password, sellerAddr))
+            {
+                Console.WriteLine("\nSeller successfully added!");
+>>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
             }
             else
             {
@@ -138,20 +148,34 @@ namespace task_2
             return new Address(street, streetNumber, city, country);
         }
 
-        static void AddProductToSeller(Manager manager) {
+        static void AddProductToSeller(Manager manager)
+        {
             Console.WriteLine("Enter product name:");
             string name = Console.ReadLine();
             Console.WriteLine("Enter product price:");
             int price = int.Parse(Console.ReadLine());
+            Category category = manager.AddCategory();
             Console.WriteLine("Enter seller name:");
+<<<<<<< HEAD
             string sellerName= Console.ReadLine();
             //manager.AddProductToSeller(name, price, sellerName);
             manager.AddNewProduct(new Product(name, price, false, 0), name);
+=======
+            string sellerName = Console.ReadLine();
+            if (category!=null) {
+                manager.AddProductToSeller(name, price, category, sellerName);
+            }
+            else
+            {
+                Console.WriteLine("\nProduct not added");
+            }
+>>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
         }
 
         static void AddProductToCart(Manager manager)
         {
 
+<<<<<<< HEAD
 
             //string name = NameOfUser();
             //Console.Write("Enter a product name: ");
@@ -178,6 +202,17 @@ namespace task_2
             //else
             //    Console.WriteLine("\nProduct not added");
              
+=======
+            else if (specialBoxStr.ToLower() == "no")
+            {
+                isSpecialBox = false;
+            }
+            if (manager.AddProductToCart(new Product(productName, productPrice, isSpecialBox, extraPrice), name))
+                Console.WriteLine("\nProduct successfully added!");
+            else
+                Console.WriteLine("\nProduct not added");
+
+>>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
         }
 
         static void Payment(Manager manager)
@@ -191,6 +226,10 @@ namespace task_2
             {
                 Console.WriteLine("\nOrder completed");
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
         }
 
         static string NameOfUser()
@@ -198,5 +237,6 @@ namespace task_2
             Console.Write("Enter name of user:");
             return (Console.ReadLine()).ToLower();
         }
+
     }
 }
