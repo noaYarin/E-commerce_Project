@@ -49,6 +49,7 @@
     <Compile Include="Manager1.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductExtraFields.cs" />
     <Compile Include="Program1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seller1.cs" />

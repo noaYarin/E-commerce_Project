@@ -14,24 +14,13 @@ namespace task_2
         private string name;
         private int price;
         private Category category;
-        private bool hasSpecialBox;
-        private int extraPrice;
 
-        public Product(string _name,int _price, Category _category) {
-            id= idCounter++;
-            this.name = _name;
-            this.price = _price;
-            this.category = _category;
-            SetPrice(_price);
-        }
-
-        public Product(string _name, int _price, bool _hasSpecialBox, int _extraPrice, Category _category)
+        public Product() { }
+        public Product(string _name, int _price, Category _category)
         {
             id = idCounter++;
             this.name = _name;
             this.price = _price;
-            this.hasSpecialBox = _hasSpecialBox;
-            this.extraPrice = _extraPrice;
             this.category = _category;
             SetPrice(_price);
         }
@@ -41,8 +30,6 @@ namespace task_2
             id = idCounter++;
             this.name = _product.name;
             this.price = _product.price;
-            this.hasSpecialBox = _product.hasSpecialBox;
-            this.extraPrice = _product.extraPrice;
             SetPrice(_product.price);
         }
 
@@ -59,12 +46,10 @@ namespace task_2
 
         public string GetProductName() { return  name; }
         public int GetPrice() { return price; }
-        public bool GetHasSpecialBox() { return hasSpecialBox; }
-        public int GetExtraPrice() {  return extraPrice; }
 
-        public string ToString()
+        public virtual string ToString()
         {
-            return $"\t- ID:{id}, product name: {name}, price: {price} ,category: {category.GetCategoryName()}, special box: {hasSpecialBox}, extra price: {extraPrice}";
+            return $"\t- ID:{id}, product name: {name}, price: {price} ,category: {category.GetCategoryName()}";
         }
     }
 }
