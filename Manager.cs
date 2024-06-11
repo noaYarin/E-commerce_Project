@@ -10,105 +10,113 @@ namespace task_2
 {
     internal class Manager
     {
+        private Buyer[] buyers; 
+        private Seller[] sellers; 
+
         private string name;
-        private UserSeller[] sellers;
         private int sellersLogSize=0;
-        private UserBuyer[] buyers;
         private int buyersLogSize=0;
         private const int size = 2;
 
 
         public Manager(string _name)
         {
+            buyers = new Buyer[size];
+            sellers = new Seller[size];
             this.name = _name;
-            buyers = new UserBuyer[size];
-            sellers = new UserSeller[size];
         }
 
-        public bool AddBuyer(string name, string password, Address address)
+       
+        public bool AddUserBuyer(string name, string password, Address address)
         {
-            UserBuyer[] tempNewBuyers;
-            UserBuyer newBuyer = new UserBuyer();
-
-            checkUserName(name);
-
-            bool isValid = newBuyer.SetBuyer(name, password, address);
-            if (!isValid)
-            {
-                Console.WriteLine("Invalid values");
-                return false;
-            }
-
-            if (buyersLogSize == buyers.Length)
-            {
-                tempNewBuyers = new UserBuyer[buyers.Length * 2];
-                buyers.CopyTo(tempNewBuyers, 0);
-                buyers = tempNewBuyers;
-            }
-            buyers[buyersLogSize] = newBuyer;
-            buyersLogSize++;
-            return true;
-        }
-
-
-        public bool AddSeller(string name, string password, Address address)
-        {
-            UserSeller[] tempNewSellers;
-            UserSeller newSeller = new UserSeller();
+            User newUser = new User(name, password, address); 
             bool isNameNotExist = checkUserName(name);
-            bool isValid = newSeller.SetSeller(name, password, address);
-            if (!isValid || !isNameNotExist)
+            if (isNameNotExist)
             {
-                Console.WriteLine("Invalid values");
-                return false;
+                Buyer[] tempNewBuyers;
+                Buyer newBuyer = new Buyer(newUser);
+                if (buyersLogSize == buyers.Length)
+                {
+                    tempNewBuyers = new Buyer[buyers.Length * 2];
+                    buyers.CopyTo(tempNewBuyers, 0);
+                    buyers = tempNewBuyers;
+                }
+                buyers[buyersLogSize] = newBuyer;
+                buyersLogSize++;
+                
             }
-
-            if (sellersLogSize == sellers.Length)
-            {
-                tempNewSellers = new UserSeller[sellers.Length * 2];
-                sellers.CopyTo(tempNewSellers, 0);
-                sellers = tempNewSellers;
-            }
-            sellers[sellersLogSize] = newSeller;
-            sellersLogSize++;
             return true;
         }
 
-        public void AddProductToSeller(string name,int price,Category category, string sellerName)
+        public bool AddUserSeller(string name, string password, Address address)
         {
-            bool isAdded = false;
-            foreach (var seller in sellers)
+            User newUser = new User(name, password, address);
+            bool isNameNotExist = checkUserName(name);
+            if (isNameNotExist)
+            {
+                Seller[] tempNewBuyers;
+                Seller newSeller = new Seller(newUser);
+                if (sellersLogSize == sellers.Length)
+                {
+                    tempNewBuyers = new Seller[sellers.Length * 2];
+                    sellers.CopyTo(tempNewBuyers, 0);
+                    sellers = tempNewBuyers;
+                }
+                sellers[sellersLogSize] = newSeller;
+                sellersLogSize++;
+
+            }
+            return true;
+        }
+
+
+       public void PrintAllProductSeller()
+       {
+            foreach(var seller in sellers)
+            {
+                Console.WriteLine(seller.ToString());
+            }
+       }
+
+        public void AddProductToSeller(string name,int price,string sellerName)
+        {
+            
+            foreach (var buyer in buyers) 
             {
                 if(checkSellerName(seller, sellerName)) {
-                  isAdded =seller.AddProduct(name, price,category);
+                  isAdded =seller.AddProduct(name, price);
                 }
             }
             Console.WriteLine(isAdded ? "\nProduct successfully added!" : "\nProduct not added");
         }
 
-        public bool AddProductToCart(Product product, string name)
-        {
-            foreach (var buyer in buyers)
+            }
+            
+            return false;
+        }
+
+        public bool AddNewProduct(Product product, string name)
+        {           
+            foreach (var seller in sellers)
             {
-               
-                if(checkBuyerName(buyer, name))
+
+                if (checkSellerName(seller, name)) 
                 {
-                    buyer.SetProduct(product);
+                    seller.SetProduct(product);
                     return true;
                 }
             }
-
-            return false; 
+            return false;
         }
 
 
         public bool PaymentCart(string name)
         {
-            foreach(var buyer in buyers)
+            foreach (var buyer in buyers)
             {
                 if (checkBuyerName(buyer, name))
                 {
-                    buyer.SetOrderArr(buyer);
+                    buyer.SetOrderArr(); 
                     buyer.RemoveAllCartProducts();
                     return true;
                 }
@@ -116,35 +124,36 @@ namespace task_2
             return false;
         }
 
+
         public void ShowAllBuyers()
         {
             Console.WriteLine("\n***Show all buyers details***");
-            if (buyers[0] != null) 
+            if (buyers[0] != null)
             {
                 int index = 1;
                 foreach (var buyer in buyers)
                 {
-                    if (buyer == null) { 
+                    if (buyer == null)
+                    {
                         break;
                     }
                     Console.WriteLine($"{index}) {buyer.ToString()} ");
-                    buyer.ToStringAllProducts(); 
                     Console.WriteLine();
-                    buyer.ToStringHistoryProducts(); 
+                    buyer.ToStringHistoryProducts();
                     Console.WriteLine();
                     index++;
                 }
             }
             else
             {
-                Console.WriteLine("\nNo buyers to display."); 
+                Console.WriteLine("\nNo buyers to display.");
             }
-
         }
+
 
         public void ShowAllSellers()
         {
-            Console.WriteLine("\n***Show all buyers details***");
+            Console.WriteLine("\n***Show all sellers details***");
             if (sellers[0] != null)
             {
                 int index = 1;
@@ -154,9 +163,7 @@ namespace task_2
                     {
                         break;
                     }
-                    Console.WriteLine($"{index}) {seller.ToString()} ");
-                    seller.ToStringAllProducts();
-                    Console.WriteLine();
+                    Console.WriteLine($"{index}) {seller.ToString()} ");           Console.WriteLine();
                     index++;
                 }
             }
@@ -166,11 +173,13 @@ namespace task_2
             }
         }
 
+
+
         private bool checkUserName(string name)
         {
             foreach (var seller in sellers)
             {
-                if (checkSellerName(seller,name))
+                if (checkSellerName(seller, name))
                 {
                     Console.WriteLine("Name already taken, try another name");
                     return false;
@@ -179,7 +188,7 @@ namespace task_2
 
             foreach (var buyer in buyers)
             {
-                if (checkBuyerName(buyer,name))
+                if (checkBuyerName(buyer, name))
                 {
                     Console.WriteLine("Name already taken, try another name");
                     return false;
@@ -189,33 +198,14 @@ namespace task_2
             return true;
         }
 
-        public bool checkBuyerName(UserBuyer buyer, string name)
+        public bool checkBuyerName(Buyer buyer, string name)
         {
-            return buyer != null && buyer.GetBuyerName() == name ?true:false;
+            return buyer != null && buyer.GetBuyerName() == name ? true : false;
         }
 
-        public bool checkSellerName(UserSeller buyer, string name)
+        public bool checkSellerName(Seller buyer, string name)
         {
-            return buyer != null && buyer.GetSellerName() == name ? true : false;
-        }
-
-        public Category AddCategory()
-        {
-            Category category = new Category();
-            DisplayCategories(category);
-            int index = int.Parse(Console.ReadLine());
-           bool isValidChoice= category.SetCategoryNameByIndex(index);
-            return !isValidChoice ? null : category;
-        }
-        public void DisplayCategories(Category category)
-        {
-            string[] categories = category.GetCategoryNames();
-
-            Console.WriteLine("Please choose a category by number:");
-            for (int i = 0; i < categories.Length; i++)
-            {
-                Console.WriteLine($"{i + 1} - {categories[i]}");
-            }
+            return buyer != null && buyer.GetBuyerName() == name ? true : false;
         }
     }
 }

@@ -58,7 +58,11 @@ namespace task_2
 
         public string ToString()
         {
+<<<<<<< HEAD
+            return $"\t- product name: {name}, price: {price}, special box: {hasSpecialBox}, extra price: {extraPrice}\n";
+=======
             return $"\t- product name: {name}, price: {price} ,category: {category.GetCategoryName()}, special box: {hasSpecialBox}, extra price: {extraPrice}";
+>>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
         }
     }
 }
