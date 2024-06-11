@@ -9,13 +9,16 @@ namespace task_2
 {
     internal class Product
     {
+        private static int idCounter = 1;
+        public readonly int id;
         private string name;
         private int price;
         private Category category;
         private bool hasSpecialBox;
         private int extraPrice;
 
-        public Product(string _name,int _price, Category _category) { 
+        public Product(string _name,int _price, Category _category) {
+            id= idCounter++;
             this.name = _name;
             this.price = _price;
             this.category = _category;
@@ -24,6 +27,7 @@ namespace task_2
 
         public Product(string _name, int _price, bool _hasSpecialBox, int _extraPrice, Category _category)
         {
+            id = idCounter++;
             this.name = _name;
             this.price = _price;
             this.hasSpecialBox = _hasSpecialBox;
@@ -34,6 +38,7 @@ namespace task_2
 
         public Product(Product _product) 
         {
+            id = idCounter++;
             this.name = _product.name;
             this.price = _product.price;
             this.hasSpecialBox = _product.hasSpecialBox;
@@ -59,7 +64,7 @@ namespace task_2
 
         public string ToString()
         {
-            return $"\t- product name: {name}, price: {price} ,category: {category.GetCategoryName()}, special box: {hasSpecialBox}, extra price: {extraPrice}";
+            return $"\t- ID:{id}, product name: {name}, price: {price} ,category: {category.GetCategoryName()}, special box: {hasSpecialBox}, extra price: {extraPrice}";
         }
     }
 }
