@@ -22,12 +22,13 @@ namespace task_2
             SetPrice(_price);
         }
 
-        public Product(string _name, int _price, bool _hasSpecialBox, int _extraPrice)
+        public Product(string _name, int _price, bool _hasSpecialBox, int _extraPrice, Category _category)
         {
             this.name = _name;
             this.price = _price;
             this.hasSpecialBox = _hasSpecialBox;
             this.extraPrice = _extraPrice;
+            this.category = _category;
             SetPrice(_price);
         }
 
@@ -58,11 +59,7 @@ namespace task_2
 
         public string ToString()
         {
-<<<<<<< HEAD
-            return $"\t- product name: {name}, price: {price}, special box: {hasSpecialBox}, extra price: {extraPrice}\n";
-=======
             return $"\t- product name: {name}, price: {price} ,category: {category.GetCategoryName()}, special box: {hasSpecialBox}, extra price: {extraPrice}";
->>>>>>> e8339039bd628fc3e64e3d2dc95326c36ea473c1
         }
     }
 }
