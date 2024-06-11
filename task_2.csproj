@@ -43,28 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\Chen\Ruppin\תכנות C#\backup commericalProject\Address.cs">
-      <Link>Address.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\..\Chen\Ruppin\תכנות C#\backup commericalProject\Buyer.cs">
-      <Link>Buyer.cs</Link>
-    </Compile>
+    <Compile Include="Address1.cs" />
+    <Compile Include="Buyer1.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="..\..\..\..\..\Chen\Ruppin\תכנות C#\backup commericalProject\Manager.cs">
-      <Link>Manager.cs</Link>
-    </Compile>
+    <Compile Include="Manager1.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="..\..\..\..\..\Chen\Ruppin\תכנות C#\backup commericalProject\Program.cs">
-      <Link>Program.cs</Link>
-    </Compile>
+    <Compile Include="Program1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\..\..\..\Chen\Ruppin\תכנות C#\backup commericalProject\Seller.cs">
-      <Link>Seller.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\..\Chen\Ruppin\תכנות C#\backup commericalProject\User.cs">
-      <Link>User.cs</Link>
-    </Compile>
+    <Compile Include="Seller1.cs" />
+    <Compile Include="User1.cs" />
     <Compile Include="Validation.cs" />
   </ItemGroup>
   <ItemGroup>

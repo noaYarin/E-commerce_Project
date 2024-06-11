@@ -16,7 +16,7 @@ namespace task_2
             return false;
         }
 
-        
+
         public static bool IsValidPassword(string password)
         {
             bool hasSpecialChar = false;
@@ -41,30 +41,6 @@ namespace task_2
             Console.WriteLine("Password should to be at least 4 charecters including a special character: {! @ # & $ ?}");
             return false;
         }
-
-
-        //public static bool checkUserName(string name, Seller sellers)
-        //{
-        //    foreach (var seller in sellers)
-        //    {
-        //        if (checkSellerName(seller, name))
-        //        {
-        //            Console.WriteLine("Name already taken, try another name");
-        //            return false;
-        //        }
-        //    }
-
-        //    foreach (var buyer in buyers)
-        //    {
-        //        if (checkBuyerName(buyer, name))
-        //        {
-        //            Console.WriteLine("Name already taken, try another name");
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-        //}
-
 
     }
 }
