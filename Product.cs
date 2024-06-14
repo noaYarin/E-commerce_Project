@@ -10,7 +10,7 @@ namespace task_2
     internal class Product
     {
         private static int idCounter = 1;
-        public readonly int id;
+        private readonly int id;
         private string name;
         private int price;
         private Category category;
@@ -19,6 +19,15 @@ namespace task_2
         public Product(string _name, int _price, Category _category)
         {
             id = idCounter++;
+            this.name = _name;
+            this.price = _price;
+            this.category = _category;
+            SetPrice(_price);
+        }
+
+        public Product(int id,string _name, int _price, Category _category)
+        {
+            this.id = id;
             this.name = _name;
             this.price = _price;
             this.category = _category;
@@ -46,11 +55,12 @@ namespace task_2
 
         public string GetProductName() { return  name; }
         public int GetPrice() { return price; }
-         public Category GetCategory() { return category; }
+        public int GetId() { return id; }
+        public Category GetCategory() { return category; }
 
         public virtual string ToString()
         {
-            return $"\t- ID:{id}, Product Name: {name}, Price: {price} ,Category: {category.GetCategoryName()}";
+            return $"\t- ID:{id}, Product name: {name}, Price: {price} ,Category: {category.GetCategoryName()}\n";
         }
     }
 }
