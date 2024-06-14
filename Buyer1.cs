@@ -39,7 +39,7 @@ namespace task_2
         {
             if (hasSpecialBox)
             {
-                ProductExtraFields productExtraFields = new ProductExtraFields(productDetails.GetProductName(), 
+                ProductExtraFields productExtraFields = new ProductExtraFields(productDetails.GetId(),productDetails.GetProductName(), 
                     productDetails.GetPrice(),productDetails.GetCategory(),hasSpecialBox);
                 productDetails = productExtraFields;
             }

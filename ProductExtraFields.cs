@@ -11,7 +11,7 @@ namespace task_2
         protected bool hasSpecialBox;
         protected const int extraPrice=20;
 
-        public ProductExtraFields(string name, int price, Category category, bool _hasSpecialBox) : base(name,price,category){
+        public ProductExtraFields(int id,string name, int price, Category category, bool _hasSpecialBox) : base(id,name,price,category){
             this.hasSpecialBox = _hasSpecialBox;
         }
 
@@ -22,7 +22,7 @@ namespace task_2
         {
             string specialBox = hasSpecialBox ? "Yes" : "No";
             string baseString = base.ToString();
-            return $"{baseString},Special box: {specialBox}, Extra price: {extraPrice}";
+            return $"{baseString}\t\t,Special box: {specialBox}, Extra price: {extraPrice}\n";
         }
     }
 }
