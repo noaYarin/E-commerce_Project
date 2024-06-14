@@ -9,11 +9,10 @@ namespace task_2
     internal class ProductExtraFields : Product
     {
         protected bool hasSpecialBox;
-        protected int extraPrice;
+        protected const int extraPrice=20;
 
-        public ProductExtraFields(string name, int price, Category category, bool _hasSpecialBox,int _extraPrice) : base(name,price,category){
+        public ProductExtraFields(string name, int price, Category category, bool _hasSpecialBox) : base(name,price,category){
             this.hasSpecialBox = _hasSpecialBox;
-            this.extraPrice = _extraPrice;
         }
 
         public bool GetHasSpecialBox() { return hasSpecialBox; }
@@ -21,8 +20,9 @@ namespace task_2
 
         public override string ToString()
         {
-            base.ToString();
-            return $"Special box: {hasSpecialBox}, Extra price: {extraPrice}";
+            string specialBox = hasSpecialBox ? "Yes" : "No";
+            string baseString = base.ToString();
+            return $"{baseString},Special box: {specialBox}, Extra price: {extraPrice}";
         }
     }
 }

@@ -87,8 +87,9 @@ namespace task_2
             manager.AddNewProduct(new Product("picture", 154, category), "chen");
             manager.AddNewProduct(new Product("monitor", 254, category), "alex");
 
-            manager.AddProductToCart("tom", "chen", "Table");
-            manager.AddProductToCart("tom", "alex", "monitor");
+            manager.AddProductToCart("tom", "alex", "monitor",true);
+            manager.AddProductToCart("tom", "chen", "picture", false);
+
         }
 
 
@@ -149,7 +150,7 @@ namespace task_2
             Category category = manager.AddCategory();
             if (category != null)
             {
-                manager.AddNewProduct(new Product(name, price, false, 0, category), sellerName);
+                manager.AddNewProduct(new Product(name, price, category), sellerName);
                 Console.WriteLine("\nProduct successfully added!");
             }
             else
@@ -161,6 +162,7 @@ namespace task_2
 
         static void AddProductToCart(Manager manager)
         {
+            bool isAdded = false;
             Console.Write("Enter a buyer name: ");
             string buyerName = Console.ReadLine();
             Console.Write("Enter a seller name: ");
@@ -168,24 +170,17 @@ namespace task_2
             Console.Write("Enter a product name: ");
             string productName = Console.ReadLine().ToLower();
             Console.Write("Do you want add a special package? [Yes / No]: ");
-            string specialBoxStr = Console.ReadLine();
-            bool isSpecialBox = false;
-            int extraPrice = 0;
-            if (specialBoxStr.ToLower() == "yes")
+            if (Console.ReadLine().ToLower() == "yes")
             {
-                isSpecialBox = true;
-                Console.Write("How much is it to add a package box? ");
-                extraPrice = int.Parse(Console.ReadLine());
+                Console.Write("You have to pay another NIS 20 for an special package");
+                isAdded = manager.AddProductToCart(buyerName, sellerName, productName, true);
             }
-            else if (specialBoxStr.ToLower() == "no")
-            {
-                isSpecialBox = false;
-            }
-
-            if (manager.AddProductToCart(buyerName, sellerName, productName))
-                Console.WriteLine("\nProduct successfully added!");
             else
-                Console.WriteLine("\nProduct not added");
+            {
+                isAdded = manager.AddProductToCart(buyerName, sellerName, productName, false);
+            
+            }
+            Console.WriteLine (isAdded ? "\nProduct successfully added!" :"\nProduct not added");
         }
 
         static void Payment(Manager manager)
