@@ -35,7 +35,6 @@ namespace task_2
 
             if (password != null && password.Length >= 4 && hasSpecialChar)
             {
-                Console.WriteLine("Strong password");
                 return true;
             }
             Console.WriteLine("Password should to be at least 4 charecters including a special character: {! @ # & $ ?}");

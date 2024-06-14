@@ -55,17 +55,17 @@ namespace task_2
         }
 
 
-        public string ToString()
+        public override string ToString()
         {
-            string res = GetBuyerName();
+            string baseString = base.ToString();
             foreach (var productDetail in products)
             {
                 if (productDetail != null)
-                    res += productDetail.ToString();
+                    baseString += productDetail.ToString();
                 else
                     break;
             }
-            return res;
+            return baseString;
         }
 
     }

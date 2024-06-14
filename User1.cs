@@ -23,11 +23,6 @@ namespace task_2
         }
         public User() { }
 
-        public string ToString()
-        {
-            return "Customer name: " + name + ", Address: " + address.ToString();
-        }
-
         public string GetBuyerName() { return name; }
         public string GetBuyerPassword() { return password; }
         public Address GetAddress() { return address; }
@@ -58,6 +53,11 @@ namespace task_2
         public bool SetUserPassword(string password)
         {
             return Validation.IsValidPassword(password);
+        }
+
+        public virtual string ToString()
+        {
+            return "Name: " + name + ", Address: " + address.ToString() + "\n";
         }
 
     }
