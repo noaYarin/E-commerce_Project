@@ -89,6 +89,8 @@ namespace task_2
 
             manager.AddProductToCart("tom", "alex", "monitor",true);
             manager.AddProductToCart("tom", "chen", "picture", false);
+            manager.AddProductToCart("tomy", "chen", "table", false);
+
 
         }
 

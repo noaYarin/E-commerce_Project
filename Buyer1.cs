@@ -114,23 +114,23 @@ namespace task_2
             }
         }
 
-        public string ToString()
+        public override string ToString()
         {
-            string result = name;
+            string baseString = base.ToString();
             if (orders != null)
             {
                 foreach (Order order in orders)
                 {
-                    result += order.ToString();
+                    baseString += order.ToString();
                 }
             }
 
             foreach (Product product in products)
             {
                 if (product != null)
-                    result += product.ToString();
+                    baseString += product.ToString();
             }
-            return result;
+            return baseString;
         }
 
 
