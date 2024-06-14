@@ -35,8 +35,14 @@ namespace task_2
         }
 
 
-        public bool SetProduct(Product productDetails)
+        public bool SetProduct(Product productDetails, bool hasSpecialBox)
         {
+            if (hasSpecialBox)
+            {
+                ProductExtraFields productExtraFields = new ProductExtraFields(productDetails.GetProductName(), 
+                    productDetails.GetPrice(),productDetails.GetCategory(),hasSpecialBox);
+                productDetails = productExtraFields;
+            }
             if (productDetails == null)
                 return false;
 

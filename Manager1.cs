@@ -77,7 +77,7 @@ namespace task_2
         }
 
 
-        public bool AddProductToCart(string buyerName, string sellerName, string productName)
+        public bool AddProductToCart(string buyerName, string sellerName, string productName,bool hasSpecialBox)
         {
             foreach (var buyer in buyers)
             {
@@ -87,7 +87,7 @@ namespace task_2
                     {
                         if (seller.GetBuyerName() == sellerName)
                         {
-                            if (buyer.SetProduct(seller.GetProduct(productName)))
+                            if (buyer.SetProduct(seller.GetProduct(productName),hasSpecialBox))
                             {
                                 return true;
                             }

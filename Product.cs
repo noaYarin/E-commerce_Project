@@ -46,10 +46,11 @@ namespace task_2
 
         public string GetProductName() { return  name; }
         public int GetPrice() { return price; }
+         public Category GetCategory() { return category; }
 
         public virtual string ToString()
         {
-            return $"\t- ID:{id}, product name: {name}, price: {price} ,category: {category.GetCategoryName()}";
+            return $"\t- ID:{id}, Product Name: {name}, Price: {price} ,Category: {category.GetCategoryName()}";
         }
     }
 }

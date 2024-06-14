@@ -31,7 +31,7 @@ namespace task_2
             {
                 if (product != null)
                 {
-                    if (product.GetProductName() == productName)
+                    if (product.GetProductName().ToLower() == productName)
                         return product;
                 }
                 else return null;
