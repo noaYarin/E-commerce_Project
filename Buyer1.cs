@@ -37,13 +37,10 @@ namespace task_2
 
         public bool SetProduct(Product productDetails, bool hasSpecialBox)
         {
-            if (hasSpecialBox)
-            {
                 ProductExtraFields productExtraFields = new ProductExtraFields(productDetails.GetId(),productDetails.GetProductName(), 
                     productDetails.GetPrice(),productDetails.GetCategory(),hasSpecialBox);
-                productDetails = productExtraFields;
-            }
-            if (productDetails == null)
+
+            if (productExtraFields == null)
                 return false;
 
             Product[] tempNewProducts;
@@ -54,7 +51,7 @@ namespace task_2
                 products = tempNewProducts;
 
             }
-            products[productSizeLogic] = productDetails;
+            products[productSizeLogic] = productExtraFields;
             productSizeLogic++;
             return true;
         }
