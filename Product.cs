@@ -39,6 +39,7 @@ namespace task_2
             id = idCounter++;
             this.name = _product.name;
             this.price = _product.price;
+            this.category= _product.category;
             SetPrice(_product.price);
         }
 

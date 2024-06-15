@@ -61,6 +61,10 @@ namespace task_2
             string resProducts = "";
             foreach (Product product in allProducts)
             {
+                if(product == null) 
+                {
+                    break;
+                }
                 resProducts += product.ToString();
             }
             return $"\t# total price: {totalPrice}\n {resProducts} ";
