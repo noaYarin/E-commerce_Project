@@ -82,9 +82,14 @@ namespace task_2
 
             manager.AddUserSeller("chen", "15@4885!", addr1);
             manager.AddUserSeller("alex", "54885!@", addr1);
+
             Category category =new Category();
-            manager.AddNewProduct(new Product("Table", 54,category), "chen");
-            manager.AddNewProduct(new Product("picture", 154, category), "chen");
+            category.SetCategoryNameByIndex(1);
+            Category category1 = new Category();
+            category1.SetCategoryNameByIndex(2);
+
+            manager.AddNewProduct(new Product("Table", 54, category), "chen");
+            manager.AddNewProduct(new Product("picture", 154, category1), "chen");
             manager.AddNewProduct(new Product("monitor", 254, category), "alex");
 
             manager.AddProductToCart("tom", "alex", "monitor",true);

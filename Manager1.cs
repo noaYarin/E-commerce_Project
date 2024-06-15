@@ -140,7 +140,7 @@ namespace task_2
                 int index = 1;
                 foreach (var buyer in buyers)
                 {
-                    if (buyer == null)
+                     if (buyer == null)
                     {
                         break;
                     }
