@@ -21,8 +21,9 @@ namespace task_2
         public override string ToString()
         {
             string specialBox = hasSpecialBox ? "Yes" : "No";
+            string price = hasSpecialBox ? $", Extra price: {extraPrice}" : "";
             string baseString = base.ToString();
-            return $"{baseString}\t\t,Special box: {specialBox}, Extra price: {extraPrice}\n";
+            return $"{baseString}\t\t,Special box: {specialBox} {price}\n";
         }
     }
 }
