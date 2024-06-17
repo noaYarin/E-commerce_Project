@@ -54,6 +54,15 @@ namespace task_2
             return true;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (name == (string)obj)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
 
         public override string ToString()
         {

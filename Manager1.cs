@@ -29,7 +29,7 @@ namespace task_2
 
         public bool AddUserBuyer(string name, string password, Address address)
         {
-            bool isNameNotExist = checkUserName(name);
+            bool isNameNotExist = checkUserName(name); 
             if (isNameNotExist)
             {
                 Buyer[] tempNewBuyers;
@@ -49,7 +49,7 @@ namespace task_2
 
         public bool AddUserSeller(string name, string password, Address address)
         {
-            bool isNameNotExist = checkUserName(name);
+            bool isNameNotExist = checkUserName(name); 
             if (isNameNotExist)
             {
                 Seller[] tempNewBuyers;
@@ -107,7 +107,7 @@ namespace task_2
         {
             foreach (var seller in sellers)
             {
-                if (checkSellerName(seller, name))
+                if (seller.Equals(name))  
                 {
                     seller.SetProduct(product);
                     return true;
@@ -121,7 +121,7 @@ namespace task_2
         {
             foreach (var buyer in buyers)
             {
-                if (checkBuyerName(buyer, name))
+                if (buyer.Equals(name))  
                 {
                     buyer.SetOrderArr();
                     buyer.RemoveAllCartProducts();
@@ -199,7 +199,6 @@ namespace task_2
                     return false;
                 }
             }
-
             return true;
         }
 

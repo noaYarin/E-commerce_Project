@@ -55,6 +55,7 @@ namespace task_2
             return Validation.IsValidPassword(password);
         }
 
+
         public virtual string ToString()
         {
             return "Name: " + name + ", Address: " + address.ToString() + "\n";
