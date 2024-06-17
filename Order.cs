@@ -12,6 +12,7 @@ namespace task_2
         private Product[] allProducts;
         private float totalPrice = 0;
         private User buyerDetails;
+
         public Order(Product[] products, int cart_size, User b)
         {
             SetCheckOut(cart_size, products);
@@ -26,7 +27,10 @@ namespace task_2
             for(int i = 0; i < cart_size; i++)
             {
                 if (cartProducts[i] != null)
+                {
                     this.allProducts[i] = new Product(cartProducts[i]);
+                }
+
             }
         }
 

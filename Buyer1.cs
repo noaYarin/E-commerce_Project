@@ -131,5 +131,16 @@ namespace task_2
         }
 
 
+        public override bool Equals(object obj)
+        {
+            if(name == (string)obj)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }
