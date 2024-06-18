@@ -95,38 +95,30 @@ namespace task_2
                 products[i] = null;
             }
             logicSize = 0;
+            productSizeLogic = 0;
             return true;
         }
 
-        public void ToStringHistoryProducts()
-        {
-            if (orders != null)
-            {
-                Console.WriteLine("\tHistrory shopping:");
-                foreach (var order in orders)
-                {
-                    Console.WriteLine(order.ToString());
-                    order.HistroyCart();
-                }
-            }
-        }
-
+      
         public override string ToString()
         {
             string baseString = base.ToString();
-            if (orders != null)
-            {
-                foreach (Order order in orders)
-                {
-                    baseString += order.ToString();
-                }
-            }
 
             foreach (Product product in products)
             {
                 if (product != null)
                     baseString += product.ToString();
             }
+
+            if (orders != null)
+            {
+                baseString += "\n\tHistory shopping:\n";
+                foreach (Order order in orders)
+                {
+                    baseString += order.ToString();
+                }
+            }
+
             return baseString;
         }
 

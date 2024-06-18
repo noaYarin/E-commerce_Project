@@ -107,7 +107,7 @@ namespace task_2
         {
             foreach (var seller in sellers)
             {
-                if (seller.Equals(name))  
+                if (seller!=null && seller.Equals(name))  
                 {
                     seller.SetProduct(product);
                     return true;
