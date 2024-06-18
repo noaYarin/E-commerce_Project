@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace task_2
 {
@@ -13,7 +15,7 @@ namespace task_2
 
         public ProductExtraFields(int id,string name, int price, Category category, bool _hasSpecialBox) : base(id,name,price,category){
             this.hasSpecialBox = _hasSpecialBox;
-        }
+          }
 
         public bool GetHasSpecialBox() { return hasSpecialBox; }
         public int GetExtraPrice() { return extraPrice; }

@@ -26,9 +26,10 @@ namespace task_2
             this.allProducts = new Product[cart_size];
             for(int i = 0; i < cart_size; i++)
             {
+                bool hasSpecialBox = cartProducts[i] is ProductExtraFields productExtra ? productExtra.GetHasSpecialBox() : false;
                 if (cartProducts[i] != null)
                 {
-                    this.allProducts[i] = new Product(cartProducts[i]);
+                    this.allProducts[i] = new ProductExtraFields(cartProducts[i].GetId(), cartProducts[i].GetProductName(), cartProducts[i].GetPrice(), cartProducts[i].GetCategory(), hasSpecialBox);
                 }
 
             }
@@ -37,10 +38,14 @@ namespace task_2
         private void SetOrderPrice()
         {
             float price = 0;
-            foreach (Product product in allProducts)
+            foreach (ProductExtraFields product in allProducts)
             {
                 if (product != null)
                 {
+                    if (product.GetHasSpecialBox())
+                    {
+                        price += product.GetExtraPrice();
+                    }
                     price += product.GetPrice();
                 }
                 else 
@@ -71,7 +76,7 @@ namespace task_2
                 }
                 resProducts += product.ToString();
             }
-            return $"\t# total price: {totalPrice}\n {resProducts} ";
+            return $"\t# total price: {totalPrice}\n {resProducts}\n ";
         }
     }
 }
