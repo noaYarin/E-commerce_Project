@@ -13,6 +13,8 @@ namespace task_2
         private float totalPrice = 0;
         private User buyerDetails;
 
+       
+
         public Order(Product[] products, int cart_size, User b)
         {
             SetCheckOut(cart_size, products);
@@ -20,7 +22,9 @@ namespace task_2
             buyerDetails = b;
         }
 
+      
        
+
         private void SetCheckOut(int cart_size, Product[] cartProducts)
         {
             this.allProducts = new Product[cart_size];
