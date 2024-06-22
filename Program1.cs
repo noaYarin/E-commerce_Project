@@ -38,8 +38,9 @@ namespace task_2
                 Console.WriteLine("(7) Show sellers details");
                 Console.WriteLine("(8) EXIT");
                 Console.Write("\nEnter your choice: ");
-                userSelection = int.Parse(Console.ReadLine());
-
+                
+                    userSelection = int.Parse(Console.ReadLine());
+               
                 switch (userSelection)
                 {
                     case 1:
@@ -102,104 +103,146 @@ namespace task_2
 
         private static void AddBuyer(Manager manager)
         {
-            string name = NameOfUser();
-            Console.WriteLine("Enter password:");
-            string password = Console.ReadLine();
-            Address buyerAddr = GetAddress();
-            if (!(manager.AddUserBuyer(name, password, buyerAddr)))
+            try
             {
-                Console.WriteLine("\nBuyer not added, try again");
-                return;
+                string name = NameOfUser();
+                Console.WriteLine("Enter password:");
+                string password = Console.ReadLine();
+                Address buyerAddr = GetAddress();
+                bool isAdded = manager.AddUserBuyer(name, password, buyerAddr);
+                if (isAdded && buyerAddr!=null && password!="" && name!="")
+                {
+                    Console.WriteLine("\nBuyer successfully added!");
+                }
+                else
+                {
+                    Console.WriteLine("\nBuyer not added, try again");
+                }
             }
-            Console.WriteLine("\nBuyer successfully added!");
-
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred: {e.Message}");
+            }
         }
 
         private static void AddSeller(Manager manager)
         {
-            string name = NameOfUser();
-            Console.WriteLine("Enter password:");
-            string password = Console.ReadLine();
-            Address sellerAddr = GetAddress();
-            if (manager.AddUserSeller(name, password, sellerAddr))
+
+            try
             {
-                Console.WriteLine("\nSeller successfully added!");
+                string name = NameOfUser();
+                Console.WriteLine("Enter password:");
+                string password = Console.ReadLine();
+                Address sellerAddr = GetAddress();
+                bool isAdded = manager.AddUserSeller(name, password, sellerAddr);
+                if (isAdded && sellerAddr != null && password != "" && name != "")
+                {
+                    Console.WriteLine("\nBuyer successfully added!");
+                }
+                else
+                {
+                    Console.WriteLine("\nBuyer not added, try again");
+                }
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("\nSeller not added, try again");
+                Console.WriteLine($"An error occurred: {e.Message}");
             }
         }
 
         private static Address GetAddress()
         {
-            Console.WriteLine("Enter street:");
-            string street = Console.ReadLine();
-            Console.WriteLine("Enter street number:");
-            int streetNumber = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter city:");
-            string city = Console.ReadLine();
-            Console.WriteLine("Enter country:");
-            string country = Console.ReadLine();
+                Console.WriteLine("Enter street:");
+                string street = Console.ReadLine();
+                Console.WriteLine("Enter street number:");
+                int streetNumber = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter city:");
+                string city = Console.ReadLine();
+                Console.WriteLine("Enter country:");
+                string country = Console.ReadLine();
 
-            return new Address(street, streetNumber, city, country);
+                return new Address(street, streetNumber, city, country);
         }
 
 
         static void AddProductToSeller(Manager manager)
         {
-            Console.Write("Enter seller name: ");
-            string sellerName = Console.ReadLine();
-            Console.Write("Enter product name: ");
-            string name = Console.ReadLine().ToLower();
-            Console.Write("Enter product price: ");
-            int price = int.Parse(Console.ReadLine());
-            Category category = manager.AddCategory();
-            if (category != null)
+            try
             {
-                manager.AddNewProduct(new Product(name, price, category), sellerName);
-                Console.WriteLine("\nProduct successfully added!");
+                Console.Write("Enter seller name: ");
+                string sellerName = Console.ReadLine();
+                Console.Write("Enter product name: ");
+                string name = Console.ReadLine().ToLower();
+                Console.Write("Enter product price: ");
+                int price = int.Parse(Console.ReadLine());
+                Category category = manager.AddCategory();
+                if (category != null)
+                {
+                    manager.AddNewProduct(new Product(name, price, category), sellerName);
+                    Console.WriteLine("\nProduct successfully added!");
+                }
+                else
+                {
+                    Console.WriteLine("\nProduct not added");
+                }
             }
-            else
+            catch (NullReferenceException)
             {
-                Console.WriteLine("\nProduct not added");
+                Console.WriteLine($"An error occurred: Fields are empty");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred: {e.Message}");
             }
         }
 
 
         static void AddProductToCart(Manager manager)
         {
-            bool isAdded = false;
-            Console.Write("Enter a buyer name: ");
-            string buyerName = Console.ReadLine();
-            Console.Write("Enter a seller name: ");
-            string sellerName = Console.ReadLine();
-            Console.Write("Enter a product name: ");
-            string productName = Console.ReadLine().ToLower();
-            Console.Write("Do you want add a special package? [Yes / No]: ");
-            if (Console.ReadLine().ToLower() == "yes")
+            try
             {
-                Console.Write("You have to pay another NIS 20 for an special package");
-                isAdded = manager.AddProductToCart(buyerName, sellerName, productName, true);
+                bool isAdded = false;
+                Console.Write("Enter a buyer name: ");
+                string buyerName = Console.ReadLine();
+                Console.Write("Enter a seller name: ");
+                string sellerName = Console.ReadLine();
+                Console.Write("Enter a product name: ");
+                string productName = Console.ReadLine().ToLower();
+                Console.Write("Do you want add a special package? [Yes / No]: ");
+                if (Console.ReadLine().ToLower() == "yes")
+                {
+                    Console.Write("You have to pay another NIS 20 for a special package");
+                    isAdded = manager.AddProductToCart(buyerName, sellerName, productName, true);
+                }
+                else
+                {
+                    isAdded = manager.AddProductToCart(buyerName, sellerName, productName, false);
+                }
+                Console.WriteLine(isAdded ? "\nProduct successfully added!" : "\nProduct not added");
             }
-            else
+            catch (Exception e)
             {
-                isAdded = manager.AddProductToCart(buyerName, sellerName, productName, false);
-            
+                Console.WriteLine($"An error occurred: {e.Message}");
             }
-            Console.WriteLine (isAdded ? "\nProduct successfully added!" :"\nProduct not added");
         }
 
         static void Payment(Manager manager)
         {
-            string name = NameOfUser();
-            if (!manager.PaymentCart(name))
+            try
             {
-                Console.WriteLine("\nInvalid name");
+                string name = NameOfUser();
+                if (!manager.PaymentCart(name))
+                {
+                    Console.WriteLine("\nInvalid name");
+                }
+                else
+                {
+                    Console.WriteLine("\nOrder completed");
+                }
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("\nOrder completed");
+                Console.WriteLine($"An error occurred: {e.Message}");
             }
         }
 
