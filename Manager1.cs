@@ -33,16 +33,22 @@ namespace task_2
             if (isNameNotExist)
             {
                 Buyer[] tempNewBuyers;
-                Buyer newBuyer = new Buyer(name, password, address);
-                if (buyersLogSize == buyers.Length)
+                try
                 {
-                    tempNewBuyers = new Buyer[buyers.Length * 2];
-                    buyers.CopyTo(tempNewBuyers, 0);
-                    buyers = tempNewBuyers;
+                    Buyer newBuyer = new Buyer(name, password, address);
+                    if (buyersLogSize == buyers.Length)
+                    {
+                        tempNewBuyers = new Buyer[buyers.Length * 2];
+                        buyers.CopyTo(tempNewBuyers, 0);
+                        buyers = tempNewBuyers;
+                    }
+                    buyers[buyersLogSize] = newBuyer;
+                    buyersLogSize++;
                 }
-                buyers[buyersLogSize] = newBuyer;
-                buyersLogSize++;
-
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
             return true;
         }
@@ -81,11 +87,11 @@ namespace task_2
         {
             foreach (var buyer in buyers)
             {
-                if (buyer.GetBuyerName() == buyerName)
+                if (buyer!=null && buyer.Name == buyerName)
                 {
                     foreach (var seller in sellers)
                     {
-                        if (seller.GetBuyerName() == sellerName)
+                        if (seller.Name == sellerName)
                         {
                             if (buyer.SetProduct(seller.GetProduct(productName),hasSpecialBox))
                             {
@@ -204,12 +210,12 @@ namespace task_2
 
         public bool checkBuyerName(Buyer buyer, string name)
         {
-            return buyer != null && buyer.GetBuyerName() == name ? true : false;
+            return buyer != null && buyer.Name == name ? true : false;
         }
 
         public bool checkSellerName(Seller seller, string name)
         {
-            return seller != null && seller.GetBuyerName() == name ? true : false;
+            return seller != null && seller.Name == name ? true : false;
         }
 
         public Category AddCategory()

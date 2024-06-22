@@ -22,9 +22,6 @@ namespace task_2
             buyerDetails = b;
         }
 
-      
-       
-
         private void SetCheckOut(int cart_size, Product[] cartProducts)
         {
             this.allProducts = new Product[cart_size];
@@ -33,11 +30,11 @@ namespace task_2
                 bool hasSpecialBox = cartProducts[i] is ProductExtraFields productExtra ? productExtra.GetHasSpecialBox() : false;
                 if (cartProducts[i] != null)
                 {
-                    this.allProducts[i] = new ProductExtraFields(cartProducts[i].GetId(), cartProducts[i].GetProductName(), cartProducts[i].GetPrice(), cartProducts[i].GetCategory(), hasSpecialBox);
+                    this.allProducts[i] = new ProductExtraFields(cartProducts[i].Id, cartProducts[i].Name, cartProducts[i].Price, cartProducts[i].Category, hasSpecialBox);
                 }
-
             }
         }
+
 
         private void SetOrderPrice()
         {
@@ -50,7 +47,7 @@ namespace task_2
                     {
                         price += product.GetExtraPrice();
                     }
-                    price += product.GetPrice();
+                    price += product.Price;
                 }
                 else 
                     break;

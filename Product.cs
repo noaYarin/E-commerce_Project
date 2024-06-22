@@ -15,53 +15,74 @@ namespace task_2
         private int price;
         private Category category;
 
+        public static int IdCounter 
+        {
+            get { return idCounter; }
+            set { idCounter = value; } 
+        }
+
+        public int Id
+        {
+            get { return id; }
+        } 
+
+        public string Name 
+        {
+            get { return name; }
+            set { name = value; } 
+        }
+        public int Price 
+        {
+            get { return price; }
+            set { price = SetPrice(value); } 
+        }
+        internal Category Category
+        {
+            get { return category; }
+            set { category = value; } 
+        }
+
         public Product() { }
         public Product(string _name, int _price, Category _category)
         {
-            id = idCounter++;
-            this.name = _name;
-            this.price = _price;
-            this.category = _category;
+            id = IdCounter++;
+            this.Name = _name;
+            this.Price = _price;
+            this.Category = _category;
             SetPrice(_price);
         }
 
         public Product(int id,string _name, int _price, Category _category)
         {
             this.id = id;
-            this.name = _name;
-            this.price = _price;
-            this.category = _category;
+            this.Name = _name;
+            this.Price = _price;
+            this.Category = _category;
             SetPrice(_price);
         }
 
         public Product(Product _product) 
         {
-            id = idCounter++;
-            this.name = _product.name;
-            this.price = _product.price;
-            this.category= _product.category;
-            SetPrice(_product.price);
+            id = IdCounter++;
+            this.Name = _product.Name;
+            this.Price = _product.Price;
+            this.Category= _product.Category;
+            SetPrice(_product.Price);
         }
 
-        public bool SetPrice(int price)
+        public int SetPrice(int price)
         {
             if (price <= 0)
             {
-                Console.WriteLine("Invalid price");
-                return false;
+               throw new ArgumentException("Invalid price");
             }
-            this.price = price;
-            return true;
+            return price;
         }
 
-        public string GetProductName() { return  name; }
-        public int GetPrice() { return price; }
-        public int GetId() { return id; }
-        public Category GetCategory() { return category; }
-
+       
         public virtual string ToString()
         {
-            return $"\t- ID:{id}, Product name: {name}, Price: {price} ,Category: {category.GetCategoryName()}\n";
+            return $"\t- ID:{Id}, Product name: {Name}, Price: {Price} ,Category: {Category.GetCategoryName()}\n";
         }
     }
 }

@@ -25,13 +25,14 @@ namespace task_2
 
         public Seller() : base() { }
 
+
         public Product GetProduct(string productName)
         {
             foreach (Product product in products)
             {
                 if (product != null)
                 {
-                    if (product.GetProductName().ToLower() == productName)
+                    if (product.Name.ToLower() == productName)
                         return product;
                 }
                 else return null;
@@ -56,7 +57,7 @@ namespace task_2
 
         public override bool Equals(object obj)
         {
-            if (name == (string)obj)
+            if (Name == (string)obj)
                 return true;
             else
             {

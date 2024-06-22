@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace task_2
     internal class Buyer : User
     {
         private Order[] orders;
-        Product[] products;
+        private Product[] products;
         private int logicSize = 0;
         private int productSizeLogic = 0;
         private int size = 2;
@@ -27,18 +28,10 @@ namespace task_2
         public Buyer() : base() { }
 
 
-        public bool SetNewBuyer(string name, string password, Address address)
-        {
-            if (SetUser(name, password, address))
-                return true;
-            return false;
-        }
-
-
         public bool SetProduct(Product productDetails, bool hasSpecialBox)
         {
-                ProductExtraFields productExtraFields = new ProductExtraFields(productDetails.GetId(),productDetails.GetProductName(), 
-                    productDetails.GetPrice(),productDetails.GetCategory(),hasSpecialBox);
+                ProductExtraFields productExtraFields = new ProductExtraFields(productDetails.Id,productDetails.Name, 
+                    productDetails.Price,productDetails.Category,hasSpecialBox);
 
             if (productExtraFields == null)
                 return false;
@@ -62,15 +55,13 @@ namespace task_2
             if (products != null)
                 foreach (Product productDetail in products)
                 {
-                    priceCart += productDetail.GetPrice();
+                    priceCart += productDetail.Price;
                 }
             return priceCart;
         }
 
         public bool SetOrderArr()
         {
-
-
             Order[] newOrder;
 
             if (orders == null)
@@ -84,7 +75,7 @@ namespace task_2
                 orders = newOrder;
             }
 
-            this.orders[orders.Length - 1] = new Order(products, products.Length, new User(name, password, address));
+            this.orders[orders.Length - 1] = new Order(products, products.Length, new User(Name, Password, Address));
             return true;
         }
 
@@ -125,7 +116,7 @@ namespace task_2
 
         public override bool Equals(object obj)
         {
-            if(name == (string)obj)
+            if(Name == (string)obj)
                 return true;
             else
             {

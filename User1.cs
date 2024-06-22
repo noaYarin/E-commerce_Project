@@ -9,9 +9,23 @@ namespace task_2
 {
     internal class User
     {
-        protected string name;
-        protected string password;
-        protected Address address;
+        private string name;
+        private string password;
+        private Address address;
+
+        public string Name {
+            get { return name; }
+            set { name = SetUserName(value); } 
+        }
+
+        public string Password {
+            get { return password; }
+            set { password = SetUserPassword(value); } 
+        }
+        public Address Address {
+            get { return address; }
+            set { address = new Address(value); } 
+        }
 
         public User(string name, string password, Address address)
         {
@@ -19,46 +33,39 @@ namespace task_2
         }
         public User(User other)
         {
-            SetUser(other.name, other.password, other.address);
+            SetUser(other.Name, other.Password, other.Address);
         }
         public User() { }
 
-        public string GetBuyerName() { return name; }
-        public string GetBuyerPassword() { return password; }
-        public Address GetAddress() { return address; }
 
-
-        public bool SetUser(string name, string password, Address address)
+        public void SetUser(string name, string password, Address address)
         {
-            if (SetUserName(name) && SetUserPassword(password))
-            {
-                this.address = new Address(address);
-                this.name = name;
-                this.password = password;
-                return true;
-            }
-            return false;
+           Address = new Address(address);
+           Name = name;
+           Password = password;
         }
 
 
-        public bool SetUserName(string name)
+        public string SetUserName(string name)
         {
             if (name != null && !Validation.IsContainDigit(name) && name.Length < 10)
             {
-                return true;
+                return name;
             }
-            return false;
+            throw new ArgumentException("Name contains digit");
         }
 
-        public bool SetUserPassword(string password)
+        public string SetUserPassword(string password)
         {
-            return Validation.IsValidPassword(password);
+            if(Validation.IsValidPassword(password))
+                return password;
+            throw new ArgumentException("Invalid password");
         }
 
 
         public virtual string ToString()
         {
-            return "Name: " + name + ", Address: " + address.ToString() + "\n";
+            return "Name: " + Name + ", Address: " + Address.ToString() + "\n";
         }
 
     }
