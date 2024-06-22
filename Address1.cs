@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,73 +17,83 @@ namespace task_2
 
         public Address(string street, int numberOfStreet, string city, string country)
         {
-            SetAdress(street, numberOfStreet, city, country);
+            Street = street;
+            NumberOfStreet = numberOfStreet;
+            City = city;
+            Country = country;
         }
 
         public Address(Address addr)
         {
-            SetAdress(addr.street, addr.numberOfStreet, addr.city, addr.country);
+            Street = addr.street;
+            NumberOfStreet = addr.numberOfStreet;
+            City = addr.city;
+            Country = addr.country;
         }
 
-        public bool SetAdress(string street, int numberOfStreet, string city, string country)
+        public string Street
         {
-            if (SetStreet(street) && SetNumberOfStreet(numberOfStreet) && SetCity(city) && SetCountry(country))
-            {
-                return true;
-            }
-            return false;
+            get { return street; }
+            set { street = SetStreet(value); }
         }
 
-        bool SetStreet(string street)
+        public int NumberOfStreet
+        {
+            get { return numberOfStreet; }
+            set { numberOfStreet = SetNumberOfStreet(value); }
+        }
+
+        public string City
+        {
+            get { return city; }
+            set { city = SetCity(value); }
+        }
+
+        public string Country
+        {
+            get { return country; }
+            set { country = SetCountry(value); }
+        }
+
+        private string SetStreet(string street)
         {
             if (street != null && !Validation.IsContainDigit(street))
             {
-                this.street = street;
-                return true;
+                return street;
             }
-            return false;
+            throw new ArgumentException("Street contains digit");
         }
 
-        bool SetNumberOfStreet(int numberOfStreet)
+        int SetNumberOfStreet(int numberOfStreet)
         {
             if (numberOfStreet > 0 && numberOfStreet < 999)
             {
-                this.numberOfStreet = numberOfStreet;
-                return true;
+                return numberOfStreet;
             }
-            return false;
+            throw new ArgumentException("Street number must be between 0 - 999");
         }
 
-        bool SetCity(string city)
+        string SetCity(string city)
         {
             if (city != null && !Validation.IsContainDigit(city))
             {
-                this.city = city;
-                return true;
+                return city;
             }
-            return false;
+            throw new ArgumentException("City contains digit");
         }
 
-        bool SetCountry(string country)
+        string SetCountry(string country)
         {
             if (country != null && !Validation.IsContainDigit(country))
             {
-                this.country = country;
-                return true;
+                return country;
             }
-            return false;
+            throw new ArgumentException("Country contains digit");
         }
-
-
-        public string GetStreet() { return street; }
-        public string GetCity() { return city; }
-        public string GetCountry() { return country; }
-        public int GetNumberOfStreet() { return numberOfStreet; }
-
 
         public string ToString()
         {
-            return "Country: " + country + ", city: " + city + ", street: " + street + ", number: " + numberOfStreet;
+            return "Country: " + Country + ", city: " + City + ", street: " + Street + ", number: " + NumberOfStreet;
         }
     }
 }
