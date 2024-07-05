@@ -13,12 +13,16 @@ namespace task_2
         private float totalPrice = 0;
         private User buyerDetails;
 
-       
+        public float TotalPrice 
+        {
+            get { return totalPrice; }
+            set { totalPrice = SetOrderPrice(); }
+        }
 
         public Order(Product[] products, int cart_size, User b)
         {
             SetCheckOut(cart_size, products);
-            SetOrderPrice();
+            totalPrice = SetOrderPrice();
             buyerDetails = b;
         }
 
@@ -36,7 +40,7 @@ namespace task_2
         }
 
 
-        private void SetOrderPrice()
+        private float SetOrderPrice()
         {
             float price = 0;
             foreach (ProductExtraFields product in allProducts)
@@ -52,7 +56,7 @@ namespace task_2
                 else 
                     break;
             }
-            totalPrice = price;
+            return price;
         }
 
         public void HistroyCart()
@@ -77,7 +81,7 @@ namespace task_2
                 }
                 resProducts += product.ToString();
             }
-            return $"\t# total price: {totalPrice}\n {resProducts}\n ";
+            return $"\t# total price: {TotalPrice}\n {resProducts}\n ";
         }
     }
 }

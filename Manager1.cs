@@ -5,6 +5,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace task_2
 {
@@ -26,7 +27,7 @@ namespace task_2
             this.name = _name;
         }
 
-
+        
         public bool AddUserBuyer(string name, string password, Address address)
         {
             bool isNameNotExist = checkUserName(name); 
@@ -44,13 +45,14 @@ namespace task_2
                     }
                     buyers[buyersLogSize] = newBuyer;
                     buyersLogSize++;
+                    return true;
                 }
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
-            return true;
+            return false; 
         }
 
         public bool AddUserSeller(string name, string password, Address address)
@@ -226,6 +228,7 @@ namespace task_2
             bool isValidChoice = category.SetCategoryNameByIndex(index);
             return !isValidChoice ? null : category;
         }
+
         public void DisplayCategories(Category category)
         {
             string[] categories = category.GetCategoryNames();
@@ -235,6 +238,39 @@ namespace task_2
             {
                 Console.WriteLine($"{i + 1} - {categories[i]}");
             }
+        }
+
+
+        public void ComareBuyesShopingCart(string buyer1, string buyer2)
+        {
+            if(FindBuyer(buyer1) != null && FindBuyer(buyer2) != null)
+            {
+                Buyer b1 = FindBuyer(buyer1);
+                Buyer b2 = FindBuyer(buyer2);
+                int res = b1.CompareTo(b2);
+                if (res == 0)
+                    Console.WriteLine("the shopping cart price is the same for both buyers");
+                else if (res == 1)
+                    Console.WriteLine($"The shopping cart of {b1.Name} bigger than {b2.Name}");
+                else
+                    Console.WriteLine($"The shopping cart of {b2.Name} bigger than {b1.Name}");
+            }
+
+            else
+            {
+                Console.WriteLine("Buyer not exist");
+            }
+        }
+
+
+        private Buyer FindBuyer(string name)
+        {
+            foreach (Buyer buyer in buyers)
+            {
+                if (buyer.Name == name)
+                    return buyer;
+            }
+            return null;
         }
 
     }

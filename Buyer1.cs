@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace task_2
 {
-    internal class Buyer : User
+    internal class Buyer : User, IComparable<Buyer>
     {
         private Order[] orders;
         private Product[] products;
@@ -34,7 +35,7 @@ namespace task_2
                     productDetails.Price,productDetails.Category,hasSpecialBox);
 
             if (productExtraFields == null)
-                return false;
+                throw new ArgumentException("adding product fails");
 
             Product[] tempNewProducts;
             if (productSizeLogic == products.Length)
@@ -122,6 +123,37 @@ namespace task_2
             {
                 return false;
             }
+        }
+
+
+        public int CompareTo(Buyer other)
+        {
+            float totalSumOthers = 0;
+            float totalSum = 0;
+
+            if(other.orders == null && orders == null) 
+            {
+                Console.WriteLine("Shopping cart is empty");
+                // add trhow
+            }
+            else
+            {
+                foreach (Order order in other.orders) 
+                {
+                    totalSumOthers += order.TotalPrice;
+                }
+                foreach (Order order in orders)
+                {
+                    totalSum += order.TotalPrice;
+                }
+
+            }
+
+            if (totalSumOthers > totalSum)
+                return -1;
+            else if (totalSumOthers < totalSum)
+                return 1;
+            return 0;
         }
 
 
