@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -19,7 +20,7 @@ namespace task_2
             Console.WriteLine(programName + "\n");
             Console.ResetColor();
 
-            const int EXIT = 8;
+            const int EXIT = 9;
             int userSelection = 0;
 
             InitialData(manager);
@@ -36,7 +37,8 @@ namespace task_2
                 Console.WriteLine("(5) Pay order");
                 Console.WriteLine("(6) Show buyers details");
                 Console.WriteLine("(7) Show sellers details");
-                Console.WriteLine("(8) EXIT");
+                Console.WriteLine("(8) Compare between two customers");
+                Console.WriteLine("(9) EXIT");
                 Console.Write("\nEnter your choice: ");
                 
                     userSelection = int.Parse(Console.ReadLine());
@@ -65,6 +67,9 @@ namespace task_2
                         manager.ShowAllSellers();
                         break;
                     case 8:
+                        CompareBuyers(manager);
+                        break;
+                    case 9:
                         Console.WriteLine("Goodbye :) ");
                         break;
                     default:
@@ -78,7 +83,7 @@ namespace task_2
         {
             Address addr1 = new Address("abc", 124, "Netanya", "ISR");
 
-            manager.AddUserBuyer("tom", "54885!@", addr1);
+            manager.AddUserBuyer("tom", "Tm54885!!", addr1);
             manager.AddUserBuyer("tomy", "5@4885!", addr1);
 
             manager.AddUserSeller("chen", "15@4885!", addr1);
@@ -97,7 +102,10 @@ namespace task_2
             manager.AddProductToCart("tom", "chen", "picture", false);
             manager.AddProductToCart("tomy", "chen", "table", false);
 
-
+            //for only test
+            manager.PaymentCart("tom");
+            manager.AddProductToCart("tom", "chen", "table", true);
+            manager.PaymentCart("tom");
         }
 
 
@@ -110,7 +118,8 @@ namespace task_2
                 string password = Console.ReadLine();
                 Address buyerAddr = GetAddress();
                 bool isAdded = manager.AddUserBuyer(name, password, buyerAddr);
-                if (isAdded && buyerAddr!=null && password!="" && name!="")
+                manager.AddUserBuyer(name, password, buyerAddr);
+                if (isAdded && buyerAddr != null && password != "" && name != "")
                 {
                     Console.WriteLine("\nBuyer successfully added!");
                 }
@@ -152,16 +161,43 @@ namespace task_2
 
         private static Address GetAddress()
         {
-                Console.WriteLine("Enter street:");
-                string street = Console.ReadLine();
-                Console.WriteLine("Enter street number:");
-                int streetNumber = int.Parse(Console.ReadLine());
-                Console.WriteLine("Enter city:");
-                string city = Console.ReadLine();
-                Console.WriteLine("Enter country:");
-                string country = Console.ReadLine();
+            int counter = 0;
+            Address address = new Address();
+            do 
+            {
+                try
+                {
+                    switch (counter)
+                    {
+                        case 0:
+                            Console.WriteLine("Enter street:");
+                            address.Street = Console.ReadLine();
+                            counter++;
+                            break;
+                        case 1:
+                            Console.WriteLine("Enter street number:");
+                            address.NumberOfStreet = int.Parse(Console.ReadLine());
+                            counter++;
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter city name:");
+                            address.City = Console.ReadLine();
+                            counter++;
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter country name:");
+                            address.Country = Console.ReadLine();
+                            counter++;
+                            break;
+                    }
+                }    
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (counter < 4);
 
-                return new Address(street, streetNumber, city, country);
+            return address;
         }
 
 
@@ -223,6 +259,22 @@ namespace task_2
             catch (Exception e)
             {
                 Console.WriteLine($"An error occurred: {e.Message}");
+            }
+        }
+
+        static void CompareBuyers(Manager manager)
+        {
+            try
+            {
+                Console.Write("Enter the first name of customer: ");
+                string buyer1 = Console.ReadLine();
+                Console.Write("Enter the second name of customer: ");
+                string buyer2 = Console.ReadLine();
+                manager.ComareBuyesShopingCart(buyer1, buyer2);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 

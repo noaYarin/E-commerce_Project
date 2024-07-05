@@ -31,6 +31,8 @@ namespace task_2
             Country = addr.country;
         }
 
+        public Address() { }
+
         public string Street
         {
             get { return street; }

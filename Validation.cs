@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace task_2
 {
+   
     static class Validation
     {
+
         public static bool IsContainDigit(string str)
         {
             foreach (char ch in str)
