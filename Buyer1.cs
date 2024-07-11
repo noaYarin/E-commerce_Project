@@ -157,5 +157,41 @@ namespace task_2
         }
 
 
+        public Product[] OrderClone(float restoreByPrice)
+        {
+            foreach(Order order in orders)
+            {
+                if(order.TotalPrice == restoreByPrice)
+                {
+                    Order p2 = (Order)order.Clone();
+                    Product[] prod = p2.GetAllProducts();
+                    return prod;
+                }
+            }
+            return null;
+        }
+
+
+        public void SetProductFromHistory(Product[] productsHistory )
+        {
+            foreach (ProductExtraFields product in productsHistory)
+            {
+                if (product == null)
+                {
+                    break;
+                }
+                SetProduct(product, product.GetHasSpecialBox()); 
+            }
+        }
+
+        public void ShowShoppingCartDetail()
+        {
+            foreach(Order order in orders)
+            {
+                Console.WriteLine(order.ToString());
+            }
+        }
+
+
     }
 }

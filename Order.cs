@@ -7,16 +7,28 @@ using System.Threading.Tasks;
 
 namespace task_2
 {
-    internal class Order
+    internal class Order:ICloneable 
     {
         private Product[] allProducts;
         private float totalPrice = 0;
         private User buyerDetails;
 
+      
+        public object Clone()
+        {
+            return new Order(allProducts, allProducts.Length, new Buyer());
+        }
+       
         public float TotalPrice 
         {
             get { return totalPrice; }
             set { totalPrice = SetOrderPrice(); }
+        }
+
+
+        public Product[] GetAllProducts()
+        {
+            return allProducts;
         }
 
         public Order(Product[] products, int cart_size, User b)

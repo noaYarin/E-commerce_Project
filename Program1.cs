@@ -30,6 +30,7 @@ namespace task_2
                 Console.WriteLine();
                 Console.WriteLine("---------------Menu----------------\n");
                 Console.WriteLine("Choose one of the following options:");
+                Console.WriteLine("(0) Choose a shopping cart from a history");
                 Console.WriteLine("(1) Add new buyer");
                 Console.WriteLine("(2) Add new seller");
                 Console.WriteLine("(3) Add product for seller");
@@ -41,10 +42,13 @@ namespace task_2
                 Console.WriteLine("(9) EXIT");
                 Console.Write("\nEnter your choice: ");
                 
-                    userSelection = int.Parse(Console.ReadLine());
+                userSelection = int.Parse(Console.ReadLine());
                
                 switch (userSelection)
                 {
+                    case 0:
+                        ChooseCartHistory(manager);
+                        break;
                     case 1:
                         AddBuyer(manager);
                         break;
@@ -100,7 +104,7 @@ namespace task_2
 
             manager.AddProductToCart("tom", "alex", "monitor",true);
             manager.AddProductToCart("tom", "chen", "picture", false);
-            manager.AddProductToCart("tomy", "chen", "table", false);
+            //manager.AddProductToCart("tomy", "chen", "table", false);
 
             //for only test
             manager.PaymentCart("tom");
@@ -273,6 +277,21 @@ namespace task_2
                 manager.ComareBuyesShopingCart(buyer1, buyer2);
             }
             catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+
+        static void ChooseCartHistory(Manager manager)
+        {
+            try
+            {
+                Console.Write("Enter the name of the buyer to restore his shopping cart: ");
+                string buyerName = Console.ReadLine();
+                manager.ResorteShoppingCart(buyerName);
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }

@@ -263,6 +263,31 @@ namespace task_2
         }
 
 
+        public void ResorteShoppingCart(string buyer1)
+        {
+            if( FindBuyer(buyer1) != null)
+            {
+                Buyer buyer = FindBuyer(buyer1);
+                buyer.ShowShoppingCartDetail();
+                Console.Write("Enter a price: ");
+                try
+                {
+                    float restoreByPrice = float.Parse(Console.ReadLine());
+                    Product[] OrderClone = buyer.OrderClone(restoreByPrice);
+                    buyer.SetProductFromHistory(OrderClone);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Buyer not exist");
+            }
+        }
+
+
         private Buyer FindBuyer(string name)
         {
             foreach (Buyer buyer in buyers)
