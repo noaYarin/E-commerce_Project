@@ -22,7 +22,7 @@ namespace task_2
             const int EXIT = 8;
             int userSelection = 0;
 
-            InitialData(manager);
+          InitialData(manager);
 
             while (userSelection != EXIT)
             {
@@ -74,7 +74,7 @@ namespace task_2
             }
         }
 
-        private static void InitialData(Manager manager)
+         private static void InitialData(Manager manager)
         {
             Address addr1 = new Address("abc", 124, "Netanya", "ISR");
 
@@ -96,8 +96,6 @@ namespace task_2
             manager.AddProductToCart("tom", "alex", "monitor",true);
             manager.AddProductToCart("tom", "chen", "picture", false);
             manager.AddProductToCart("tomy", "chen", "table", false);
-
-
         }
 
 
