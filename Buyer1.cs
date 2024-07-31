@@ -192,6 +192,10 @@ namespace task_2
             }
         }
 
+        public int GetProductSize()
+        {
+            return this.productSizeLogic;
+        }
 
     }
 }

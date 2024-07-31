@@ -147,6 +147,10 @@ namespace task_2
             {
                 if (buyer.Equals(name))  
                 {
+                    if (buyer.GetProductSize() == 1)
+                    {
+                        throw new Exception("The shopping cart needs to contains at least 2 items");
+                    }
                     buyer.SetOrderArr();
                     buyer.RemoveAllCartProducts();
                     return true;
