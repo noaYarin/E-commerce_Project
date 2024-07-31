@@ -27,24 +27,41 @@ namespace task_2
             this.name = _name;
         }
 
-        
+        public static Manager operator +(Manager manager, Buyer newBuyer)
+        {
+            if (manager.buyersLogSize == manager.buyers.Length)
+            {
+                Buyer[] tempNewBuyers = new Buyer[manager.buyers.Length * 2];
+                manager.buyers.CopyTo(tempNewBuyers, 0);
+                manager.buyers = tempNewBuyers;
+            }
+            manager.buyers[manager.buyersLogSize] = newBuyer;
+            manager.buyersLogSize++;
+            return manager;
+        }
+
+        public static Manager operator +(Manager manager, Seller newSeller)
+        {
+            if (manager.sellersLogSize == manager.sellers.Length)
+            {
+                Seller[] tempNewSellers = new Seller[manager.sellers.Length * 2];
+                manager.sellers.CopyTo(tempNewSellers, 0);
+                manager.sellers = tempNewSellers;
+            }
+            manager.sellers[manager.sellersLogSize] = newSeller;
+            manager.sellersLogSize++;
+            return manager;
+        }
+
         public bool AddUserBuyer(string name, string password, Address address)
         {
-            bool isNameNotExist = checkUserName(name); 
+            bool isNameNotExist = checkUserName(name);
             if (isNameNotExist)
             {
-                Buyer[] tempNewBuyers;
                 try
                 {
                     Buyer newBuyer = new Buyer(name, password, address);
-                    if (buyersLogSize == buyers.Length)
-                    {
-                        tempNewBuyers = new Buyer[buyers.Length * 2];
-                        buyers.CopyTo(tempNewBuyers, 0);
-                        buyers = tempNewBuyers;
-                    }
-                    buyers[buyersLogSize] = newBuyer;
-                    buyersLogSize++;
+                    Manager updatedManager = this + newBuyer;
                     return true;
                 }
                 catch (ArgumentException e)
@@ -52,25 +69,24 @@ namespace task_2
                     Console.WriteLine(e.Message);
                 }
             }
-            return false; 
+            return false;
         }
 
         public bool AddUserSeller(string name, string password, Address address)
         {
-            bool isNameNotExist = checkUserName(name); 
+            bool isNameNotExist = checkUserName(name);
             if (isNameNotExist)
             {
-                Seller[] tempNewBuyers;
-                Seller newSeller = new Seller(name, password, address);
-                if (sellersLogSize == sellers.Length)
+                try
                 {
-                    tempNewBuyers = new Seller[sellers.Length * 2];
-                    sellers.CopyTo(tempNewBuyers, 0);
-                    sellers = tempNewBuyers;
+                    Seller newSeller = new Seller(name, password, address);
+                    Manager updatedManager = this + newSeller;
+                    return true;
                 }
-                sellers[sellersLogSize] = newSeller;
-                sellersLogSize++;
-                return true;
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
             return false;
         }
