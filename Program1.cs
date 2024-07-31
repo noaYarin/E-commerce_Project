@@ -137,11 +137,11 @@ namespace task_2
                 bool isAdded = manager.AddUserSeller(name, password, sellerAddr);
                 if (isAdded && sellerAddr != null && password != "" && name != "")
                 {
-                    Console.WriteLine("\nBuyer successfully added!");
+                    Console.WriteLine("\nSeller successfully added!");
                 }
                 else
                 {
-                    Console.WriteLine("\nBuyer not added, try again");
+                    Console.WriteLine("\nSeller not added, try again");
                 }
             }
             catch (Exception e)
