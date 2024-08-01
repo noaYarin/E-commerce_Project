@@ -12,9 +12,17 @@ namespace task_2
         private List<Product> allProducts;
         private float totalPrice = 0;
         private User buyerDetails;
+        private readonly int orderNum=0;
+        private static int lastOrderNum = 10000000;
 
+        private static int LastOrderNum
+        {
+            get { return lastOrderNum; }
+            set { lastOrderNum = value; }
+        }
         public object Clone()
         {
+            LastOrderNum--;
             return new Order(allProducts.ToArray(), allProducts.Count, new Buyer());
         }
 
@@ -30,12 +38,14 @@ namespace task_2
             return allProducts;
         }
 
-        public Order(Product[] products, int cart_size, User b)
+        public Order(Product[] products, int cart_size, User user)
         {
             SetCheckOut(cart_size, products);
             totalPrice = SetOrderPrice();
-            buyerDetails = b;
+            buyerDetails = user;
+            orderNum = LastOrderNum++; 
         }
+
 
         private void SetCheckOut(int cart_size, Product[] cartProducts)
         {
@@ -50,6 +60,10 @@ namespace task_2
             }
         }
 
+      public int GetOrderNum()
+        {
+           return orderNum;
+        }
 
         private float SetOrderPrice()
         {
@@ -92,7 +106,7 @@ namespace task_2
                 }
                 resProducts += product.ToString();
             }
-            return $"\t# total price: {TotalPrice}\n {resProducts}\n ";
+            return $"\tOrder number #{orderNum},total price: {TotalPrice}\n {resProducts}\n ";
         }
     }
 }

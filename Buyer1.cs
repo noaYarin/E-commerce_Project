@@ -137,7 +137,7 @@ namespace task_2
         {
             foreach(Order order in orders)
             {
-                if(order.TotalPrice == restoreByPrice)
+                if(order.GetOrderNum() == restoreByPrice)
                 {
                     Order p2 = (Order)order.Clone();
                     Product[] prod = p2.GetAllProducts().ToArray();

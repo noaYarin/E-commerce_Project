@@ -239,6 +239,7 @@ namespace task_2
                 Console.Write("Enter the name of the buyer to restore his shopping cart: ");
                 string buyerName = Console.ReadLine();
                 manager.ResorteShoppingCart(buyerName);
+                Console.WriteLine("The products have been successfully added to the shopping cart!");
             }
             catch (Exception e)
             {
