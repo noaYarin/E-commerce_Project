@@ -84,7 +84,7 @@ namespace task_2
 
          private static void InitialData(Manager manager)
         {
-            Address addr1 = new Address("abc", 124, "Netanya", "ISR");
+            Address addr1 = new Address("abc", 123, "Netanya", "ISR");
 
             manager.AddUserBuyer("tom", "54885!@", addr1);
             manager.AddUserBuyer("tomy", "5@4885!", addr1);
