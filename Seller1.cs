@@ -9,18 +9,17 @@ namespace task_2
 {
     internal class Seller : User
     {
-        Product[] products;
+        private List<Product> products;
         private int size = 2;
-        private int productLogicSize = 0;
 
         public Seller(string name, string password, Address address) : base(name, password, address)
         {
-            products = new Product[size];
+            products = new List<Product>(size); 
         }
 
         public Seller(User others) : base(others)
         {
-            products = new Product[size];
+            products = new List<Product>(size); 
         }
 
         public Seller() : base() { }
@@ -30,29 +29,18 @@ namespace task_2
         {
             foreach (Product product in products)
             {
-                if (product != null)
+                if (product != null && product.Name.ToLower() == productName.ToLower())
                 {
-                    if (product.Name.ToLower() == productName)
-                        return product;
+                    return product;
                 }
-                else return null;
             }
             return null;
+
         }
 
-        public bool SetProduct(Product productDetails)
+        public void SetProduct(Product productDetails)
         {
-            Product[] tempNewProducts;
-            if (productLogicSize == products.Length)
-            {
-                tempNewProducts = new Product[products.Length * size];
-                products.CopyTo(tempNewProducts, 0);
-                products = tempNewProducts;
-
-            }
-            products[productLogicSize] = productDetails;
-            productLogicSize++;
-            return true;
+            products.Add(productDetails);
         }
 
         public override bool Equals(object obj)
@@ -78,5 +66,9 @@ namespace task_2
             return baseString;
         }
 
+        public int GetProductCount()
+        {
+            return products.Count;
+        }
     }
 }
