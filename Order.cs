@@ -13,7 +13,7 @@ namespace task_2
         private float totalPrice = 0;
         private User buyerDetails;
 
-      
+
         public object Clone()
         {
             return new Order(allProducts, allProducts.Length, new Buyer());
