@@ -59,11 +59,11 @@ namespace task_2
 
         private string SetStreet(string street)
         {
-            if (street != null || !Validation.IsContainDigit(street))
+            if (street !="" && !Validation.IsContainDigit(street))
             {
                 return street;
             }
-            throw new ArgumentException("Street contains digit");
+            throw new ArgumentException("Enter street again");
         }
 
         int SetNumberOfStreet(int numberOfStreet)
@@ -77,20 +77,20 @@ namespace task_2
 
         string SetCity(string city)
         {
-            if (city != null || !Validation.IsContainDigit(city))
+            if (city !="" && !Validation.IsContainDigit(city))
             {
                 return city;
             }
-            throw new ArgumentException("City contains digit");
+            throw new ArgumentException("Enter city again");
         }
 
         string SetCountry(string country)
         {
-            if (country != null || !Validation.IsContainDigit(country))
+            if (country !="" && !Validation.IsContainDigit(country))
             {
                 return country;
             }
-            throw new ArgumentException("Country contains digit");
+            throw new ArgumentException("Enter country again");
         }
 
         public string ToString()
