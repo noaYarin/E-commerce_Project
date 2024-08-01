@@ -289,11 +289,11 @@ namespace task_2
             {
                 Buyer buyer = FindBuyer(buyer1);
                 buyer.ShowShoppingCartDetail();
-                Console.Write("Enter a price: ");
+                Console.Write("Enter order number: ");
                 try
                 {
-                    float restoreByPrice = float.Parse(Console.ReadLine());
-                    Product[] OrderClone = buyer.OrderClone(restoreByPrice);
+                    float restoreByOrderNum = float.Parse(Console.ReadLine());
+                    Product[] OrderClone = buyer.OrderClone(restoreByOrderNum);
                     buyer.SetProductFromHistory(OrderClone);
                 }
                 catch (Exception e)
