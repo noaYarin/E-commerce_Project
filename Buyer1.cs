@@ -128,25 +128,29 @@ namespace task_2
 
         public int CompareTo(Buyer other)
         {
-            float totalSumOthers = 0;
-            float totalSum = 0;
+            float totalSumOthers = 0,totalSum = 0;
 
-            if(other.orders == null && orders == null) 
+            if(other.products == null || products == null) 
             {
-                Console.WriteLine("Shopping cart is empty");
-                // add trhow
+                throw new Exception("Shopping cart is empty");
             }
             else
             {
-                foreach (Order order in other.orders) 
-                {
-                    totalSumOthers += order.TotalPrice;
-                }
-                foreach (Order order in orders)
-                {
-                    totalSum += order.TotalPrice;
-                }
+                    foreach (Product product in other.products)
+                    {
+                        if (product != null)
+                        {
+                            totalSumOthers += product.Price;
+                        }
+                    }
 
+                    foreach (Product product in products)
+                    {
+                        if (product != null)
+                        {
+                            totalSum += product.Price;
+                        }
+                    }
             }
 
             if (totalSumOthers > totalSum)

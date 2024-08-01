@@ -37,7 +37,8 @@ namespace task_2
                 Console.WriteLine("(6) Pay order");
                 Console.WriteLine("(7) Show buyers details");
                 Console.WriteLine("(8) Show sellers details");
-                Console.WriteLine("(9) EXIT");
+                Console.WriteLine("(9) Comparing two buyers based on their shopping cart amount");
+                Console.WriteLine("(10) EXIT");
                 Console.Write("\nEnter your choice: ");
                 
                     userSelection = int.Parse(Console.ReadLine());
@@ -69,6 +70,9 @@ namespace task_2
                         manager.ShowAllSellers();
                         break;
                     case 9:
+                        CompareBuyers(manager);
+                        break;
+                    case 10:
                         Console.WriteLine("Goodbye :) ");
                         break;
                     default:
@@ -266,6 +270,10 @@ namespace task_2
         {
             Console.Write("Enter name of user: ");
             return (Console.ReadLine()).ToLower();
+        }
+
+        static void CompareBuyers(Manager manager) {
+            manager.ComareBuyesShopingCart(NameOfUser(), NameOfUser());
         }
     }
 }
