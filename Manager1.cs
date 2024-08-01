@@ -187,16 +187,16 @@ namespace task_2
         public void ShowAllSellers()
         {
             Console.WriteLine("\n***Show all sellers details***");
-            if (sellers[0] != null)
+            var validSellers = sellers.Where(seller => seller != null)
+                                         .OrderByDescending(seller => seller.GetProductCount())
+                                         .ToList();
+
+            if (validSellers.Count>0)
             {
                 int index = 1;
-                foreach (var seller in sellers)
+                foreach (var seller in validSellers)
                 {
-                    if (seller == null)
-                    {
-                        break;
-                    }
-                    Console.WriteLine($"{index}) {seller.ToString()} ");
+                    Console.WriteLine($"{index}) {seller.ToString()}");
                     Console.WriteLine();
                     index++;
                 }
