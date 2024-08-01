@@ -59,7 +59,7 @@ namespace task_2
 
         private string SetStreet(string street)
         {
-            if (street != null && !Validation.IsContainDigit(street))
+            if (street != null || !Validation.IsContainDigit(street))
             {
                 return street;
             }
@@ -77,7 +77,7 @@ namespace task_2
 
         string SetCity(string city)
         {
-            if (city != null && !Validation.IsContainDigit(city))
+            if (city != null || !Validation.IsContainDigit(city))
             {
                 return city;
             }
@@ -86,7 +86,7 @@ namespace task_2
 
         string SetCountry(string country)
         {
-            if (country != null && !Validation.IsContainDigit(country))
+            if (country != null || !Validation.IsContainDigit(country))
             {
                 return country;
             }

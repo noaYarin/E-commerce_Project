@@ -267,15 +267,21 @@ namespace task_2
             {
                 Buyer b1 = FindBuyer(buyer1);
                 Buyer b2 = FindBuyer(buyer2);
-                int res = b1.CompareTo(b2);
-                if (res == 0)
-                    Console.WriteLine("the shopping cart price is the same for both buyers");
-                else if (res == 1)
-                    Console.WriteLine($"The shopping cart of {b1.Name} bigger than {b2.Name}");
-                else
-                    Console.WriteLine($"The shopping cart of {b2.Name} bigger than {b1.Name}");
+                try
+                {
+                    int res = b1.CompareTo(b2);
+                    if (res == 0)
+                        Console.WriteLine("the shopping cart price is the same for both buyers");
+                    else if (res == 1)
+                        Console.WriteLine($"The shopping cart of {b1.Name} bigger than {b2.Name}");
+                    else
+                        Console.WriteLine($"The shopping cart of {b2.Name} bigger than {b1.Name}");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-
             else
             {
                 Console.WriteLine("Buyer not exist");
@@ -312,7 +318,7 @@ namespace task_2
         {
             foreach (Buyer buyer in buyers)
             {
-                if (buyer.Name == name)
+                if (buyer.Name.ToLower() == name)
                     return buyer;
             }
             return null;

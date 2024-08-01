@@ -13,7 +13,7 @@ namespace task_2
     {
         static void Main(string[] args)
         {
-            const string programName = "E-commerce Project\nSubmitted by Noa-Yarin Levi and Chen Brown";
+            const string programName = "E-commerce Project\nBy Noa-Yarin Levi and Chen Brown";
             Manager manager = new Manager(programName);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(programName + "\n");
@@ -33,10 +33,12 @@ namespace task_2
                 Console.WriteLine("(2) Add new seller");
                 Console.WriteLine("(3) Add product for seller");
                 Console.WriteLine("(4) Add product to shopping cart");
-                Console.WriteLine("(5) Pay order");
-                Console.WriteLine("(6) Show buyers details");
-                Console.WriteLine("(7) Show sellers details");
-                Console.WriteLine("(8) EXIT");
+                Console.WriteLine("(5) Choose a shopping cart from a history");
+                Console.WriteLine("(6) Pay order");
+                Console.WriteLine("(7) Show buyers details");
+                Console.WriteLine("(8) Show sellers details");
+                Console.WriteLine("(9) Comparing two buyers based on their shopping cart amount");
+                Console.WriteLine("(10) EXIT");
                 Console.Write("\nEnter your choice: ");
                 
                     userSelection = int.Parse(Console.ReadLine());
@@ -56,15 +58,21 @@ namespace task_2
                         AddProductToCart(manager);
                         break;
                     case 5:
-                        Payment(manager);
+                        ChooseCartHistory(manager);
                         break;
                     case 6:
-                        manager.ShowAllBuyers();
+                        Payment(manager);
                         break;
                     case 7:
-                        manager.ShowAllSellers();
+                        manager.ShowAllBuyers();
                         break;
                     case 8:
+                        manager.ShowAllSellers();
+                        break;
+                    case 9:
+                        CompareBuyers(manager);
+                        break;
+                    case 10:
                         Console.WriteLine("Goodbye :) ");
                         break;
                     default:
@@ -224,6 +232,20 @@ namespace task_2
             }
         }
 
+        static void ChooseCartHistory(Manager manager)
+        {
+            try
+            {
+                Console.Write("Enter the name of the buyer to restore his shopping cart: ");
+                string buyerName = Console.ReadLine();
+                manager.ResorteShoppingCart(buyerName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         static void Payment(Manager manager)
         {
             try
@@ -248,6 +270,10 @@ namespace task_2
         {
             Console.Write("Enter name of user: ");
             return (Console.ReadLine()).ToLower();
+        }
+
+        static void CompareBuyers(Manager manager) {
+            manager.ComareBuyesShopingCart(NameOfUser(), NameOfUser());
         }
     }
 }
