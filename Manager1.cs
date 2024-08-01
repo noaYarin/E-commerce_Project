@@ -11,45 +11,35 @@ namespace task_2
 {
     internal class Manager
     {
-        private Buyer[] buyers;
-        private Seller[] sellers;
-
+        private List<Buyer> buyers;
+        private List<Seller> sellers;
         private string name;
-        private int sellersLogSize = 0;
-        private int buyersLogSize = 0;
         private const int size = 2;
-
 
         public Manager(string _name)
         {
-            buyers = new Buyer[size];
-            sellers = new Seller[size];
-            this.name = _name;
+            buyers = new List<Buyer>(size); 
+           sellers = new List<Seller>(size); 
+           this.name = _name;
         }
 
         public static Manager operator +(Manager manager, Buyer newBuyer)
         {
-            if (manager.buyersLogSize == manager.buyers.Length)
+            if (manager.buyers.Count == manager.buyers.Capacity)
             {
-                Buyer[] tempNewBuyers = new Buyer[manager.buyers.Length * 2];
-                manager.buyers.CopyTo(tempNewBuyers, 0);
-                manager.buyers = tempNewBuyers;
+                manager.buyers.Capacity *= 2; 
             }
-            manager.buyers[manager.buyersLogSize] = newBuyer;
-            manager.buyersLogSize++;
+            manager.buyers.Add(newBuyer); 
             return manager;
         }
 
         public static Manager operator +(Manager manager, Seller newSeller)
         {
-            if (manager.sellersLogSize == manager.sellers.Length)
+            if (manager.sellers.Count == manager.sellers.Capacity)
             {
-                Seller[] tempNewSellers = new Seller[manager.sellers.Length * 2];
-                manager.sellers.CopyTo(tempNewSellers, 0);
-                manager.sellers = tempNewSellers;
+                manager.sellers.Capacity *= 2; 
             }
-            manager.sellers[manager.sellersLogSize] = newSeller;
-            manager.sellersLogSize++;
+            manager.sellers.Add(newSeller); 
             return manager;
         }
 
@@ -163,7 +153,7 @@ namespace task_2
         public void ShowAllBuyers()
         {
             Console.WriteLine("\n***Show all buyers details***");
-            if (buyers[0] != null)
+            if (buyers.Count > 0)
             {
                 int index = 1;
                 foreach (var buyer in buyers)
@@ -187,6 +177,10 @@ namespace task_2
         public void ShowAllSellers()
         {
             Console.WriteLine("\n***Show all sellers details***");
+            if(sellers.Count == 0)
+            {
+                Console.WriteLine("\nNo sellers to display.");
+            }
             var validSellers = sellers.Where(seller => seller != null)
                                          .OrderByDescending(seller => seller.GetProductCount())
                                          .ToList();
