@@ -19,7 +19,7 @@ namespace task_2
             Console.WriteLine(programName + "\n");
             Console.ResetColor();
 
-            const int EXIT = 8;
+            const int EXIT = 10;
             int userSelection = 0;
 
           InitialData(manager);

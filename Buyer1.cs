@@ -11,20 +11,18 @@ namespace task_2
 {
     internal class Buyer : User, IComparable<Buyer>
     {
-        private Order[] orders;
-        private Product[] products;
-        private int logicSize = 0;
-        private int productSizeLogic = 0;
+        private List<Order> orders;
+        private List<Product> products;
         private int size = 2;
 
         public Buyer(string name, string password, Address address) : base(name, password, address)
         {
-            products = new Product[size];
+            products = new List<Product>(size); 
         }
 
         public Buyer(User others) : base(others)
         {
-            products = new Product[size];
+            products = new List<Product>(size); 
         }
         public Buyer() : base() { }
 
@@ -35,18 +33,12 @@ namespace task_2
                     productDetails.Price,productDetails.Category,hasSpecialBox);
 
             if (productExtraFields == null)
-                throw new ArgumentException("adding product fails");
-
-            Product[] tempNewProducts;
-            if (productSizeLogic == products.Length)
+                throw new ArgumentException("Adding product fails");
+            if (products.Count == products.Capacity)
             {
-                tempNewProducts = new Product[products.Length * size];
-                products.CopyTo(tempNewProducts, 0);
-                products = tempNewProducts;
-
+                products.Capacity *= size; 
             }
-            products[productSizeLogic] = productExtraFields;
-            productSizeLogic++;
+            products.Add(productExtraFields); 
             return true;
         }
 
@@ -63,35 +55,19 @@ namespace task_2
 
         public bool SetOrderArr()
         {
-            Order[] newOrder;
-
-            if (orders == null)
+            if (orders == null) 
             {
-                orders = new Order[1];
+                orders = new List<Order>(); 
             }
-            else
-            {
-                newOrder = new Order[orders.Length + 1];
-                orders.CopyTo(newOrder, 0);
-                orders = newOrder;
-            }
-
-            this.orders[orders.Length - 1] = new Order(products, products.Length, new User(Name, Password, Address));
+            orders.Add(new Order(products.ToArray(), products.Count, new User(Name, Password, Address))); 
             return true;
         }
 
         public bool RemoveAllCartProducts()
         {
-            for (int i = 0; i < products.Length; i++)
-            {
-                products[i] = null;
-            }
-            logicSize = 0;
-            productSizeLogic = 0;
+            products.Clear(); 
             return true;
         }
-
-      
         public override string ToString()
         {
             string baseString = base.ToString();
@@ -113,20 +89,16 @@ namespace task_2
 
             return baseString;
         }
-
-
         public override bool Equals(object obj)
         {
-            if(Name == (string)obj)
+            if (Name == (string)obj)
                 return true;
             else
             {
                 return false;
             }
         }
-
-
-        public int CompareTo(Buyer other)
+            public int CompareTo(Buyer other)
         {
             float totalSumOthers = 0,totalSum = 0;
 
@@ -168,7 +140,7 @@ namespace task_2
                 if(order.TotalPrice == restoreByPrice)
                 {
                     Order p2 = (Order)order.Clone();
-                    Product[] prod = p2.GetAllProducts();
+                    Product[] prod = p2.GetAllProducts().ToArray();
                     return prod;
                 }
             }
@@ -198,7 +170,7 @@ namespace task_2
 
         public int GetProductSize()
         {
-            return this.productSizeLogic;
+            return products.Count;
         }
 
     }

@@ -9,16 +9,15 @@ namespace task_2
 {
     internal class Order:ICloneable 
     {
-        private Product[] allProducts;
+        private List<Product> allProducts;
         private float totalPrice = 0;
         private User buyerDetails;
 
-
         public object Clone()
         {
-            return new Order(allProducts, allProducts.Length, new Buyer());
+            return new Order(allProducts.ToArray(), allProducts.Count, new Buyer());
         }
-       
+
         public float TotalPrice 
         {
             get { return totalPrice; }
@@ -26,7 +25,7 @@ namespace task_2
         }
 
 
-        public Product[] GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             return allProducts;
         }
@@ -40,13 +39,13 @@ namespace task_2
 
         private void SetCheckOut(int cart_size, Product[] cartProducts)
         {
-            this.allProducts = new Product[cart_size];
-            for(int i = 0; i < cart_size; i++)
+            this.allProducts = new List<Product>(cart_size); 
+              for (int i = 0; i < cart_size; i++)
             {
                 bool hasSpecialBox = cartProducts[i] is ProductExtraFields productExtra ? productExtra.GetHasSpecialBox() : false;
                 if (cartProducts[i] != null)
                 {
-                    this.allProducts[i] = new ProductExtraFields(cartProducts[i].Id, cartProducts[i].Name, cartProducts[i].Price, cartProducts[i].Category, hasSpecialBox);
+                    this.allProducts.Add(new ProductExtraFields(cartProducts[i].Id, cartProducts[i].Name, cartProducts[i].Price, cartProducts[i].Category, hasSpecialBox)); 
                 }
             }
         }
@@ -82,7 +81,7 @@ namespace task_2
             }
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string resProducts = "";
             foreach (Product product in allProducts)
