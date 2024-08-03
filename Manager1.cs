@@ -43,7 +43,7 @@ namespace task_2
             return manager;
         }
 
-        public bool AddUserBuyer(string name, string password, Address address)
+        public void AddUserBuyer(string name, string password, Address address)
         {
             bool isNameNotExist = checkUserName(name);
             if (isNameNotExist)
@@ -52,17 +52,16 @@ namespace task_2
                 {
                     Buyer newBuyer = new Buyer(name, password, address);
                     Manager updatedManager = this + newBuyer;
-                    return true;
+             
                 }
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
-            return false;
         }
 
-        public bool AddUserSeller(string name, string password, Address address)
+        public void AddUserSeller(string name, string password, Address address)
         {
             bool isNameNotExist = checkUserName(name);
             if (isNameNotExist)
@@ -70,15 +69,13 @@ namespace task_2
                 try
                 {
                     Seller newSeller = new Seller(name, password, address);
-                    Manager updatedManager = this + newSeller;
-                    return true;
+                    Manager updatedManager = this + newSeller;                   
                 }
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
-            return false;
         }
 
 

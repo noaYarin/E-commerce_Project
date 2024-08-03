@@ -21,28 +21,45 @@ namespace task_2
 
             const int EXIT = 10;
             int userSelection = 0;
+            int counterUserSellectionException = 0;
 
-          InitialData(manager);
+            InitialData(manager);
 
             while (userSelection != EXIT)
             {
-                Console.WriteLine();
-                Console.WriteLine("---------------Menu----------------\n");
-                Console.WriteLine("Choose one of the following options:");
-                Console.WriteLine("(1) Add new buyer");
-                Console.WriteLine("(2) Add new seller");
-                Console.WriteLine("(3) Add product for seller");
-                Console.WriteLine("(4) Add product to shopping cart");
-                Console.WriteLine("(5) Choose a shopping cart from a history");
-                Console.WriteLine("(6) Pay order");
-                Console.WriteLine("(7) Show buyers details");
-                Console.WriteLine("(8) Show sellers details");
-                Console.WriteLine("(9) Comparing two buyers based on their shopping cart amount");
-                Console.WriteLine("(10) EXIT");
-                Console.Write("\nEnter your choice: ");
+                counterUserSellectionException = 0;
+                do
+                {
+                    try
+                    {
+                        
+                        Console.WriteLine();
+                        Console.WriteLine("---------------Menu----------------\n");
+                        Console.WriteLine("Choose one of the following options:");
+                        Console.WriteLine("(1) Add new buyer");
+                        Console.WriteLine("(2) Add new seller");
+                        Console.WriteLine("(3) Add product for seller");
+                        Console.WriteLine("(4) Add product to shopping cart");
+                        Console.WriteLine("(5) Choose a shopping cart from a history");
+                        Console.WriteLine("(6) Pay order");
+                        Console.WriteLine("(7) Show buyers details");
+                        Console.WriteLine("(8) Show sellers details");
+                        Console.WriteLine("(9) Comparing two buyers based on their shopping cart amount");
+                        Console.WriteLine("(10) EXIT");
+                        Console.Write("\nEnter your choice: ");
+
+                        userSelection = int.Parse(Console.ReadLine());
+                        counterUserSellectionException = 1;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                } while (counterUserSellectionException == 0);
                 
-                    userSelection = int.Parse(Console.ReadLine());
-               
+                
+         
                 switch (userSelection)
                 {
                     case 1:
@@ -83,7 +100,7 @@ namespace task_2
         }
 
          private static void InitialData(Manager manager)
-        {
+         {
             Address addr1 = new Address("abc", 123, "Netanya", "ISR");
 
             manager.AddUserBuyer("tom", "54885!@", addr1);
@@ -115,19 +132,13 @@ namespace task_2
                 Console.WriteLine("Enter password:");
                 string password = Console.ReadLine();
                 Address buyerAddr = GetAddress();
-                bool isAdded = manager.AddUserBuyer(name, password, buyerAddr);
-                if (isAdded && buyerAddr!=null && password!="" && name!="")
-                {
-                    Console.WriteLine("\nBuyer successfully added!");
-                }
-                else
-                {
-                    Console.WriteLine("\nBuyer not added, try again");
-                }
+                manager.AddUserBuyer(name, password, buyerAddr);
+                Console.WriteLine("\nBuyer successfully added!");
             }
             catch (Exception e)
             {
                 Console.WriteLine($"An error occurred: {e.Message}");
+                Console.WriteLine("Buyer not added, try again");
             }
         }
 
@@ -140,19 +151,13 @@ namespace task_2
                 Console.WriteLine("Enter password:");
                 string password = Console.ReadLine();
                 Address sellerAddr = GetAddress();
-                bool isAdded = manager.AddUserSeller(name, password, sellerAddr);
-                if (isAdded && sellerAddr != null && password != "" && name != "")
-                {
-                    Console.WriteLine("\nSeller successfully added!");
-                }
-                else
-                {
-                    Console.WriteLine("\nSeller not added, try again");
-                }
+                manager.AddUserSeller(name, password, sellerAddr);
+                Console.WriteLine("\nSeller successfully added!");
             }
             catch (Exception e)
             {
                 Console.WriteLine($"An error occurred: {e.Message}");
+                Console.WriteLine("Seller not added, try again");
             }
         }
 
