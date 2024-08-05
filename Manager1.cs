@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows.Forms;
 
 namespace task_2
 {
@@ -50,13 +51,14 @@ namespace task_2
             {
                 try
                 {
+                    name = name.ToLower();
                     Buyer newBuyer = new Buyer(name, password, address);
                     Manager updatedManager = this + newBuyer;
              
                 }
-                catch (ArgumentException e)
+                catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    throw new Exception(e.Message);
                 }
             }
         }
@@ -114,17 +116,17 @@ namespace task_2
         }
 
 
-        public bool AddNewProduct(Product product, string name)
+        public void AddNewProduct(Product product, string name)
         {
             foreach (var seller in sellers)
             {
                 if (seller!=null && seller.Equals(name))  
                 {
                     seller.SetProduct(product);
-                    return true;
+                    return;
                 }
             }
-            return false;
+            throw new Exception("Seller don't found");
         }
 
 
@@ -147,9 +149,9 @@ namespace task_2
         }
 
 
-        public void ShowAllBuyers()
+        public string ShowAllBuyers()
         {
-            Console.WriteLine("\n***Show all buyers details***");
+            string str = "";
             if (buyers.Count > 0)
             {
                 int index = 1;
@@ -159,24 +161,24 @@ namespace task_2
                     {
                         break;
                     }
-                    Console.WriteLine($"{index}) {buyer.ToString()} ");
-                    Console.WriteLine();
+                    str += buyer.ToString() + '\n';
                     index++;
                 }
             }
             else
             {
-                Console.WriteLine("\nNo buyers to display.");
+                throw new ArgumentException("No buyers to display.");
             }
+            return str;
         }
 
 
-        public void ShowAllSellers()
+        public string ShowAllSellers()
         {
-            Console.WriteLine("\n***Show all sellers details***");
+            string str = "";
             if(sellers.Count == 0)
             {
-                Console.WriteLine("\nNo sellers to display.");
+                throw new Exception("No sellers to display.");
             }
             var validSellers = sellers.Where(seller => seller != null)
                                          .OrderByDescending(seller => seller.GetProductCount())
@@ -187,15 +189,15 @@ namespace task_2
                 int index = 1;
                 foreach (var seller in validSellers)
                 {
-                    Console.WriteLine($"{index}) {seller.ToString()}");
-                    Console.WriteLine();
+                    str += seller.ToString() + "\n";
                     index++;
                 }
             }
             else
             {
-                Console.WriteLine("\nNo sellers to display.");
+                throw new Exception("No sellers to display.");
             }
+            return str;
         }
 
 
@@ -206,6 +208,7 @@ namespace task_2
                 if (checkSellerName(seller, name))
                 {
                     Console.WriteLine("Name already taken, try another name");
+                    throw new Exception("Name already taken, try another name");
                     return false;
                 }
             }
@@ -231,11 +234,12 @@ namespace task_2
             return seller != null && seller.Name == name ? true : false;
         }
 
-        public Category AddCategory()
+        public Category AddCategory(int index)
         {
             Category category = new Category();
             DisplayCategories(category);
-            int index = int.Parse(Console.ReadLine());
+            //int index = int.Parse(Console.ReadLine());
+            
             bool isValidChoice = category.SetCategoryNameByIndex(index);
             return !isValidChoice ? null : category;
         }
