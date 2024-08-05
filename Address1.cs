@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace task_2
 {
-    internal class Address
+    public class Address
     {
         private string street;
         private int numberOfStreet;
