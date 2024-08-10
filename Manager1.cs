@@ -209,7 +209,6 @@ namespace task_2
                 {
                     Console.WriteLine("Name already taken, try another name");
                     throw new Exception("Name already taken, try another name");
-                    return false;
                 }
             }
 
@@ -238,7 +237,6 @@ namespace task_2
         {
             Category category = new Category();
             DisplayCategories(category);
-            //int index = int.Parse(Console.ReadLine());
             
             bool isValidChoice = category.SetCategoryNameByIndex(index);
             return !isValidChoice ? null : category;
