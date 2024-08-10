@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using static task_2.Category;
 
 namespace task_2
 {
@@ -43,6 +45,30 @@ namespace task_2
             products.Add(productDetails);
         }
 
+        public void ImportProductFromString(string productData)
+        {
+           string[] productDetails = productData.Split(',');
+            if (productDetails.Length == 3)
+            {
+                string productName = productDetails[0].Trim();
+                if (!int.TryParse(productDetails[1].Trim(), out int price))
+                {
+                    throw new ArgumentException("Invalid price format.");
+                }
+                    string categoryString = productDetails[2].Trim();
+                    Category category = new Category();
+                    int categoryIndex = category.FindCategoryIndexByName(categoryString);
+                    category.SetCategoryNameByIndex(categoryIndex);
+                   Product product = new Product(productName, price, category);
+                SetProduct(product);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid product data format.");
+            }
+        }
+
+
         public override bool Equals(object obj)
         {
             if (Name == (string)obj)
@@ -69,6 +95,11 @@ namespace task_2
         public int GetProductCount()
         {
             return products.Count;
+        }
+
+        public List<Product> GetProducts()
+        {
+            return products;
         }
     }
 }

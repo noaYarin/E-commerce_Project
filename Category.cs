@@ -56,5 +56,19 @@ namespace task_2
             return name;
         }
 
+        public int FindCategoryIndexByName(string categoryName)
+        {
+            string lowerCaseCategoryName = categoryName.Trim().ToLower();
+
+            foreach (CategoriesList category in Enum.GetValues(typeof(CategoriesList)))
+            {
+                if (category.ToString().ToLower() == lowerCaseCategoryName)
+                {
+                    return (int)category;
+                }
+            }
+            throw new ArgumentException("Invalid category name.");
+        }
+
     }
 }

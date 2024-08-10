@@ -48,6 +48,7 @@
     <Compile Include="Address1.cs" />
     <Compile Include="Buyer1.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="FileLogic.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
