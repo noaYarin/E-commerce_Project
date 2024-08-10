@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -16,12 +17,20 @@ namespace task_2
         private List<Seller> sellers;
         private string name;
         private const int size = 2;
+        private FileLogic fileLogic;
 
-        public Manager(string _name)
+        public Manager(string _name, string dataFileName)
         {
             buyers = new List<Buyer>(size); 
-           sellers = new List<Seller>(size); 
-           this.name = _name;
+             sellers = new List<Seller>(size); 
+             name = _name;
+            fileLogic = new FileLogic(dataFileName);
+
+            string sellersData = fileLogic.LoadData();
+            if (!string.IsNullOrEmpty(sellersData))
+            {
+                ImportSellersAndProducts(sellersData);
+            }
         }
 
         public static Manager operator +(Manager manager, Buyer newBuyer)
@@ -209,7 +218,6 @@ namespace task_2
                 {
                     Console.WriteLine("Name already taken, try another name");
                     throw new Exception("Name already taken, try another name");
-                    return false;
                 }
             }
 
@@ -238,7 +246,6 @@ namespace task_2
         {
             Category category = new Category();
             DisplayCategories(category);
-            //int index = int.Parse(Console.ReadLine());
             
             bool isValidChoice = category.SetCategoryNameByIndex(index);
             return !isValidChoice ? null : category;
@@ -307,8 +314,6 @@ namespace task_2
                 Console.WriteLine("Buyer not exist");
             }
         }
-
-
         private Buyer FindBuyer(string name)
         {
             foreach (Buyer buyer in buyers)
@@ -317,6 +322,87 @@ namespace task_2
                     return buyer;
             }
             return null;
+        }
+
+        public void SaveData()
+        {
+            string sellersData = ExportSellersData();
+            fileLogic.SaveData(sellersData);
+        }
+
+        public string ExportSellersData()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (var seller in sellers)
+            {
+                if (seller != null)
+                {
+                    stringBuilder.AppendLine(seller.Name);
+                    stringBuilder.AppendLine(seller.Password);
+                    var address = seller.Address;
+                    if (address != null)
+                    {
+                        stringBuilder.AppendLine($"{address.Country}, {address.City}, {address.Street}, {address.NumberOfStreet}");
+                    }
+
+                    foreach (var product in seller.GetProducts())
+                    {
+                        stringBuilder.AppendLine($"{product.Name}, {product.Price}, {product.Category.GetCategoryName()}");
+                    }
+
+                    stringBuilder.AppendLine();
+                }
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        public void ImportSellersAndProducts(string sellersData)
+        {
+            using (StringReader reader = new StringReader(sellersData))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string sellerName = line.Trim();
+                    string sellerPassword = reader.ReadLine()?.Trim();
+                    string sellerAddressLine = reader.ReadLine()?.Trim();
+                    Address sellerAddress = !string.IsNullOrEmpty(sellerAddressLine) ? ParseAddress(sellerAddressLine) : new Address();
+
+                    Seller seller = new Seller(sellerName, sellerPassword, sellerAddress);
+
+                    while (!string.IsNullOrWhiteSpace(line = reader.ReadLine()))
+                    {
+                        seller.ImportProductFromString(line.Trim());
+                    }
+
+                    sellers.Add(seller);
+                }
+            }
+        }
+
+        private Address ParseAddress(string addressData)
+        {
+            string[] addressParts = addressData.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (addressParts.Length == 4)
+            {
+                string country = addressParts[0].Trim();
+                string city = addressParts[1].Trim();
+                string street = addressParts[2].Trim();
+                string streetNumberPart = addressParts[3].Trim();
+                string numericPart = new string(streetNumberPart.Where(char.IsDigit).ToArray());
+                return new Address
+                {
+                    Country = country,
+                    City = city,
+                    Street = street,
+                    NumberOfStreet = int.Parse(numericPart)
+                };
+            }
+
+            return new Address();
         }
 
     }

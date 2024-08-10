@@ -15,23 +15,25 @@ namespace task_2
     public partial class CommerceForm : Form
     {
         const string programName = "E-commerce Project\nBy Noa-Yarin Levi and Chen Brown";
-        Manager manager = new Manager(programName);
-        
+        Manager manager;
         public CommerceForm()
         {
             InitializeComponent();
+            manager = new Manager(programName, "sellers_data.txt");
             InitalBuyers(manager);
         }
 
-
-        private void InitalBuyers(Manager manager)
+    private void InitalBuyers(Manager manager)
         {
             Address addr1 = new Address("Zamenhof", 7, "Netanya", "ISR");
+            Address addr3 = new Address("Zamenhoffff", 77, "Netanya", "ISR");
+            Address addr4 = new Address("Za", 12, "Netanya", "ISR");
+
             manager.AddUserBuyer("Chen", "123@!!tg", addr1);
             Address addr2 = new Address("abc", 123, "Ruppin", "ISR");
             manager.AddUserBuyer("Noa", "123@!!tg", addr1);
 
-            manager.AddUserSeller("avi", "15@4885!", addr1);
+            //manager.AddUserSeller("avi", "15@4885!", addr1);
         }
 
         private void errorEnableVisible() 
@@ -215,7 +217,7 @@ namespace task_2
                     index = 2;
                 else if (radOffice.Checked)
                     index= 3;
-                else if (radOffice.Checked)
+                else if (radClothes.Checked)
                     index = 4;
 
 
@@ -289,6 +291,12 @@ namespace task_2
                 throw ex;
             }
             
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            manager.SaveData();
+            base.OnFormClosing(e);
         }
     }
 }

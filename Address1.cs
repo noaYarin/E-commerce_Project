@@ -93,7 +93,7 @@ namespace task_2
             throw new ArgumentException("Enter country again");
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return "Country: " + Country + ", city: " + City + ", street: " + Street + ", number: " + NumberOfStreet;
         }
