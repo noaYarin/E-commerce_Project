@@ -55,40 +55,35 @@ namespace task_2
 
         public void AddUserBuyer(string name, string password, Address address)
         {
-            bool isNameNotExist = checkUserName(name);
-            if (isNameNotExist)
+            checkUserName(name);
+           
+            try
             {
-                try
-                {
-                    name = name.ToLower();
-                    Buyer newBuyer = new Buyer(name, password, address);
-                    Manager updatedManager = this + newBuyer;
-             
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
+                name = name.ToLower();
+                Buyer newBuyer = new Buyer(name, password, address);
+                Manager updatedManager = this + newBuyer;
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public void AddUserSeller(string name, string password, Address address)
         {
-            bool isNameNotExist = checkUserName(name);
-            if (isNameNotExist)
+            checkUserName(name);
+            try
             {
-                try
-                {
-                    Seller newSeller = new Seller(name, password, address);
-                    Manager updatedManager = this + newSeller;                   
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                Seller newSeller = new Seller(name, password, address);
+                Manager updatedManager = this + newSeller;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
-
+        
 
         public void PrintAllProductSeller()
         {
@@ -99,7 +94,7 @@ namespace task_2
         }
 
 
-        public bool AddProductToCart(string buyerName, string sellerName, string productName,bool hasSpecialBox)
+        public void AddProductToCart(string buyerName, string sellerName, string productName,bool hasSpecialBox)
         {
             foreach (var buyer in buyers)
             {
@@ -111,17 +106,19 @@ namespace task_2
                         {
                             if (buyer.SetProduct(seller.GetProduct(productName),hasSpecialBox))
                             {
-                                return true;
+                                return;
                             }
                             else
                             {
-                                return false;
+                                throw new Exception("Product not found");
                             }
                         }
+
                     }
+                    throw new Exception("Seller not found");
                 }
             }
-            return false;
+            throw new Exception("Buyer not found");
         }
 
 
@@ -210,7 +207,7 @@ namespace task_2
         }
 
 
-        private bool checkUserName(string name)
+        private void checkUserName(string name) 
         {
             foreach (var seller in sellers)
             {
@@ -226,10 +223,9 @@ namespace task_2
                 if (checkBuyerName(buyer, name))
                 {
                     Console.WriteLine("Name already taken, try another name");
-                    return false;
+                    throw new Exception("Name already taken, try another name");
                 }
             }
-            return true;
         }
 
         public bool checkBuyerName(Buyer buyer, string name)
