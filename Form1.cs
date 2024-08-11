@@ -63,7 +63,6 @@ namespace task_2
             {
                 AddBuyer(manager);
             }
-            errorDisableVisible();
         }
 
         private void AddBuyer(Manager manager)
@@ -87,8 +86,8 @@ namespace task_2
                 txtErrorFields.Text = ex.Message;
             }
            
-            
         }
+
 
         private void btnShowBuyers_Click(object sender, EventArgs e)
         {
@@ -236,14 +235,12 @@ namespace task_2
             catch (NullReferenceException)
             {
                 Console.WriteLine($"An error occurred: Fields are empty");
-                txtErrorFields.Text = $"An error occurred: Fields are empty";
-                errorEnableVisible();
+                throw new Exception("An error occurred: Fields are empty");
             }
             catch (Exception e)
             {
                 Console.WriteLine($"An error occurred: {e.Message}");
-                txtErrorFields.Text = e.Message;
-                errorEnableVisible();
+                throw new Exception($"An error occurred: {e.Message}");
             }
         }
 
@@ -265,6 +262,7 @@ namespace task_2
             catch(Exception ex)
             {
                 txtErrorFields.Text = ex.Message;
+                errorEnableVisible();
             }
         }
 
