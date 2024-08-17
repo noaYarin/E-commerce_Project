@@ -26,7 +26,7 @@ namespace task_2
              name = _name;
             fileLogic = new FileLogic(dataFileName);
 
-            string sellersData = fileLogic.LoadData();
+            string sellersData = fileLogic.LoadData();  
             if (!string.IsNullOrEmpty(sellersData))
             {
                 ImportSellersAndProducts(sellersData);
@@ -80,7 +80,7 @@ namespace task_2
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
+                throw new Exception(e.Message);
             }
         }
         
@@ -324,6 +324,12 @@ namespace task_2
         {
             string sellersData = ExportSellersData();
             fileLogic.SaveData(sellersData);
+        }
+
+        public void ClearData()
+        {
+            this.buyers.Clear();
+            this.sellers.Clear();
         }
 
         public string ExportSellersData()

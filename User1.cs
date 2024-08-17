@@ -59,7 +59,7 @@ namespace task_2
         {
             if(Validation.IsValidPassword(password))
                 return password;
-            throw new ArgumentException("Invalid password");
+            throw new ArgumentException("Password should to be at least 4 charecters including a special character: {! @ # & $ ?}");  //Invalid password
         }
 
 

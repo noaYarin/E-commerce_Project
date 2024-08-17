@@ -63,20 +63,20 @@
             this.radChildren = new System.Windows.Forms.RadioButton();
             this.lblCategories = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtNameSellerAddProduct = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnAddProductBuyer = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblSpeciel = new System.Windows.Forms.Label();
-            this.chkBoxSpecialPackage = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNameSellerAddProduct = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.txtSellerNameToBuy = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtNameBuyerAddProduct = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.chkBoxSpecialPackage = new System.Windows.Forms.CheckBox();
             this.txtProductNameBuyer = new System.Windows.Forms.TextBox();
+            this.lblSpeciel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtSellerNameToBuy = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numStreetNamber)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -101,6 +101,11 @@
             // numStreetNamber
             // 
             this.numStreetNamber.Location = new System.Drawing.Point(379, 57);
+            this.numStreetNamber.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numStreetNamber.Name = "numStreetNamber";
             this.numStreetNamber.Size = new System.Drawing.Size(100, 20);
             this.numStreetNamber.TabIndex = 62;
@@ -403,6 +408,22 @@
             this.panel1.Size = new System.Drawing.Size(298, 243);
             this.panel1.TabIndex = 96;
             // 
+            // txtNameSellerAddProduct
+            // 
+            this.txtNameSellerAddProduct.Location = new System.Drawing.Point(118, 20);
+            this.txtNameSellerAddProduct.Name = "txtNameSellerAddProduct";
+            this.txtNameSellerAddProduct.Size = new System.Drawing.Size(100, 20);
+            this.txtNameSellerAddProduct.TabIndex = 99;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.TabIndex = 99;
+            this.label3.Text = "Name of the seller";
+            // 
             // btnAddProductBuyer
             // 
             this.btnAddProductBuyer.Location = new System.Drawing.Point(74, 206);
@@ -430,14 +451,37 @@
             this.panel2.Size = new System.Drawing.Size(303, 243);
             this.panel2.TabIndex = 98;
             // 
-            // lblSpeciel
+            // txtSellerNameToBuy
             // 
-            this.lblSpeciel.AutoSize = true;
-            this.lblSpeciel.Location = new System.Drawing.Point(57, 116);
-            this.lblSpeciel.Name = "lblSpeciel";
-            this.lblSpeciel.Size = new System.Drawing.Size(62, 13);
-            this.lblSpeciel.TabIndex = 100;
-            this.lblSpeciel.Text = "Special box";
+            this.txtSellerNameToBuy.Location = new System.Drawing.Point(140, 17);
+            this.txtSellerNameToBuy.Name = "txtSellerNameToBuy";
+            this.txtSellerNameToBuy.Size = new System.Drawing.Size(100, 20);
+            this.txtSellerNameToBuy.TabIndex = 101;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(32, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(92, 13);
+            this.label8.TabIndex = 105;
+            this.label8.Text = "Name of the seller";
+            // 
+            // txtNameBuyerAddProduct
+            // 
+            this.txtNameBuyerAddProduct.Location = new System.Drawing.Point(140, 46);
+            this.txtNameBuyerAddProduct.Name = "txtNameBuyerAddProduct";
+            this.txtNameBuyerAddProduct.Size = new System.Drawing.Size(100, 20);
+            this.txtNameBuyerAddProduct.TabIndex = 103;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(30, 53);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 104;
+            this.label6.Text = "Name of the buyer";
             // 
             // chkBoxSpecialPackage
             // 
@@ -448,21 +492,30 @@
             this.chkBoxSpecialPackage.TabIndex = 102;
             this.chkBoxSpecialPackage.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // txtProductNameBuyer
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
-            this.label3.TabIndex = 99;
-            this.label3.Text = "Name of the seller";
+            this.txtProductNameBuyer.Location = new System.Drawing.Point(140, 76);
+            this.txtProductNameBuyer.Name = "txtProductNameBuyer";
+            this.txtProductNameBuyer.Size = new System.Drawing.Size(100, 20);
+            this.txtProductNameBuyer.TabIndex = 102;
             // 
-            // txtNameSellerAddProduct
+            // lblSpeciel
             // 
-            this.txtNameSellerAddProduct.Location = new System.Drawing.Point(118, 20);
-            this.txtNameSellerAddProduct.Name = "txtNameSellerAddProduct";
-            this.txtNameSellerAddProduct.Size = new System.Drawing.Size(100, 20);
-            this.txtNameSellerAddProduct.TabIndex = 99;
+            this.lblSpeciel.AutoSize = true;
+            this.lblSpeciel.Location = new System.Drawing.Point(57, 116);
+            this.lblSpeciel.Name = "lblSpeciel";
+            this.lblSpeciel.Size = new System.Drawing.Size(62, 13);
+            this.lblSpeciel.TabIndex = 100;
+            this.lblSpeciel.Text = "Special box";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(57, 79);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 13);
+            this.label7.TabIndex = 101;
+            this.label7.Text = "Prodct name";
             // 
             // label4
             // 
@@ -481,54 +534,6 @@
             this.label5.Size = new System.Drawing.Size(141, 13);
             this.label5.TabIndex = 100;
             this.label5.Text = "Adding product for the buyer";
-            // 
-            // txtNameBuyerAddProduct
-            // 
-            this.txtNameBuyerAddProduct.Location = new System.Drawing.Point(140, 46);
-            this.txtNameBuyerAddProduct.Name = "txtNameBuyerAddProduct";
-            this.txtNameBuyerAddProduct.Size = new System.Drawing.Size(100, 20);
-            this.txtNameBuyerAddProduct.TabIndex = 103;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 53);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
-            this.label6.TabIndex = 104;
-            this.label6.Text = "Name of the buyer";
-            // 
-            // txtProductNameBuyer
-            // 
-            this.txtProductNameBuyer.Location = new System.Drawing.Point(140, 76);
-            this.txtProductNameBuyer.Name = "txtProductNameBuyer";
-            this.txtProductNameBuyer.Size = new System.Drawing.Size(100, 20);
-            this.txtProductNameBuyer.TabIndex = 102;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(57, 79);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 13);
-            this.label7.TabIndex = 101;
-            this.label7.Text = "Prodct name";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
-            this.label8.TabIndex = 105;
-            this.label8.Text = "Name of the seller";
-            // 
-            // txtSellerNameToBuy
-            // 
-            this.txtSellerNameToBuy.Location = new System.Drawing.Point(140, 17);
-            this.txtSellerNameToBuy.Name = "txtSellerNameToBuy";
-            this.txtSellerNameToBuy.Size = new System.Drawing.Size(100, 20);
-            this.txtSellerNameToBuy.TabIndex = 101;
             // 
             // CommerceForm
             // 
