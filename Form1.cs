@@ -21,20 +21,7 @@ namespace task_2
         {
             InitializeComponent();
             manager = new Manager(programName, "sellers_data.txt");
-            //InitalBuyers(manager);
         }
-
-    private void InitalBuyers(Manager manager)
-        {
-            Address addr1 = new Address("Zamenhof", 7, "Netanya", "ISR");
-            Address addr3 = new Address("Zamenhoffff", 77, "Netanya", "ISR");
-            Address addr4 = new Address("Za", 12, "Netanya", "ISR");
-
-            manager.AddUserBuyer("Chen", "123@!!tg", addr1);
-            Address addr2 = new Address("abc", 123, "Ruppin", "ISR");
-            manager.AddUserBuyer("Noa", "123@!!tg", addr1);
-        }
-
         private void errorEnableVisible() 
         {
             txtErrorFields.Visible = true;
@@ -56,7 +43,7 @@ namespace task_2
             }
             else
             {
-                DialogResult adCorrectBuyer = MessageBox.Show("Byer does no added");
+                DialogResult adCorrectBuyer = MessageBox.Show("Buyer does no added");
             }
         }
 
@@ -75,11 +62,11 @@ namespace task_2
                 manager.AddUserBuyer(buyerName, password, currentAddr);
                 errorDisableVisible();
                 ShowBuyers(manager);
-                DialogResult adCorrectBuyer = MessageBox.Show("Byer added");
+                DialogResult adCorrectBuyer = MessageBox.Show("Buyer added");
             }
             catch (Exception ex)
             {
-                DialogResult adCorrectBuyer = MessageBox.Show("Byer does no added");
+                DialogResult adCorrectBuyer = MessageBox.Show("Buyer does no added");
                 errorEnableVisible();
                 txtErrorFields.Text = ex.Message;
             }

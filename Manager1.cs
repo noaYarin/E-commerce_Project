@@ -54,12 +54,11 @@ namespace task_2
         }
 
         public void AddUserBuyer(string name, string password, Address address)
-        {
-            checkUserName(name);
-           
+        {           
             try
             {
                 name = name.ToLower();
+                checkUserName(name);
                 Buyer newBuyer = new Buyer(name, password, address);
                 Manager updatedManager = this + newBuyer;
             }
@@ -72,9 +71,10 @@ namespace task_2
 
         public void AddUserSeller(string name, string password, Address address)
         {
-            checkUserName(name);
             try
             {
+                name = name.ToLower();
+                checkUserName(name);
                 Seller newSeller = new Seller(name, password, address);
                 Manager updatedManager = this + newSeller;
             }
@@ -209,22 +209,29 @@ namespace task_2
 
         private void checkUserName(string name) 
         {
-            foreach (var seller in sellers)
+            if (name != "")
             {
-                if (checkSellerName(seller, name))
+                foreach (var seller in sellers)
                 {
-                    Console.WriteLine("Name already taken, try another name");
-                    throw new Exception("Name already taken, try another name");
+                    if (checkSellerName(seller, name))
+                    {
+                        Console.WriteLine("Name already taken, try another name");
+                        throw new Exception("Name already taken, try another name");
+                    }
+                }
+
+                foreach (var buyer in buyers)
+                {
+                    if (checkBuyerName(buyer, name))
+                    {
+                        Console.WriteLine("Name already taken, try another name");
+                        throw new Exception("Name already taken, try another name");
+                    }
                 }
             }
-
-            foreach (var buyer in buyers)
+            else
             {
-                if (checkBuyerName(buyer, name))
-                {
-                    Console.WriteLine("Name already taken, try another name");
-                    throw new Exception("Name already taken, try another name");
-                }
+                throw new Exception("Name is missing");
             }
         }
 
