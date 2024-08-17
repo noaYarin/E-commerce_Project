@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,7 +21,7 @@ namespace task_2
         {
             InitializeComponent();
             manager = new Manager(programName, "sellers_data.txt");
-            InitalBuyers(manager);
+            //InitalBuyers(manager);
         }
 
     private void InitalBuyers(Manager manager)
@@ -32,8 +33,6 @@ namespace task_2
             manager.AddUserBuyer("Chen", "123@!!tg", addr1);
             Address addr2 = new Address("abc", 123, "Ruppin", "ISR");
             manager.AddUserBuyer("Noa", "123@!!tg", addr1);
-
-            //manager.AddUserSeller("avi", "15@4885!", addr1);
         }
 
         private void errorEnableVisible() 
@@ -50,18 +49,14 @@ namespace task_2
 
         private void btnAddBuyer_Click(object sender, EventArgs e)
         {
-
-            if (txtNameBuyer.Text.Equals(string.Empty) || txtPassword.Text.Equals(string.Empty) || txtStreet.Text.Equals(string.Empty) || txtCity.Text.Equals(string.Empty) || txtCountry.Text.Equals(string.Empty) || numStreetNamber.Value == 0)
-            {
-                errorEnableVisible();
-                txtErrorFields.Text = "Not all information provided!";
-                return;
-            }
-
             DialogResult drAddBuyer = MessageBox.Show("Please confirm all the details are correct", "are you sure?", MessageBoxButtons.OKCancel);
             if (drAddBuyer == System.Windows.Forms.DialogResult.OK)
             {
                 AddBuyer(manager);
+            }
+            else
+            {
+                DialogResult adCorrectBuyer = MessageBox.Show("Byer does no added");
             }
         }
 
@@ -79,9 +74,12 @@ namespace task_2
                 Address currentAddr = new Address(street, streetNumber, city, country);
                 manager.AddUserBuyer(buyerName, password, currentAddr);
                 errorDisableVisible();
+                ShowBuyers(manager);
+                DialogResult adCorrectBuyer = MessageBox.Show("Byer added");
             }
             catch (Exception ex)
             {
+                DialogResult adCorrectBuyer = MessageBox.Show("Byer does no added");
                 errorEnableVisible();
                 txtErrorFields.Text = ex.Message;
             }
@@ -112,19 +110,14 @@ namespace task_2
 
         private void btnAddSeller_Click(object sender, EventArgs e)
         {
-            if (txtNameSeller.Text.Equals(string.Empty) || txtPassword.Text.Equals(string.Empty) || txtStreet.Text.Equals(string.Empty) || txtCity.Text.Equals(string.Empty) || txtCountry.Text.Equals(string.Empty) || numStreetNamber.Value == 0)
-            {
-                errorEnableVisible();
-                txtErrorFields.Text = "Not all information provided!";
-                return;
-            }
-            errorDisableVisible();
-
-
             DialogResult drAddBuyer = MessageBox.Show("Please confirm all the details are correct", "are you sure?", MessageBoxButtons.OKCancel);
             if (drAddBuyer == System.Windows.Forms.DialogResult.OK)
             {
                 AddSeller(manager);
+            }
+            else
+            {
+                MessageBox.Show("Seller does not added");
             }
         }
 
@@ -143,11 +136,14 @@ namespace task_2
                 Address currentAddr = new Address(street, streetNumber, city, country);
                 manager.AddUserSeller(SellerName, password, currentAddr);
                 errorDisableVisible();
+                ShowSellers(manager);
+                DialogResult adCorrectBuyer = MessageBox.Show("Seller added");
             }
             catch (Exception ex)
             {
                 errorEnableVisible();
                 txtErrorFields.Text = ex.Message;
+                MessageBox.Show("Seller does not added");
             }
         }
 
@@ -193,11 +189,13 @@ namespace task_2
             {
                 AddProductToSeller(manager);
                 ShowSellers(manager);
+                MessageBox.Show("Product added");
             }
             catch (Exception ex)
             {
                 txtErrorFields.Text = ex.Message;
                 errorEnableVisible();
+                MessageBox.Show("Product not added");
             }
         }
 
@@ -250,6 +248,7 @@ namespace task_2
             {
                 errorEnableVisible();
                 txtErrorFields.Text = "Not all information provided!";
+                MessageBox.Show("Product not added");
                 return;
             }
             errorDisableVisible();
@@ -258,11 +257,14 @@ namespace task_2
             {
                 AddProductToCart(manager);
                 ShowBuyers(manager);
+                MessageBox.Show("Product added");
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 txtErrorFields.Text = ex.Message;
                 errorEnableVisible();
+                MessageBox.Show("Product not added");
             }
         }
 
@@ -294,6 +296,7 @@ namespace task_2
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             manager.SaveData();
+            manager.ClearData();
             base.OnFormClosing(e);
         }
     }

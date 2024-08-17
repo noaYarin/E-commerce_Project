@@ -72,7 +72,8 @@ namespace task_2
             {
                 return numberOfStreet;
             }
-            throw new ArgumentException("Street number must be between 0 - 999");
+            throw new ArgumentException("Street number must be between 1 - 999");
+            
         }
 
         string SetCity(string city)
